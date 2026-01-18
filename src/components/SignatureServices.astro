@@ -1,0 +1,117 @@
+---
+import { Image } from "astro:assets";
+
+import fTypeExterior from "../assets/f-type-exterior.jpg";
+import gt3Interior from "../assets/gt3-interior.jpg";
+---
+
+<section id="services" class="bg-neutral-950 text-white -mt-12">
+  <div class="mx-auto max-w-7xl px-6 pb-20 lg:px-10">
+
+    <!-- Header -->
+    <div class="flex items-end justify-between gap-6">
+      <div>
+        <p class="text-xs tracking-[0.3em] uppercase text-white/50">
+          Services
+        </p>
+
+        <h2 class="mt-3 text-2xl font-semibold md:text-3xl">
+          Signature services, executed with restraint.
+        </h2>
+
+        <p class="mt-3 max-w-2xl text-white/70">
+          Focused packages designed for paint, wheels, glass, and interior—delivered at your home in Collin County.
+        </p>
+      </div>
+
+      <a
+        href="/services"
+        class="hidden sm:inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-white/80 transition hover:border-white/30 hover:bg-white/5"
+      >
+        View all
+      </a>
+    </div>
+
+    <!-- Cards -->
+    <div class="mt-10 grid gap-5 md:grid-cols-3">
+
+      <!-- Paint Correction -->
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+        <Image
+          src={fTypeExterior}
+          alt="Exterior paint correction detail"
+          class="mb-4 h-40 w-full rounded-2xl object-cover"
+          loading="lazy"
+        />
+
+        <p class="text-xs tracking-[0.3em] uppercase text-white/50">
+          Exterior
+        </p>
+
+        <h3 class="mt-3 text-lg font-semibold">
+          Paint Correction
+        </h3>
+
+        <p class="mt-3 text-sm leading-relaxed text-white/70">
+          Defect removal and refinement for clarity, depth, and a cleaner reflection—without an overdone finish.
+        </p>
+      </div>
+
+      <!-- Ceramic Protection -->
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+        <Image
+          src={fTypeExterior}
+          alt="Ceramic protection exterior detail"
+          class="mb-4 h-40 w-full rounded-2xl object-cover"
+          loading="lazy"
+        />
+
+        <p class="text-xs tracking-[0.3em] uppercase text-white/50">
+          Protection
+        </p>
+
+        <h3 class="mt-3 text-lg font-semibold">
+          Ceramic Protection
+        </h3>
+
+        <p class="mt-3 text-sm leading-relaxed text-white/70">
+          Long-term protection for paint and wheels, tuned for slickness and easier maintenance.
+        </p>
+      </div>
+
+      <!-- Interior Reset -->
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+        <Image
+          src={gt3Interior}
+          alt="GT3 interior detailing"
+          class="mb-4 h-40 w-full rounded-2xl object-cover"
+          loading="lazy"
+        />
+
+        <p class="text-xs tracking-[0.3em] uppercase text-white/50">
+          Interior
+        </p>
+
+        <h3 class="mt-3 text-lg font-semibold">
+          Interior Reset
+        </h3>
+
+        <p class="mt-3 text-sm leading-relaxed text-white/70">
+          A thorough, material-safe clean that restores calm—leather, carpets, plastics, and glass.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Mobile CTA -->
+    <div class="mt-8 sm:hidden">
+      <a
+        href="/services"
+        class="inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-white/80 transition hover:border-white/30 hover:bg-white/5"
+      >
+        View all services
+      </a>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,62 @@
+---
+import { Image } from "astro:assets";
+import heroImg from "../assets/gt3-hero.jpg";
+---
+
+<section class="min-h-[calc(100vh-5rem)] bg-neutral-950 text-white flex items-center">
+<div class="mx-auto max-w-7xl px-6 py-12 lg:py-20 lg:px-10">
+
+    <div class="grid items-center gap-12 lg:grid-cols-12">
+
+      <!-- Copy -->
+      <div class="lg:col-span-5">
+        <p class="text-xs tracking-[0.25em] uppercase text-white/60">
+          Mobile Detailing • McKinney, TX
+        </p>
+
+        <h1 class="mt-4 text-4xl font-semibold leading-tight md:text-5xl">
+          Factory Reset Detail
+        </h1>
+
+        <p class="mt-6 max-w-prose text-base leading-relaxed text-white/70">
+          Precision detailing, completed in the comfort of your home.
+        </p>
+
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a
+            href="#contact"
+            class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-neutral-950 transition hover:bg-white/90"
+          >
+            Book a Detail
+          </a>
+
+          <a
+            href="#services"
+            class="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-sm font-medium text-white/80 transition hover:border-white/30 hover:bg-white/5"
+          >
+            View Services
+          </a>
+        </div>
+      </div>
+
+      <!-- Image -->
+      <div class="lg:col-span-7">
+        <div class="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl">
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/55 via-black/10 to-transparent"></div>
+
+          <Image
+            src={heroImg}
+            alt="Factory Reset Detail Porsche GT3"
+            class="h-[340px] w-full object-cover md:h-[440px] lg:h-[540px]"
+            loading="eager"
+            fetchpriority="high"
+            widths={[900, 1200, 1500]}
+            sizes="(min-width: 1024px) 58vw, 100vw"
+            format="webp"
+          />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
