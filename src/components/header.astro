@@ -1,0 +1,228 @@
+---
+const nav = [
+  { label: "Services", href: "/services" },
+  { label: "Process", href: "/services#process" },
+  { label: "Results", href: "/services#results" },
+  { label: "FAQ", href: "/services#faq" },
+];
+---
+
+<header class="frd-header" data-header>
+  <div class="frd-header__inner">
+    <a class="frd-brand" href="/" aria-label="Factory Reset Detail home">
+      <span class="frd-brand__mark" aria-hidden="true"></span>
+      <span class="frd-brand__text">Factory Reset Detail</span>
+    </a>
+
+    <nav class="frd-nav" aria-label="Primary">
+      <ul class="frd-nav__list">
+        {nav.map((item) => (
+          <li><a class="frd-nav__link" href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="frd-actions">
+      <a class="frd-link" href="/services#contact">Book</a>
+      <a class="frd-btn" href="/services#contact">Request a Booking</a>
+
+      <button class="frd-menu" type="button" aria-label="Open menu" aria-expanded="false" data-menu-button>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="frd-drawer" data-drawer hidden>
+    <nav aria-label="Mobile">
+      <ul class="frd-drawer__list">
+        {nav.map((item) => (
+          <li><a class="frd-drawer__link" href={item.href} data-drawer-link>{item.label}</a></li>
+        ))}
+        <li class="frd-drawer__cta">
+          <a class="frd-btn frd-btn--full" href="/services#contact">Request a Booking</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <script is:inline>
+    const header = document.querySelector('[data-header]');
+    const drawer = document.querySelector('[data-drawer]');
+    const btn = document.querySelector('[data-menu-button]');
+    const links = document.querySelectorAll('[data-drawer-link]');
+
+    const setScrolled = () => {
+      const scrolled = window.scrollY > 12;
+      header?.classList.toggle('is-scrolled', scrolled);
+    };
+
+    const setOpen = (open) => {
+      if (!drawer || !btn) return;
+      btn.setAttribute('aria-expanded', String(open));
+      drawer.hidden = !open;
+      document.documentElement.classList.toggle('frd-lock', open);
+    };
+
+    btn?.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      setOpen(open);
+    });
+
+    links.forEach((a) => a.addEventListener('click', () => setOpen(false)));
+
+    window.addEventListener('scroll', setScrolled, { passive: true });
+    setScrolled();
+  </script>
+</header>
+
+<style>
+  /* Lock scroll when mobile drawer is open */
+  :global(html.frd-lock), :global(html.frd-lock body) { overflow: hidden; }
+
+  .frd-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    transition: background-color 200ms ease, border-color 200ms ease, backdrop-filter 200ms ease;
+    background: color-mix(in oklab, transparent 85%, #0b0b0c);
+    border-bottom: 1px solid color-mix(in oklab, transparent 88%, #ffffff);
+    backdrop-filter: blur(10px);
+  }
+  .frd-header.is-scrolled {
+    background: color-mix(in oklab, #0b0b0c 92%, transparent);
+    border-bottom: 1px solid color-mix(in oklab, #ffffff 12%, transparent);
+  }
+
+  .frd-header__inner{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .frd-brand{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    min-width: 200px;
+  }
+  .frd-brand__mark{
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: color-mix(in oklab, #ffffff 70%, transparent);
+    box-shadow: 0 0 0 6px color-mix(in oklab, #ffffff 8%, transparent);
+  }
+  .frd-brand__text{
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.92;
+    white-space: nowrap;
+  }
+
+  .frd-nav{ display: none; }
+  .frd-nav__list{
+    display: flex;
+    gap: 22px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .frd-nav__link{
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    opacity: 0.85;
+    transition: opacity 150ms ease;
+  }
+  .frd-nav__link:hover{ opacity: 1; }
+
+  .frd-actions{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .frd-link{
+    font-size: 13px;
+    text-decoration: none;
+    opacity: 0.85;
+  }
+  .frd-link:hover{ opacity: 1; }
+
+  .frd-btn{
+    display: none;
+    font-size: 13px;
+    padding: 10px 12px;
+    border-radius: 999px;
+    text-decoration: none;
+    border: 1px solid color-mix(in oklab, #ffffff 14%, transparent);
+    background: color-mix(in oklab, #ffffff 10%, transparent);
+    backdrop-filter: blur(10px);
+    transition: transform 150ms ease, background-color 150ms ease, border-color 150ms ease;
+    white-space: nowrap;
+  }
+  .frd-btn:hover{
+    transform: translateY(-1px);
+    background: color-mix(in oklab, #ffffff 14%, transparent);
+    border-color: color-mix(in oklab, #ffffff 20%, transparent);
+  }
+  .frd-btn--full{
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .frd-menu{
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in oklab, #ffffff 14%, transparent);
+    background: color-mix(in oklab, #ffffff 6%, transparent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .frd-menu span{
+    display: block;
+    width: 16px;
+    height: 1px;
+    background: color-mix(in oklab, #ffffff 75%, transparent);
+    opacity: 0.9;
+  }
+
+  .frd-drawer{
+    border-top: 1px solid color-mix(in oklab, #ffffff 10%, transparent);
+    background: color-mix(in oklab, #0b0b0c 95%, transparent);
+    backdrop-filter: blur(14px);
+  }
+  .frd-drawer__list{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 12px 18px 18px;
+    list-style: none;
+  }
+  .frd-drawer__link{
+    display: block;
+    padding: 12px 0;
+    text-decoration: none;
+    opacity: 0.9;
+    border-bottom: 1px solid color-mix(in oklab, #ffffff 8%, transparent);
+  }
+  .frd-drawer__cta{ padding-top: 14px; }
+
+  @media (min-width: 880px){
+    .frd-nav{ display: block; }
+    .frd-btn{ display: inline-flex; }
+    .frd-menu{ display: none; }
+    .frd-drawer{ display: none; }
+  }
+</style>

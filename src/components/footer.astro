@@ -1,0 +1,113 @@
+<footer class="frd-footer">
+  <div class="frd-footer__inner">
+<div class="frd-footer__brand">
+  <span class="frd-footer__name">Factory Reset Detail</span>
+  <span class="frd-footer__meta">
+    Mobile detailing · McKinney · Collin County
+  </span>
+  <span class="frd-footer__contact">
+  <a href="tel:+14692798048">(469) 279-8048</a> ·
+  <a href="mailto:ashton@factoryresetdetail.com">
+    ashton@factoryresetdetail.com
+  </a>
+</span>
+
+</div>
+
+    <nav class="frd-footer__nav" aria-label="Footer">
+      <a href="/services">Services</a>
+      <a href="/services#process">Process</a>
+      <a href="/services#faq">FAQ</a>
+      <a href="/services#contact">Book</a>
+    </nav>
+  </div>
+
+  <div class="frd-footer__legal">
+    <span>© {new Date().getFullYear()} Factory Reset Detail</span>
+    <span>Material-safe · Paint-conscious</span>
+  </div>
+
+  <style>
+    .frd-footer {
+      margin-top: 96px;
+      border-top: 1px solid color-mix(in oklab, #ffffff 10%, transparent);
+      background: color-mix(in oklab, #0b0b0c 96%, transparent);
+    }
+
+    .frd-footer__inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 48px 18px 32px;
+      display: grid;
+      gap: 32px;
+    }
+
+    .frd-footer__brand {
+      display: grid;
+      gap: 8px;
+    }
+
+    .frd-footer__name {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .frd-footer__meta {
+      font-size: 13px;
+      opacity: 0.65;
+    }
+
+    .frd-footer__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 13px;
+    }
+
+    .frd-footer__nav a {
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 150ms ease;
+    }
+
+    .frd-footer__nav a:hover {
+      opacity: 1;
+    }
+
+ .frd-footer__legal {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 16px 18px 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  font-size: 12px;
+  opacity: 0.55;
+}
+
+.frd-footer__contact {
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.frd-footer__contact a {
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 150ms ease;
+}
+
+.frd-footer__contact a:hover {
+  opacity: 1;
+}
+
+@media (min-width: 720px) {
+  .frd-footer__inner {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+  }
+}
+ </style>
+</footer>

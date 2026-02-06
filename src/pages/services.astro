@@ -1,160 +1,332 @@
 ---
-import Layout from "./layouts/Layout.astro";
+import Layout from "../layouts/layout.astro";
 
 const packages = [
   {
-    eyebrow: "Exterior",
-    title: "Paint Correction",
-    bestFor: "Best for: swirls, haze, and washed-out paint",
+    eyebrow: "Maintenance",
+    title: "Basic",
+    bestFor: "Best for: regular upkeep when the vehicle is already in decent shape",
     desc:
-      "Defect removal and refinement for clarity and depth—executed with restraint for a clean, natural finish.",
-    bullets: ["Decon wash + prep", "1–2 stage correction", "Gloss refinement + wipe-down"],
-    meta: ["Typical time: 4–10 hrs", "Quoted after photos"],
+      "A clean, professional refresh—safe wash, glass, and a straightforward interior tidy.",
+    bullets: [
+      "Foam pre-rinse + safe hand wash",
+      "Exterior rinse + premium microfiber dry",
+      "Windows cleaned inside + out",
+      "Light interior wipe of main surfaces",
+      "Vacuum of carpets and seats",
+    ],
+    meta: ["Protection: not included", "Wheels: light rinse/clean as needed"],
   },
   {
-    eyebrow: "Protection",
-    title: "Ceramic Protection",
-    bestFor: "Best for: daily drivers and long-term ease of maintenance",
+    eyebrow: "Detail",
+    title: "Essential",
+    bestFor: "Best for: a true detail with noticeably more time and precision",
     desc:
-      "Long-term protection tuned for slickness and easier maintenance—ideal for daily-driven performance and luxury vehicles.",
-    bullets: ["Panel prep", "Paint + wheel options", "Cure guidance + aftercare"],
-    meta: ["Typical time: 1–2 days", "Quoted after prep needs"],
+      "A deeper, more complete clean with the details that make it feel professionally finished.",
+    bullets: [
+      "Thorough wheel cleaning (tools + brushes)",
+      "Door jamb cleaning",
+      "Deeper interior cleaning (crevices + touch points)",
+      "More deliberate vacuuming and finishing",
+      "Includes hydrophobic spray wax/sealant (Formula 4 level)",
+    ],
+    meta: ["Option to upgrade protection", "Most popular balance"],
   },
   {
-    eyebrow: "Interior",
-    title: "Interior Reset",
-    bestFor: "Best for: buildup, spills, and restoring a factory-calm finish",
+    eyebrow: "Signature",
+    title: "Executive (Factory Reset)",
+    bestFor: "Best for: the most complete reset without stepping into paint correction",
     desc:
-      "A thorough, material-safe clean that restores calm—leather, carpets, plastics, vents, and glass.",
-    bullets: ["Vacuum + deep clean", "Steam/safe extraction as needed", "Matte, factory-correct finish"],
-    meta: ["Typical time: 2–6 hrs", "Quoted after condition"],
+      "Comprehensive, top-to-bottom detailing designed to make the vehicle feel new again—inside, outside, and in the details.",
+    bullets: [
+      "Deep interior reset (including under-seat and rail access)",
+      "Pet hair removal as needed",
+      "Stain removal as needed",
+      "Air-blown crack drying to prevent drips/water marks",
+      "Includes upgraded hydrophobic protection (TEC-582 level)",
+    ],
+    meta: ["Includes clay/decon if needed", "Most comprehensive detail tier"],
   },
 ];
 
 const addons = [
-  { title: "Headlight restoration", desc: "Clarity restored for improved output and appearance." },
-  { title: "Engine bay detail", desc: "Careful cleaning and dressing—no overspray, no shortcuts." },
-  { title: "Wheel-off deep clean", desc: "Barrel, caliper, and inner fender attention." },
-  { title: "Pet hair removal", desc: "Time-based add-on depending on severity." },
+  { title: "Headlight restoration", desc: "Restores clarity for improved output and a cleaner front-end finish." },
+  { title: "Pet hair removal", desc: "Time-based add-on depending on severity and material type." },
+  { title: "Biohazard remediation", desc: "For bodily fluids (vomit, urine, etc.). Quoted based on scope and safety needs." },
+  { title: "Carpet shampoo", desc: "Deep cleaning for set-in grime and traffic areas. Condition-based pricing." },
+  { title: "Stain removal", desc: "Targeted treatment for visible stains—results vary by material and dwell time." },
+  { title: "Trim restoration", desc: "Revives interior & exterior trim for a darker, more even finish without greasy residue." },
+  { title: "Advanced Hydrophobic Protection", desc: "Upgraded protection using a higher-performance sealant for stronger water behavior and easier maintenance." },
+  { title: "Clay + Decontamination", desc: "Removes bonded contaminants for a smoother finish—recommended before correction or longer-term protection." },
+];
+
+const faqs = [
+  {
+    q: "How long does a detail take?",
+    a: "Most services run 2–4 hours, with larger corrections and coatings taking longer depending on condition and prep needs.",
+  },
+  {
+    q: "Do you bring your own water and power?",
+    a: "I don’t bring water or power, but I arrive fully equipped with all tools needed (including a water hose and a 100-foot extension cable). I’ll just need access to a standard outdoor spigot and outlet to perform any service.",
+  },
+  {
+    q: "Is this safe for new, luxury, or ceramic-coated vehicles?",
+    a: "Absolutely. Methods and products are selected to preserve materials and existing protection with paint-safe technique.",
+  },
+  {
+    q: "Do you offer pricing over text?",
+    a: "We can provide a range, but final pricing is based on condition. Photos help us recommend the right level of service without guesswork.",
+  },
 ];
 ---
 
 <Layout>
-  <section class="bg-neutral-950 text-white">
-    <div class="mx-auto max-w-7xl px-6 py-14 lg:px-10 lg:py-18">
-      <p class="text-xs tracking-[0.3em] uppercase text-white/50">Services</p>
+  <main>
+    <!-- HERO + PACKAGES + ADD-ONS (Premium, dark) -->
+    <section class="bg-neutral-950 text-white">
+      <div class="mx-auto max-w-7xl px-6 py-14 lg:px-10 lg:py-18">
+        <p class="text-xs tracking-[0.3em] uppercase text-white/50">Services</p>
 
-      <div class="mt-4 grid gap-10 lg:grid-cols-12 lg:items-end">
-        <div class="lg:col-span-7">
-          <h1 class="text-3xl font-semibold leading-tight md:text-5xl">
-            Premium detailing, built around outcomes.
-          </h1>
-          <p class="mt-4 max-w-2xl text-white/70">
-            Mobile service in McKinney and surrounding Collin County. Every package is designed to
-            preserve materials, refine gloss, and deliver a calm, finished look—never greasy, never overdone.
-          </p>
+        <div class="mt-4 grid gap-10 lg:grid-cols-12 lg:items-end">
+          <div class="lg:col-span-7">
+            <h1 class="text-3xl font-semibold leading-tight md:text-5xl">
+              Premium detailing, built around outcomes.
+            </h1>
+            <p class="mt-4 max-w-2xl text-white/70">
+              Mobile service based in McKinney—serving Collin County and surrounding areas (typically within an hour).
+              Every package is designed to preserve materials, refine gloss, and deliver a calm, finished look—never
+              greasy, never overdone.
+            </p>
 
-          <div class="mt-6 flex flex-wrap gap-2 text-xs text-white/60">
-            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">Paint-safe methods</span>
-            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">Material-correct finishes</span>
-            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">Clear recommendations</span>
+            <div class="mt-6 flex flex-wrap gap-2 text-xs text-white/60">
+              <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">Paint-safe methods</span>
+              <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">Material-correct finishes</span>
+              <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">Clear recommendations</span>
+            </div>
           </div>
         </div>
 
-        <div class="lg:col-span-5 lg:flex lg:justify-end">
-          <a
-            href="#contact"
-            class="inline-flex w-full items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-neutral-950 transition hover:bg-white/90 sm:w-auto"
-          >
-            Request a Quote
-          </a>
-        </div>
-      </div>
+        <!-- Packages -->
+        <div class="mt-12 grid gap-6 lg:grid-cols-3">
+          {packages.map((p) => (
+            <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+              <p class="text-xs tracking-[0.3em] uppercase text-white/50">{p.eyebrow}</p>
+              <h2 class="mt-3 text-lg font-semibold">{p.title}</h2>
+              <p class="mt-2 text-sm text-white/60">{p.bestFor}</p>
 
-      <!-- Packages -->
-      <div class="mt-12 grid gap-6 lg:grid-cols-3">
-        {packages.map((p) => (
-          <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <p class="text-xs tracking-[0.3em] uppercase text-white/50">{p.eyebrow}</p>
-            <h2 class="mt-3 text-lg font-semibold">{p.title}</h2>
-            <p class="mt-2 text-sm text-white/60">{p.bestFor}</p>
+              <p class="mt-4 text-sm leading-relaxed text-white/70">{p.desc}</p>
 
-            <p class="mt-4 text-sm leading-relaxed text-white/70">{p.desc}</p>
+              <ul class="mt-5 space-y-2 text-sm text-white/70">
+                {p.bullets.map((b) => (
+                  <li class="flex gap-3">
+                    <span class="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-white/40"></span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
 
-            <ul class="mt-5 space-y-2 text-sm text-white/70">
-              {p.bullets.map((b) => (
-                <li class="flex gap-3">
-                  <span class="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-white/40"></span>
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
+              <div class="mt-5 flex flex-wrap gap-2 text-xs text-white/60">
+                {p.meta.map((m) => (
+                  <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">{m}</span>
+                ))}
+              </div>
 
-            <div class="mt-5 flex flex-wrap gap-2 text-xs text-white/60">
-              {p.meta.map((m) => (
-                <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">{m}</span>
-              ))}
-            </div>
-
-            <div class="mt-6">
-              <a
-                href="#contact"
-                class="inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-white/80 transition hover:border-white/30 hover:bg-white/5"
-              >
-                Get a recommendation
-              </a>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <!-- Process teaser -->
-      <p class="mt-10 text-center text-xs tracking-[0.3em] uppercase text-white/40">
-        Assess &nbsp;→&nbsp; Protect &nbsp;→&nbsp; Refine &nbsp;→&nbsp; Inspect
-      </p>
-
-      <!-- Add-ons -->
-      <div class="mt-14 border-t border-white/5 pt-14">
-        <div>
-          <p class="text-xs tracking-[0.3em] uppercase text-white/50">Add-ons</p>
-          <h3 class="mt-3 text-2xl font-semibold md:text-3xl">
-            Finishing touches, added when they make sense.
-          </h3>
-          <p class="mt-3 max-w-2xl text-sm text-white/70">
-            Add-ons are quoted based on condition and time required—no blanket upcharges.
-          </p>
+              <div class="mt-6">
+                <a
+                  href="#contact"
+                  class="inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-white/80 transition hover:border-white/30 hover:bg-white/5"
+                >
+                  Get a recommendation
+                </a>
+              </div>
+            </article>
+          ))}
         </div>
 
-        <div class="mt-8 grid gap-5 md:grid-cols-2">
-          {addons.map((a) => (
-            <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
-              <h4 class="text-base font-semibold">{a.title}</h4>
-              <p class="mt-2 text-sm leading-relaxed text-white/70">{a.desc}</p>
-            </div>
+        <!-- Custom + Ceramic -->
+        <div class="mt-12 grid gap-6 lg:grid-cols-12">
+          <div class="lg:col-span-7">
+            <p class="text-xs tracking-[0.3em] uppercase text-white/50">Custom</p>
+            <h3 class="mt-3 text-2xl font-semibold md:text-3xl">
+              Condition-based recommendations
+            </h3>
+            <p class="mt-3 text-sm text-white/70">
+              Not every vehicle fits a package. If you’re unsure, send a couple photos and I’ll recommend the right
+              level of service based on condition—no upsells, just clarity.
+            </p>
+          </div>
+
+          <div class="lg:col-span-5">
+            <p class="text-xs tracking-[0.3em] uppercase text-white/50">Ceramic Coatings</p>
+            <h3 class="mt-3 text-2xl font-semibold md:text-3xl">
+              Coming Spring 2026
+            </h3>
+            <p class="mt-3 text-sm text-white/70">
+              Ceramic coatings will be available this year. Prep is required by default (decontamination and some
+              level of correction or refinement—even on newer vehicles) to ensure the coating bonds properly and
+              looks right.
+            </p>
+          </div>
+        </div>
+
+        <!-- Process teaser -->
+        <p class="mt-10 text-center text-xs tracking-[0.3em] uppercase text-white/40">
+          Assess &nbsp;→&nbsp; Protect &nbsp;→&nbsp; Refine &nbsp;→&nbsp; Inspect
+        </p>
+
+        <!-- Add-ons -->
+        <div class="mt-14 border-t border-white/5 pt-14">
+          <div>
+            <p class="text-xs tracking-[0.3em] uppercase text-white/50">Add-ons</p>
+            <h3 class="mt-3 text-2xl font-semibold md:text-3xl">
+              Finishing touches, added when they make sense.
+            </h3>
+            <p class="mt-3 max-w-2xl text-sm text-white/70">
+              Add-ons are quoted based on condition and time required—no blanket upcharges.
+            </p>
+          </div>
+
+          <div class="mt-8 grid gap-5 md:grid-cols-2">
+            {addons.map((a) => (
+              <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+                <h4 class="text-base font-semibold">{a.title}</h4>
+                <p class="mt-2 text-sm leading-relaxed text-white/70">{a.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process" class="bg-white">
+      <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+        <p class="text-xs tracking-[0.3em] uppercase text-neutral-500">Process</p>
+        <h2 class="mt-3 text-2xl font-semibold text-neutral-950 md:text-3xl">
+          A calm, methodical approach
+        </h2>
+        <p class="mt-3 max-w-2xl text-sm text-neutral-700">
+          Every detail follows a consistent sequence designed to protect materials, refine appearance, and deliver
+          results you can maintain.
+        </p>
+
+        <ol class="mt-10 grid gap-6 md:grid-cols-3">
+          <li class="rounded-3xl border border-neutral-200 p-6">
+            <p class="text-xs tracking-[0.3em] uppercase text-neutral-500">01</p>
+            <h3 class="mt-2 text-base font-semibold text-neutral-950">Assessment</h3>
+            <p class="mt-2 text-sm leading-relaxed text-neutral-700">
+              We evaluate condition, surfaces, and priorities before choosing the right methods.
+            </p>
+          </li>
+
+          <li class="rounded-3xl border border-neutral-200 p-6">
+            <p class="text-xs tracking-[0.3em] uppercase text-neutral-500">02</p>
+            <h3 class="mt-2 text-base font-semibold text-neutral-950">Material-correct execution</h3>
+            <p class="mt-2 text-sm leading-relaxed text-neutral-700">
+              Paint-safe technique, controlled product use, and deliberate finishing—no rushed shortcuts.
+            </p>
+          </li>
+
+          <li class="rounded-3xl border border-neutral-200 p-6">
+            <p class="text-xs tracking-[0.3em] uppercase text-neutral-500">03</p>
+            <h3 class="mt-2 text-base font-semibold text-neutral-950">Final inspection</h3>
+            <p class="mt-2 text-sm leading-relaxed text-neutral-700">
+              We check details under proper lighting and leave clear guidance for care.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="results" class="bg-white">
+      <div class="mx-auto max-w-7xl px-6 pb-16 lg:px-10 lg:pb-20">
+        <p class="text-xs tracking-[0.3em] uppercase text-neutral-500">Results</p>
+        <h2 class="mt-3 text-2xl font-semibold text-neutral-950 md:text-3xl">
+          Outcomes you can see—and maintain
+        </h2>
+        <p class="mt-3 max-w-2xl text-sm text-neutral-700">
+          Clients choose Factory Reset Detail for consistency: clean gloss, correct sheen, and finishes that hold
+          up beyond the first wash.
+        </p>
+
+        <ul class="mt-10 grid gap-6 md:grid-cols-3">
+          <li class="rounded-3xl border border-neutral-200 p-6">
+            <h3 class="text-base font-semibold text-neutral-950">Clarity without harshness</h3>
+            <p class="mt-2 text-sm leading-relaxed text-neutral-700">
+              Refinement that respects clear coat and avoids an overworked look.
+            </p>
+          </li>
+          <li class="rounded-3xl border border-neutral-200 p-6">
+            <h3 class="text-base font-semibold text-neutral-950">Factory-calm interiors</h3>
+            <p class="mt-2 text-sm leading-relaxed text-neutral-700">
+              A clean, dry finish—no greasy shine, no heavy fragrance, no residue.
+            </p>
+          </li>
+          <li class="rounded-3xl border border-neutral-200 p-6">
+            <h3 class="text-base font-semibold text-neutral-950">Protection that makes life easier</h3>
+            <p class="mt-2 text-sm leading-relaxed text-neutral-700">
+              Protectants selected for longevity and maintenance, not hype.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="bg-white">
+      <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+        <p class="text-xs tracking-[0.3em] uppercase text-neutral-500">FAQ</p>
+        <h2 class="mt-3 text-2xl font-semibold text-neutral-950 md:text-3xl">
+          Quick answers
+        </h2>
+
+        <div class="mt-10 space-y-3">
+          {faqs.map((f) => (
+            <details class="group rounded-2xl border border-neutral-200 p-5">
+              <summary class="cursor-pointer list-none text-sm font-medium text-neutral-950">
+                <span class="flex items-center justify-between gap-4">
+                  <span>{f.q}</span>
+                  <span class="text-neutral-400 transition group-open:rotate-45">+</span>
+                </span>
+              </summary>
+              <p class="mt-3 text-sm leading-relaxed text-neutral-700">{f.a}</p>
+            </details>
           ))}
         </div>
       </div>
+    </section>
 
-      <!-- CTA -->
-      <div id="contact" class="mt-14 rounded-3xl border border-white/10 bg-white/5 p-8">
-        <div class="grid gap-6 lg:grid-cols-12 lg:items-center">
-          <div class="lg:col-span-8">
-            <h3 class="text-2xl font-semibold">Ready for a reset?</h3>
-            <p class="mt-3 text-white/70">
-              Send your vehicle, location, and a couple photos. I’ll reply with a clear recommendation and a quote.
-            </p>
-          </div>
-          <div class="lg:col-span-4 lg:flex lg:justify-end">
-            <a
-              href="/contact"
-              class="inline-flex w-full items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-neutral-950 transition hover:bg-white/90 sm:w-auto"
-            >
-              Contact
-            </a>
+    <!-- CONTACT -->
+    <section id="contact" class="bg-neutral-950 text-white">
+      <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <div class="grid gap-6 lg:grid-cols-12 lg:items-center">
+            <div class="lg:col-span-8">
+              <p class="text-xs tracking-[0.3em] uppercase text-white/50">Contact</p>
+              <h2 class="mt-3 text-2xl font-semibold md:text-3xl">
+                Ready for a reset?
+              </h2>
+              <p class="mt-3 text-white/70">
+                Send your vehicle, location, and a couple photos. I’ll reply with a clear recommendation and a quote.
+              </p>
+            </div>
+
+            <div class="lg:col-span-4 lg:flex lg:justify-end">
+              <a
+                href="/contact"
+                class="inline-flex w-full items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-neutral-950 transition hover:bg-white/90 sm:w-auto"
+              >
+                Contact
+              </a>
+            </div>
           </div>
         </div>
-      </div>
 
-    </div>
-  </section>
+        <p class="mt-8 text-xs tracking-[0.3em] uppercase text-white/40">
+          Paint-safe &nbsp;•&nbsp; Material-correct &nbsp;•&nbsp; Calm, finished results
+        </p>
+      </div>
+    </section>
+  </main>
 </Layout>

@@ -1,14 +1,24 @@
 ---
 import "../styles/global.css";
+import Header from "../components/header.astro";
+import Footer from "../components/footer.astro";
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Factory Reset Detail</title>
   </head>
+
   <body class="bg-black text-white">
-    <slot />
+    <Header />
+
+    <main>
+      <slot />
+    </main>
+
+    <Footer />
   </body>
 </html>
