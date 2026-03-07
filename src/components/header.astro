@@ -23,10 +23,16 @@ const nav = [
     </nav>
 
     <div class="frd-actions">
-      <a class="frd-link" href="/services#contact">Book</a>
+      <a class="frd-book" href="/services#contact">Book</a>
       <a class="frd-btn" href="/services#contact">Request a Booking</a>
 
-      <button class="frd-menu" type="button" aria-label="Open menu" aria-expanded="false" data-menu-button>
+      <button
+        class="frd-menu"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        data-menu-button
+      >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </button>
@@ -71,6 +77,18 @@ const nav = [
 
     links.forEach((a) => a.addEventListener('click', () => setOpen(false)));
 
+    // Optional: click outside drawer closes it
+    document.addEventListener('click', (e) => {
+      if (!drawer || !btn) return;
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      if (!open) return;
+
+      const target = e.target;
+      const clickedMenuButton = btn.contains(target);
+      const clickedInsideDrawer = drawer.contains(target);
+      if (!clickedMenuButton && !clickedInsideDrawer) setOpen(false);
+    });
+
     window.addEventListener('scroll', setScrolled, { passive: true });
     setScrolled();
   </script>
@@ -78,13 +96,17 @@ const nav = [
 
 <style>
   /* Lock scroll when mobile drawer is open */
-  :global(html.frd-lock), :global(html.frd-lock body) { overflow: hidden; }
+  :global(html.frd-lock),
+  :global(html.frd-lock body) {
+    overflow: hidden;
+  }
 
   .frd-header {
     position: sticky;
     top: 0;
     z-index: 50;
-    transition: background-color 200ms ease, border-color 200ms ease, backdrop-filter 200ms ease;
+    transition: background-color 200ms ease, border-color 200ms ease,
+      backdrop-filter 200ms ease;
     background: color-mix(in oklab, transparent 85%, #0b0b0c);
     border-bottom: 1px solid color-mix(in oklab, transparent 88%, #ffffff);
     backdrop-filter: blur(10px);
@@ -94,32 +116,35 @@ const nav = [
     border-bottom: 1px solid color-mix(in oklab, #ffffff 12%, transparent);
   }
 
-  .frd-header__inner{
+  .frd-header__inner {
     max-width: 1120px;
     margin: 0 auto;
     padding: 14px 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 14px;
+    gap: 12px;
   }
 
-  .frd-brand{
+  .frd-brand {
     display: flex;
     align-items: center;
     gap: 10px;
     text-decoration: none;
     color: inherit;
-    min-width: 200px;
+    min-width: 0; /* prevents overflow on tiny phones */
   }
-  .frd-brand__mark{
+
+  .frd-brand__mark {
     width: 10px;
     height: 10px;
     border-radius: 999px;
     background: color-mix(in oklab, #ffffff 70%, transparent);
     box-shadow: 0 0 0 6px color-mix(in oklab, #ffffff 8%, transparent);
+    flex: 0 0 auto;
   }
-  .frd-brand__text{
+
+  .frd-brand__text {
     font-size: 14px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -127,37 +152,69 @@ const nav = [
     white-space: nowrap;
   }
 
-  .frd-nav{ display: none; }
-  .frd-nav__list{
+  /* Slightly tighter brand text on very small screens */
+  @media (max-width: 360px) {
+    .frd-brand__text {
+      font-size: 13px;
+      letter-spacing: 0.05em;
+    }
+  }
+
+  .frd-nav {
+    display: none;
+  }
+  .frd-nav__list {
     display: flex;
     gap: 22px;
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  .frd-nav__link{
+  .frd-nav__link {
     font-size: 13px;
     letter-spacing: 0.02em;
     text-decoration: none;
     opacity: 0.85;
     transition: opacity 150ms ease;
   }
-  .frd-nav__link:hover{ opacity: 1; }
+  .frd-nav__link:hover {
+    opacity: 1;
+  }
 
-  .frd-actions{
+  .frd-actions {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex: 0 0 auto;
   }
 
-  .frd-link{
+  /* Book pill (mobile + desktop, looks good everywhere) */
+  .frd-book {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 999px;
     font-size: 13px;
+    letter-spacing: 0.02em;
     text-decoration: none;
-    opacity: 0.85;
+    color: color-mix(in oklab, #ffffff 92%, transparent);
+    border: 1px solid color-mix(in oklab, #ffffff 14%, transparent);
+    background: color-mix(in oklab, #ffffff 8%, transparent);
+    backdrop-filter: blur(10px);
+    transition: transform 150ms ease, background-color 150ms ease,
+      border-color 150ms ease;
+    white-space: nowrap;
   }
-  .frd-link:hover{ opacity: 1; }
+  .frd-book:hover {
+    transform: translateY(-1px);
+    background: color-mix(in oklab, #ffffff 12%, transparent);
+    border-color: color-mix(in oklab, #ffffff 20%, transparent);
+  }
 
-  .frd-btn{
+  /* Primary CTA button (desktop only via media query below) */
+  .frd-btn {
     display: none;
     font-size: 13px;
     padding: 10px 12px;
@@ -166,21 +223,23 @@ const nav = [
     border: 1px solid color-mix(in oklab, #ffffff 14%, transparent);
     background: color-mix(in oklab, #ffffff 10%, transparent);
     backdrop-filter: blur(10px);
-    transition: transform 150ms ease, background-color 150ms ease, border-color 150ms ease;
+    transition: transform 150ms ease, background-color 150ms ease,
+      border-color 150ms ease;
     white-space: nowrap;
   }
-  .frd-btn:hover{
+  .frd-btn:hover {
     transform: translateY(-1px);
     background: color-mix(in oklab, #ffffff 14%, transparent);
     border-color: color-mix(in oklab, #ffffff 20%, transparent);
   }
-  .frd-btn--full{
+  .frd-btn--full {
     display: inline-flex;
     width: 100%;
     justify-content: center;
   }
 
-  .frd-menu{
+  /* Hamburger: premium + balanced next to Book */
+  .frd-menu {
     width: 42px;
     height: 42px;
     border-radius: 999px;
@@ -189,40 +248,66 @@ const nav = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-  }
-  .frd-menu span{
-    display: block;
-    width: 16px;
-    height: 1px;
-    background: color-mix(in oklab, #ffffff 75%, transparent);
-    opacity: 0.9;
+    flex-direction: column;
+    gap: 5px;
   }
 
-  .frd-drawer{
+  .frd-menu span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: color-mix(in oklab, #ffffff 75%, transparent);
+    opacity: 0.9;
+    border-radius: 999px;
+    transition: transform 180ms ease;
+  }
+
+  /* Animate to X when open */
+  .frd-menu[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+  .frd-menu[aria-expanded="true"] span:nth-child(2) {
+    transform: translateY(-3.5px) rotate(-45deg);
+  }
+
+  .frd-drawer {
     border-top: 1px solid color-mix(in oklab, #ffffff 10%, transparent);
     background: color-mix(in oklab, #0b0b0c 95%, transparent);
     backdrop-filter: blur(14px);
   }
-  .frd-drawer__list{
+
+  .frd-drawer__list {
     max-width: 1120px;
     margin: 0 auto;
     padding: 12px 18px 18px;
     list-style: none;
   }
-  .frd-drawer__link{
+
+  .frd-drawer__link {
     display: block;
     padding: 12px 0;
     text-decoration: none;
     opacity: 0.9;
     border-bottom: 1px solid color-mix(in oklab, #ffffff 8%, transparent);
   }
-  .frd-drawer__cta{ padding-top: 14px; }
 
-  @media (min-width: 880px){
-    .frd-nav{ display: block; }
-    .frd-btn{ display: inline-flex; }
-    .frd-menu{ display: none; }
-    .frd-drawer{ display: none; }
+  .frd-drawer__cta {
+    padding-top: 14px;
+  }
+
+  /* Desktop layout */
+  @media (min-width: 880px) {
+    .frd-nav {
+      display: block;
+    }
+    .frd-btn {
+      display: inline-flex;
+    }
+    .frd-menu {
+      display: none;
+    }
+    .frd-drawer {
+      display: none;
+    }
   }
 </style>

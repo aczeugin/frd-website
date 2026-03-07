@@ -1,12 +1,10 @@
 ---
-import { Image } from "astro:assets";
-import heroImg from "../assets/gt3-hero.jpg";
 ---
 
-<section class="min-h-[calc(100vh-5rem)] bg-neutral-950 text-white flex items-center">
-<div class="mx-auto max-w-7xl px-6 py-12 lg:py-20 lg:px-10">
+<section class="frd-hero pb-6 bg-neutral-950 text-white flex items-start lg:items-center">
+<div class="mx-auto max-w-7xl px-6 pt-5 pb-10 lg:py-20 lg:px-10">
 
-    <div class="grid items-center gap-12 lg:grid-cols-12">
+    <div class="grid items-center gap-8 lg:gap-12 lg:grid-cols-12">
 
       <!-- Copy -->
       <div class="lg:col-span-5">
@@ -24,7 +22,7 @@ import heroImg from "../assets/gt3-hero.jpg";
 </p>
 
 
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
           <a
             href="/services#contact"
             class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-neutral-950 transition hover:bg-white/90"
@@ -40,7 +38,7 @@ import heroImg from "../assets/gt3-hero.jpg";
           </a>
         </div>
 
-<div class="mt-6 flex flex-wrap gap-2 text-xs text-white/60">
+<div class="mt-4 flex flex-wrap gap-2 text-xs text-white/60">
   <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">
     Fully mobile • Collin County
   </span>
@@ -55,23 +53,114 @@ import heroImg from "../assets/gt3-hero.jpg";
       </div>
 
       <!-- Image -->
-      <div class="lg:col-span-7">
-        <div class="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl">
-          <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/55 via-black/10 to-transparent"></div>
+<div class="lg:col-span-7">
+  <div class="hero-frame relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl">
+    <div class="hero-slider h-[clamp(220px,28svh,260px)] sm:h-[320px] md:h-[440px] lg:h-[540px]">
+      <img
+        src="/img/porsche-gt3-front.webp"
+        alt="Factory Reset Detail Porsche GT3 exterior"
+        class="slide active"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <img
+        src="/img/jaguar-ftype-rear.webp"
+        alt="Factory Reset Detail Jaguar F-Type exterior"
+        class="slide"
+        loading="lazy"
+      />
+      <img
+        src="/img/gt3-engine.webp"
+        alt="Factory Reset Detail Porsche GT3 engine bay"
+        class="slide"
+        loading="lazy"
+      />
+      <img
+        src="/img/jaguar-interior.webp"
+        alt="Factory Reset Detail Jaguar interior"
+        class="slide"
+        loading="lazy"
+      />
+      <img
+        src="/img/gt3-interior.webp"
+        alt="Factory Reset Detail Porsche GT3 interior"
+        class="slide"
+        loading="lazy"
+      />
+      <img
+        src="/img/silverado-z71.webp"
+        alt="Factory Reset Detail Silverado Z71 exterior"
+        class="slide"
+        loading="lazy"
+      />
+    </div>
 
-          <Image
-            src={heroImg}
-            alt="Factory Reset Detail Porsche GT3"
-            class="h-[340px] w-full object-cover md:h-[440px] lg:h-[540px]"
-            loading="eager"
-            fetchpriority="high"
-            widths={[900, 1200, 1500]}
-            sizes="(min-width: 1024px) 58vw, 100vw"
-            format="webp"
-          />
-        </div>
-      </div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/55 via-black/10 to-transparent"></div>
+  </div>
+</div>
 
     </div>
   </div>
 </section>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const sliders = document.querySelectorAll(".hero-slider");
+
+    sliders.forEach((slider) => {
+      const slides = slider.querySelectorAll(".slide");
+      if (!slides.length) return;
+
+      let current = 0;
+
+      setInterval(() => {
+        slides[current].classList.remove("active");
+        current = (current + 1) % slides.length;
+        slides[current].classList.add("active");
+      }, 5500);
+    });
+  });
+</script>
+<style>
+  /* Base hero height (most phones) */
+  .frd-hero {
+    min-height: calc(100svh - 5rem);
+  }
+
+  /* Tall phones (iPhone Pro Max, large Androids):
+     slightly cap hero height so next section doesn't peek */
+  @media (max-width: 500px) and (min-height: 900px) {
+    .frd-hero {
+      min-height: calc(92svh - 5rem);
+    }
+  }
+
+  /* Desktop: classic viewport height */
+  @media (min-width: 1024px) {
+    .frd-hero {
+      min-height: calc(100vh - 5rem);
+    }
+  }
+  .hero-frame {
+  isolation: isolate;
+}
+
+.hero-slider {
+  position: relative;
+  width: 100%;
+}
+
+.hero-slider .slide {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+
+.hero-slider .slide.active {
+  opacity: 1;
+}
+</style>

@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+/* Anchor offset for sticky header */
+:root {
+  --header-offset: 88px; /* we will fine-tune this */
+}
+
+/* Ensures anchor links land below the sticky header */
+html {
+  scroll-padding-top: var(--header-offset);
+  scroll-behavior: smooth; /* optional but feels premium */
+}
