@@ -1,26 +1,23 @@
 ---
 ---
 
-<section class="frd-hero pb-6 bg-neutral-950 text-white flex items-start lg:items-center">
-<div class="mx-auto max-w-7xl px-6 pt-5 pb-10 lg:py-20 lg:px-10">
-
-    <div class="grid items-center gap-8 lg:gap-12 lg:grid-cols-12">
+<section class="frd-hero bg-neutral-950 text-white">
+  <div class="mx-auto max-w-7xl px-6 pt-6 pb-8 lg:px-10 lg:pt-10 lg:pb-12 xl:pt-12 xl:pb-14">
+    <div class="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
 
       <!-- Copy -->
-      <div class="lg:col-span-5">
-        <p class="text-xs tracking-[0.25em] uppercase text-white/60">
+      <div class="lg:col-span-4">
+        <p class="text-[11px] tracking-[0.28em] uppercase text-white/60 md:text-xs">
           Mobile Detailing • McKinney, TX
         </p>
 
-        <h1 class="mt-4 text-4xl font-semibold leading-tight md:text-5xl">
-  Precision detailing, executed with restraint.
-</h1>
+        <h1 class="mt-4 max-w-[11ch] text-4xl font-semibold leading-[1.02] md:text-5xl xl:text-[3.7rem]">
+          Precision detailing executed with restraint.
+        </h1>
 
-
-        <p class="mt-5 max-w-prose text-base leading-relaxed text-white/70">
-  A material-safe, paint-conscious approach designed to preserve finishes—not push them.
-</p>
-
+        <p class="mt-5 max-w-[34rem] text-[15px] leading-relaxed text-white/70 md:text-base">
+          A material-safe, paint-conscious approach designed to preserve finishes—not push them.
+        </p>
 
         <div class="mt-6 flex flex-col gap-3 sm:flex-row">
           <a
@@ -38,70 +35,67 @@
           </a>
         </div>
 
-<div class="mt-4 flex flex-wrap gap-2 text-xs text-white/60">
-  <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-    Fully mobile • Collin County
-  </span>
-  <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-    Paint-safe methods
-  </span>
-  <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-    Material-correct finishes
-  </span>
-</div>
-
+        <div class="mt-4 flex flex-wrap gap-2 text-xs text-white/60">
+          <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+            Fully mobile • Collin County
+          </span>
+          <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+            Paint-safe methods
+          </span>
+        </div>
       </div>
 
       <!-- Image -->
-<div class="lg:col-span-7">
-  <div class="hero-frame relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl">
-    <div class="hero-slider h-[clamp(220px,28svh,260px)] sm:h-[320px] md:h-[440px] lg:h-[540px]">
-      <img
-        src="/img/porsche-gt3-front.webp"
-        alt="Factory Reset Detail Porsche GT3 exterior"
-        class="slide active"
-        loading="eager"
-        fetchpriority="high"
-      />
-      <img
-        src="/img/jaguar-ftype-rear.webp"
-        alt="Factory Reset Detail Jaguar F-Type exterior"
-        class="slide"
-        loading="lazy"
-      />
-      <img
-        src="/img/gt3-engine.webp"
-        alt="Factory Reset Detail Porsche GT3 engine bay"
-        class="slide"
-        loading="lazy"
-      />
-      <img
-        src="/img/jaguar-interior.webp"
-        alt="Factory Reset Detail Jaguar interior"
-        class="slide"
-        loading="lazy"
-      />
-      <img
-        src="/img/gt3-interior.webp"
-        alt="Factory Reset Detail Porsche GT3 interior"
-        class="slide"
-        loading="lazy"
-      />
-      <img
-        src="/img/silverado-z71.webp"
-        alt="Factory Reset Detail Silverado Z71 exterior"
-        class="slide"
-        loading="lazy"
-      />
-    </div>
+      <div class="lg:col-span-8">
+        <div class="hero-frame relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl">
+          <div class="hero-slider aspect-[4/3] w-full">
+            <img
+              src="/img/porsche-gt3-front.webp"
+              alt="Factory Reset Detail Porsche GT3 exterior"
+              class="slide active"
+              loading="eager"
+              fetchpriority="high"
+            />
+            <img
+              src="/img/jaguar-ftype-rear.webp"
+              alt="Factory Reset Detail Jaguar F-Type exterior"
+              class="slide"
+              loading="lazy"
+            />
+            <img
+              src="/img/gt3-engine.webp"
+              alt="Factory Reset Detail Porsche GT3 engine bay"
+              class="slide"
+              loading="lazy"
+            />
+            <img
+              src="/img/jaguar-interior.webp"
+              alt="Factory Reset Detail Jaguar interior"
+              class="slide"
+              loading="lazy"
+            />
+            <img
+              src="/img/gt3-interior.webp"
+              alt="Factory Reset Detail Porsche GT3 interior"
+              class="slide"
+              loading="lazy"
+            />
+            <img
+              src="/img/silverado-z71.webp"
+              alt="Factory Reset Detail Silverado Z71 exterior"
+              class="slide"
+              loading="lazy"
+            />
+          </div>
 
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/55 via-black/10 to-transparent"></div>
-  </div>
-</div>
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/55 via-black/10 to-transparent"></div>
+        </div>
+      </div>
 
     </div>
   </div>
 </section>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const sliders = document.querySelectorAll(".hero-slider");
@@ -120,47 +114,79 @@
     });
   });
 </script>
+
 <style>
-  /* Base hero height (most phones) */
   .frd-hero {
-    min-height: calc(100svh - 5rem);
+    min-height: calc(98svh - 5rem);
   }
 
-  /* Tall phones (iPhone Pro Max, large Androids):
-     slightly cap hero height so next section doesn't peek */
+  .hero-frame {
+    isolation: isolate;
+  }
+
+  .hero-slider {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-slider .slide {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 900ms ease;
+  }
+
+  .hero-slider .slide.active {
+    opacity: 1;
+  }
+
+  /* Small phones */
+  @media (max-width: 390px) and (max-height: 850px) {
+    .frd-hero {
+      min-height: calc(100svh - 5rem);
+    }
+
+    .hero-slider {
+      aspect-ratio: 4 / 3;
+      max-height: 220px;
+    }
+  }
+
+  /* Tall phones */
   @media (max-width: 500px) and (min-height: 900px) {
     .frd-hero {
-      min-height: calc(92svh - 5rem);
+      min-height: calc(90svh - 5rem);
+    }
+
+    .hero-slider {
+      aspect-ratio: 4 / 3;
+      max-height: 240px;
     }
   }
 
-  /* Desktop: classic viewport height */
+  /* Tablets */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .hero-slider {
+      max-height: 440px;
+    }
+  }
+
+  /* Desktop */
   @media (min-width: 1024px) {
     .frd-hero {
-      min-height: calc(100vh - 5rem);
+      min-height: calc(86vh - 5rem);
     }
   }
-  .hero-frame {
-  isolation: isolate;
-}
 
-.hero-slider {
-  position: relative;
-  width: 100%;
-}
-
-.hero-slider .slide {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 900ms ease;
-}
-
-.hero-slider .slide.active {
-  opacity: 1;
-}
+  /* Larger desktop / 1440p */
+  @media (min-width: 1440px) {
+    .frd-hero {
+      min-height: calc(84vh - 5rem);
+    }
+  }
 </style>
