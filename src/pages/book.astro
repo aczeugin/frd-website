@@ -4,47 +4,10 @@ import Layout from "../layouts/Layout.astro";
 const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
 const uploadFormUrl =
   import.meta.env.PUBLIC_UPLOAD_FORM_URL ?? "https://YOUR-UPLOAD-FORM-URL-HERE";
-
-const service = Astro.url.searchParams.get("service") ?? "";
-
-const services = {
-  maintenance: {
-    label: "Maintenance Detail",
-    slug: "factoryresetdetail/maintenance-detail",
-    blurb:
-      "Best for already well-kept vehicles that need consistent upkeep and preferred recurring pricing.",
-  },
-  signature: {
-    label: "Signature Detail",
-    slug: "factoryresetdetail/signature-detail",
-    blurb:
-      "Best for clients wanting a deeper, more complete detail with stronger interior and wheel attention.",
-  },
-  reset: {
-    label: "Factory Reset Detail",
-    slug: "factoryresetdetail/factory-reset-detail",
-    blurb:
-      "Best for the most comprehensive reset short of correction work, inside and out.",
-  },
-};
-
-const fallback = {
-  label: "Signature Detail",
-  slug: "factoryresetdetail/signature-detail",
-  blurb:
-    "Choose a time that works for you. After booking, send a few current photos so service fit and any add-ons can be confirmed before arrival.",
-};
-
-const selected = services[service as keyof typeof services] ?? fallback;
-
-const activeService =
-  service === "maintenance" || service === "reset" || service === "signature"
-    ? service
-    : "signature";
 ---
 
 <Layout
-  title={`${selected.label} | Book | Factory Reset Detail`}
+  title="Book | Factory Reset Detail"
   description="Book your mobile detailing appointment with Factory Reset Detail in McKinney and surrounding areas."
 >
   <main class="bg-neutral-950 text-white">
@@ -63,51 +26,39 @@ const activeService =
 
         <div class="mt-6 inline-flex flex-wrap items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80">
           <span class="font-medium text-white">Currently viewing:</span>
-          <span>{selected.label}</span>
+          <span id="selected-service-label">Signature Detail</span>
           <span class="hidden text-white/30 sm:inline">•</span>
           <span class="text-white/60">Mobile service in McKinney + surrounding areas</span>
         </div>
 
         <div class="mt-6 flex flex-wrap gap-2">
           <a
+            id="service-pill-maintenance"
             href="/book?service=maintenance"
-            class:list={[
-              "inline-flex items-center rounded-full border px-4 py-2 text-sm transition",
-              activeService === "maintenance"
-                ? "border-white bg-white text-neutral-950"
-                : "border-white/10 bg-white/5 text-white/75 hover:border-white/20 hover:bg-white/10",
-            ]}
+            class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/75 transition hover:border-white/20 hover:bg-white/10"
           >
             Maintenance
           </a>
 
           <a
+            id="service-pill-signature"
             href="/book?service=signature"
-            class:list={[
-              "inline-flex items-center rounded-full border px-4 py-2 text-sm transition",
-              activeService === "signature"
-                ? "border-white bg-white text-neutral-950"
-                : "border-white/10 bg-white/5 text-white/75 hover:border-white/20 hover:bg-white/10",
-            ]}
+            class="inline-flex items-center rounded-full border border-white bg-white px-4 py-2 text-sm text-neutral-950 transition"
           >
             Signature
           </a>
 
           <a
+            id="service-pill-reset"
             href="/book?service=reset"
-            class:list={[
-              "inline-flex items-center rounded-full border px-4 py-2 text-sm transition",
-              activeService === "reset"
-                ? "border-white bg-white text-neutral-950"
-                : "border-white/10 bg-white/5 text-white/75 hover:border-white/20 hover:bg-white/10",
-            ]}
+            class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/75 transition hover:border-white/20 hover:bg-white/10"
           >
             Factory Reset
           </a>
         </div>
 
-        <p class="mt-4 max-w-2xl text-sm text-white/55">
-          {selected.blurb}
+        <p id="selected-service-blurb" class="mt-4 max-w-2xl text-sm text-white/55">
+          Best for clients wanting a deeper, more complete detail with stronger interior and wheel attention.
         </p>
       </div>
 
@@ -167,22 +118,75 @@ const activeService =
   is:inline
   define:vars={{
     calOrigin,
-    calLink: selected.slug,
-    serviceLabel: selected.label,
   }}
 >
   (function () {
+    const services = {
+      maintenance: {
+        label: "Maintenance Detail",
+        slug: "factoryresetdetail/maintenance-detail",
+        blurb:
+          "Best for already well-kept vehicles that need consistent upkeep and preferred recurring pricing.",
+      },
+      signature: {
+        label: "Signature Detail",
+        slug: "factoryresetdetail/signature-detail",
+        blurb:
+          "Best for clients wanting a deeper, more complete detail with stronger interior and wheel attention.",
+      },
+      reset: {
+        label: "Factory Reset Detail",
+        slug: "factoryresetdetail/factory-reset-detail",
+        blurb:
+          "Best for the most comprehensive reset short of correction work, inside and out.",
+      },
+    };
+
+    const defaultService = "signature";
+    const params = new URLSearchParams(window.location.search);
+    const serviceParam = params.get("service");
+    const activeService = services[serviceParam] ? serviceParam : defaultService;
+    const selected = services[activeService];
+
+    const labelEl = document.getElementById("selected-service-label");
+    const blurbEl = document.getElementById("selected-service-blurb");
+
+    if (labelEl) labelEl.textContent = selected.label;
+    if (blurbEl) blurbEl.textContent = selected.blurb;
+
+    const pillIds = {
+      maintenance: "service-pill-maintenance",
+      signature: "service-pill-signature",
+      reset: "service-pill-reset",
+    };
+
+    Object.entries(pillIds).forEach(([key, id]) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      if (key === activeService) {
+        el.className =
+          "inline-flex items-center rounded-full border border-white bg-white px-4 py-2 text-sm text-neutral-950 transition";
+      } else {
+        el.className =
+          "inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/75 transition hover:border-white/20 hover:bg-white/10";
+      }
+    });
+
     function bootCal() {
       if (!window.Cal) return;
+
+      const booker = document.getElementById("cal-booker");
+      if (booker) booker.innerHTML = "";
 
       window.Cal("init", { origin: calOrigin });
 
       window.Cal("inline", {
         elementOrSelector: "#cal-booker",
-        calLink,
+        calLink: selected.slug,
         config: {
           layout: "month_view",
-          "metadata[selectedService]": serviceLabel,
+          "metadata[selectedService]": selected.label,
         },
       });
 
