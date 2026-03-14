@@ -2,116 +2,110 @@
 import { Image } from "astro:assets";
 
 import fTypeExterior from "../assets/f-type-exterior.jpg";
+import gt3Front from "../assets/gt3-hero.jpg";
 import gt3Interior from "../assets/gt3-interior.jpg";
+
+const services = [
+  {
+    eyebrow: "Maintenance",
+    title: "Maintenance Detail",
+    desc: "For already well-kept vehicles that need consistent upkeep with a clean, polished finish.",
+    image: fTypeExterior,
+    alt: "Factory Reset Detail maintenance exterior finish",
+  },
+  {
+    eyebrow: "Most Popular",
+    title: "Signature Detail",
+    desc: "A deeper, more complete service designed to leave the vehicle feeling professionally finished.",
+    image: gt3Front,
+    alt: "Factory Reset Detail signature exterior detail",
+  },
+  {
+    eyebrow: "Complete Reset",
+    title: "Factory Reset Detail",
+    desc: "The most comprehensive reset short of correction work, inside and out.",
+    image: gt3Interior,
+    alt: "Factory Reset Detail deep-cleaned interior",
+  },
+];
 ---
 
-<section id="services" class="bg-neutral-950 text-white -mt-12">
-  <div class="mx-auto max-w-7xl px-6 pb-20 lg:px-10">
-
-    <!-- Header -->
+<section id="services" class="bg-neutral-950 text-white -mt-8 lg:-mt-14">
+  <div class="mx-auto max-w-7xl px-6 pt-2 pb-20 lg:px-10 lg:pt-4">
     <div class="flex items-end justify-between gap-6">
-      <div>
-        <p class="text-xs tracking-[0.3em] uppercase text-white/50">
+      <div class="max-w-2xl">
+        <p class="hidden md:block text-[11px] tracking-[0.28em] uppercase text-white/50 md:text-xs">
           Services
         </p>
 
-        <h2 class="mt-3 text-2xl font-semibold md:text-3xl">
+        <h2 class="mt-3 text-2xl font-semibold tracking-tight text-white md:text-3xl">
           Signature services, executed with restraint.
         </h2>
 
-        <p class="mt-3 max-w-2xl text-white/70">
+        <p class="mt-3 text-sm leading-relaxed text-white/68 md:text-base">
           Focused packages designed for paint, wheels, glass, and interior—delivered at your home in Collin County.
         </p>
       </div>
 
       <a
         href="/services"
-        class="hidden sm:inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-white/80 transition hover:border-white/30 hover:bg-white/5"
+        class="hidden sm:inline-flex items-center justify-center rounded-full border border-white/12 px-5 py-2.5 text-sm font-medium text-white/80 transition-all duration-300 hover:border-white/25 hover:bg-white/5 hover:text-white"
       >
         View all
       </a>
     </div>
 
-    <!-- Cards -->
-    <div class="mt-10 grid gap-5 md:grid-cols-3">
+    <div class="mt-6 grid gap-5 md:grid-cols-3">
+      {services.map((service) => (
+        <article
+          class={`group overflow-hidden rounded-3xl border transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(0,0,0,0.24)] ${
+            service.title === "Signature Detail"
+              ? "border-white/18 bg-white/[0.08] hover:border-white/28"
+              : "border-white/10 bg-white/[0.04] hover:border-white/20 hover:bg-white/[0.06]"
+          }`}
+        >
+          <div class="overflow-hidden rounded-t-3xl">
+            <Image
+              src={service.image}
+              alt={service.alt}
+              class="h-56 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+              loading="lazy"
+            />
+          </div>
 
-      <!-- Paint Correction -->
-      <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
-        <Image
-          src={fTypeExterior}
-          alt="Exterior paint correction detail"
-          class="mb-4 h-40 w-full rounded-2xl object-cover"
-          loading="lazy"
-        />
+          <div class="p-5">
+            <p class="text-[11px] uppercase tracking-[0.28em] text-white/45">
+              {service.eyebrow}
+            </p>
 
-        <p class="text-xs tracking-[0.3em] uppercase text-white/50">
-          Exterior
-        </p>
+            <h3 class="mt-3 text-lg font-semibold text-white">
+              {service.title}
+            </h3>
 
-        <h3 class="mt-3 text-lg font-semibold">
-          Paint Correction
-        </h3>
+            <p class="mt-3 text-sm leading-relaxed text-white/68">
+              {service.desc}
+            </p>
 
-        <p class="mt-3 text-sm leading-relaxed text-white/70">
-          Defect removal and refinement for clarity, depth, and a cleaner reflection—without an overdone finish.
-        </p>
-      </div>
-
-      <!-- Ceramic Protection -->
-      <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
-        <Image
-          src={fTypeExterior}
-          alt="Ceramic protection exterior detail"
-          class="mb-4 h-40 w-full rounded-2xl object-cover"
-          loading="lazy"
-        />
-
-        <p class="text-xs tracking-[0.3em] uppercase text-white/50">
-          Protection
-        </p>
-
-        <h3 class="mt-3 text-lg font-semibold">
-          Ceramic Protection
-        </h3>
-
-        <p class="mt-3 text-sm leading-relaxed text-white/70">
-          Long-term protection for paint and wheels, tuned for slickness and easier maintenance.
-        </p>
-      </div>
-
-      <!-- Interior Reset -->
-      <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
-        <Image
-          src={gt3Interior}
-          alt="GT3 interior detailing"
-          class="mb-4 h-40 w-full rounded-2xl object-cover"
-          loading="lazy"
-        />
-
-        <p class="text-xs tracking-[0.3em] uppercase text-white/50">
-          Interior
-        </p>
-
-        <h3 class="mt-3 text-lg font-semibold">
-          Interior Reset
-        </h3>
-
-        <p class="mt-3 text-sm leading-relaxed text-white/70">
-          A thorough, material-safe clean that restores calm—leather, carpets, plastics, and glass.
-        </p>
-      </div>
-
+            <div class="mt-5">
+              <span class="inline-flex items-center text-sm font-medium text-white/78 transition duration-300 group-hover:text-white">
+                Explore service
+                <span class="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">
+                  →
+                </span>
+              </span>
+            </div>
+          </div>
+        </article>
+      ))}
     </div>
 
-    <!-- Mobile CTA -->
-    <div class="mt-8 sm:hidden">
+    <div class="mt-6 sm:hidden">
       <a
         href="/services"
-        class="inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-white/80 transition hover:border-white/30 hover:bg-white/5"
+        class="inline-flex items-center justify-center rounded-full border border-white/12 px-5 py-2.5 text-sm font-medium text-white/80 transition-all duration-300 hover:border-white/25 hover:bg-white/5 hover:text-white"
       >
-        View all services
+        View all
       </a>
     </div>
-
   </div>
 </section>
