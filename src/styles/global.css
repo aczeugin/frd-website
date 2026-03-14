@@ -10,3 +10,7 @@ html {
   scroll-padding-top: var(--header-offset);
   scroll-behavior: smooth; /* optional but feels premium */
 }
+
+[id] {
+  scroll-margin-top: var(--header-offset);
+}
