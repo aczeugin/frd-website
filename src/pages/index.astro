@@ -2,9 +2,134 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import SignatureServices from "../components/SignatureServices.astro";
+
+const heroImages = [
+  {
+    src: "/img/FRD-Hero/F-Type-Rear-Quarter-4_3(squooshed).jpg",
+    alt: "Factory Reset Detail Jaguar exterior finish",
+  },
+  {
+    src: "/img/FRD-Hero/Jaguar-Interior-4_3(squooshed).jpg",
+    alt: "Factory Reset Detail Jaguar interior detail",
+  },
+  {
+    src: "/img/FRD-Hero/porsche-gt3-front.webp",
+    alt: "Factory Reset Detail Porsche GT3 exterior finish",
+  },
+  {
+    src: "/img/FRD-Hero/GT3-Trunk-4_3(squooshed).jpg",
+    alt: "Factory Reset Detail Porsche GT3 trunk detail",
+  },
+];
 ---
 
 <Layout>
-  <Hero />
+  <Hero>
+    <div
+      class="hero-slideshow group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03]"
+      data-hero-slideshow
+    >
+      <div class="relative aspect-[16/11] w-full">
+
+        {heroImages.map((image, index) => (
+          <img
+            src={image.src}
+            alt={image.alt}
+            class={`hero-slide absolute inset-0 h-full w-full object-cover ${
+              index === 0 ? "opacity-100" : "opacity-0"
+            }`}
+            data-hero-slide
+          />
+        ))}
+
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/38 via-black/8 to-transparent"></div>
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/22 to-transparent"></div>
+
+      </div>
+
+      <div class="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+
+        {heroImages.map((_, index) => (
+          <button
+            type="button"
+            class={`hero-dot h-2 rounded-full transition-all duration-300 ${
+              index === 0 ? "w-8 bg-white" : "w-2 bg-white/35 hover:bg-white/55"
+            }`}
+            aria-label={`Show hero image ${index + 1}`}
+            data-hero-dot
+          />
+        ))}
+
+      </div>
+    </div>
+  </Hero>
+
   <SignatureServices />
 </Layout>
+
+<script is:inline>
+(() => {
+  const slideshow = document.querySelector("[data-hero-slideshow]");
+  if (!slideshow) return;
+
+  const slides = [...slideshow.querySelectorAll("[data-hero-slide]")];
+  const dots = [...slideshow.querySelectorAll("[data-hero-dot]")];
+
+  if (!slides.length || !dots.length) return;
+
+  let current = 0;
+  let intervalId;
+
+  const setActive = (index) => {
+    current = index;
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("opacity-100", i === index);
+      slide.classList.toggle("opacity-0", i !== index);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("w-8", i === index);
+      dot.classList.toggle("bg-white", i === index);
+      dot.classList.toggle("w-2", i !== index);
+      dot.classList.toggle("bg-white/35", i !== index);
+      dot.classList.toggle("hover:bg-white/55", i !== index);
+    });
+  };
+
+  const stop = () => {
+    if (intervalId) {
+      window.clearInterval(intervalId);
+      intervalId = null;
+    }
+  };
+
+  const start = () => {
+    stop();
+    intervalId = window.setInterval(() => {
+      const next = (current + 1) % slides.length;
+      setActive(next);
+    }, 5000);
+  };
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      setActive(index);
+      start();
+    });
+  });
+
+  slideshow.addEventListener("mouseenter", stop);
+  slideshow.addEventListener("mouseleave", start);
+
+  setActive(0);
+  start();
+})();
+</script>
+
+<style>
+.hero-slide {
+  transition: opacity 900ms ease;
+  will-change: opacity;
+}
+</style>
