@@ -1,105 +1,201 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const calLink = "YOUR_CAL_LINK";
-const uploadFormUrl = "YOUR_UPLOAD_FORM_URL";
+const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
+const uploadFormUrl =
+  import.meta.env.PUBLIC_UPLOAD_FORM_URL ?? "https://YOUR-UPLOAD-FORM-URL-HERE";
+
 const service = Astro.url.searchParams.get("service") ?? "";
-const serviceLabelMap = {
-  maintenance: "Maintenance Detail",
-  signature: "Signature Detail",
-  reset: "Factory Reset Detail",
+
+const services = {
+  maintenance: {
+    label: "Maintenance Detail",
+    slug: "factoryresetdetail/maintenance-detail",
+    blurb:
+      "Best for already well-kept vehicles that need consistent upkeep and preferred recurring pricing.",
+  },
+  signature: {
+    label: "Signature Detail",
+    slug: "factoryresetdetail/signature-detail",
+    blurb:
+      "Best for clients wanting a deeper, more complete detail with stronger interior and wheel attention.",
+  },
+  reset: {
+    label: "Factory Reset Detail",
+    slug: "factoryresetdetail/factory-reset-detail",
+    blurb:
+      "Best for the most comprehensive reset short of correction work, inside and out.",
+  },
 };
 
-const selectedService =
-  serviceLabelMap[service as keyof typeof serviceLabelMap] ?? "Detail Appointment";
+const fallback = {
+  label: "Signature Detail",
+  slug: "factoryresetdetail/signature-detail",
+  blurb:
+    "Choose a time that works for you. After booking, send a few current photos so service fit and any add-ons can be confirmed before arrival.",
+};
+
+const selected =
+  services[service as keyof typeof services] ?? fallback;
 ---
 
 <Layout
-  title="Book a Detail | Factory Reset Detail"
-  description="Schedule your mobile detailing appointment with Factory Reset Detail."
+  title={`${selected.label} | Book | Factory Reset Detail`}
+  description="Book your mobile detailing appointment with Factory Reset Detail in McKinney and surrounding areas."
 >
-  <section class="bg-neutral-950 text-white">
-    <div class="mx-auto max-w-6xl px-6 py-14 lg:px-10 lg:py-20">
+  <main class="bg-neutral-950 text-white">
+    <section class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
       <div class="max-w-3xl">
-        <p class="text-xs uppercase tracking-[0.32em] text-white/55">
-          Booking
-        </p>
-
-        <h1 class="mt-4 text-4xl font-semibold leading-tight md:text-5xl">
+        <p class="text-xs uppercase tracking-[0.35em] text-white/50">Booking</p>
+        <h1 class="mt-3 text-4xl font-semibold leading-tight md:text-5xl">
           Book your detail.
         </h1>
-
-        <p class="mt-5 text-base leading-relaxed text-white/72 md:text-lg">
-          Choose a time that works for you, then send a few vehicle photos so I can confirm
-          condition, service fit, and any add-ons before arrival.
+        <p class="mt-4 max-w-2xl text-base text-white/70 md:text-lg">
+          Reserve a time below, then send a few current photos so condition,
+          service fit, and any add-ons can be confirmed before arrival.
         </p>
 
-        <div class="mt-6 flex flex-wrap gap-3 text-sm text-white/70">
-          <span class="rounded-full border border-white/12 bg-white/5 px-4 py-2">
-            Selected service: {selectedService}
-          </span>
-          <span class="rounded-full border border-white/12 bg-white/5 px-4 py-2">
-            Mobile service in McKinney + surrounding areas
-          </span>
-        </div>
-      </div>
-
-      <div class="mt-10 grid gap-8 lg:grid-cols-[1.3fr_0.7fr]">
-        <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-3 md:p-4">
-          <div class="overflow-hidden rounded-[1.4rem] border border-white/10 bg-black">
-            <iframe
-              src={`${calLink}${service ? `?service=${service}` : ""}`}
-              title="Book with Factory Reset Detail"
-              class="h-[860px] w-full"
-              loading="lazy"
-            />
-          </div>
+        <div class="mt-6 inline-flex flex-wrap items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80">
+          <span class="font-medium text-white">Selected service:</span>
+          <span>{selected.label}</span>
+          <span class="hidden text-white/30 sm:inline">•</span>
+          <span class="text-white/60">Mobile service in McKinney + surrounding areas</span>
         </div>
 
-        <aside class="space-y-5">
-          <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-            <p class="text-xs uppercase tracking-[0.28em] text-white/50">
-              Step 2
-            </p>
-            <h2 class="mt-3 text-2xl font-semibold">
-              Upload photos
-            </h2>
-            <p class="mt-3 text-sm leading-relaxed text-white/70">
-              After booking, upload a few current photos of the exterior, interior, wheels,
-              and any problem areas. That lets me confirm condition and recommend the right level
-              of service before the appointment.
-            </p>
-
-            <a
-              href={uploadFormUrl}
-              target="_blank"
-              rel="noreferrer"
-              class="mt-5 inline-flex w-full items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90"
-            >
-              Upload vehicle photos
-            </a>
-
-            <p class="mt-3 text-xs text-white/45">
-              Fallback: you can still text photos if needed, but upload is preferred for cleaner intake.
-            </p>
-          </div>
-
-          <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-            <p class="text-xs uppercase tracking-[0.28em] text-white/50">
-              What to include
-            </p>
-
-            <ul class="mt-4 space-y-3 text-sm text-white/72">
-              <li>Front 3/4 exterior</li>
-              <li>Rear 3/4 exterior</li>
-              <li>Driver seat / front cabin</li>
-              <li>Rear seats / cargo area</li>
-              <li>Wheels / brake dust condition</li>
-              <li>Any stains, pet hair, or problem spots</li>
-            </ul>
-          </div>
-        </aside>
+        <p class="mt-4 max-w-2xl text-sm text-white/55">
+          {selected.blurb}
+        </p>
       </div>
-    </div>
-  </section>
+
+      <div class="mt-10 overflow-hidden rounded-[28px] border border-white/10 bg-white">
+        <div id="cal-booker" class="min-h-[780px]"></div>
+      </div>
+
+      <section
+        id="upload-photos"
+        class="mt-10 rounded-[28px] border border-white/10 bg-white/5 p-6 lg:p-8"
+      >
+        <p class="text-xs uppercase tracking-[0.35em] text-white/50">Step 2</p>
+        <h2 class="mt-3 text-2xl font-semibold">Upload photos</h2>
+        <p class="mt-3 max-w-2xl text-white/70">
+          After booking, upload a few current photos of the exterior, interior,
+          wheels, and any problem areas. That helps confirm condition and make
+          sure the selected service still fits before the appointment.
+        </p>
+
+        <div class="mt-6">
+          <a
+            href={uploadFormUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90"
+          >
+            Upload vehicle photos
+          </a>
+        </div>
+
+        <p class="mt-4 text-sm text-white/50">
+          Fallback: you can still text photos if needed, but upload is preferred for cleaner intake.
+        </p>
+
+        <div class="mt-8">
+          <h3 class="text-sm font-medium uppercase tracking-[0.24em] text-white/50">
+            What to include
+          </h3>
+          <ul class="mt-4 grid gap-3 text-sm text-white/75 md:grid-cols-2">
+            <li>Front 3/4 exterior</li>
+            <li>Rear 3/4 exterior</li>
+            <li>Driver seat / front cabin</li>
+            <li>Rear seats / cargo area</li>
+            <li>Wheels / brake dust condition</li>
+            <li>Any stains, pet hair, or problem spots</li>
+          </ul>
+        </div>
+      </section>
+    </section>
+  </main>
 </Layout>
+
+<script
+  is:inline
+  define:vars={{
+    calOrigin,
+    calLink: selected.slug,
+    serviceLabel: selected.label,
+  }}
+>
+  (function () {
+    function bootCal() {
+      if (!window.Cal) return;
+
+      window.Cal("init", { origin: calOrigin });
+
+      window.Cal("inline", {
+        elementOrSelector: "#cal-booker",
+        calLink,
+        config: {
+          layout: "month_view",
+          "metadata[selectedService]": serviceLabel,
+        },
+      });
+
+      window.Cal("ui", {
+        styles: {
+          body: {
+            background: "#ffffff",
+          },
+        },
+      });
+
+      window.Cal("on", {
+        action: "bookingSuccessfulV2",
+        callback: function () {
+          const upload = document.getElementById("upload-photos");
+          if (upload) {
+            upload.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        },
+      });
+    }
+
+    if (window.Cal) {
+      bootCal();
+      return;
+    }
+
+    (function (C, A, L) {
+      let p = function (a, ar) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal =
+        C.Cal ||
+        function () {
+          let cal = C.Cal;
+          let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            let s = d.createElement("script");
+            s.src = A;
+            s.async = true;
+            d.head.appendChild(s);
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () { p(api, arguments); };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+            } else {
+              p(cal, ar);
+            }
+            return;
+          }
+          p(cal, ar);
+        };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+
+    bootCal();
+  })();
+</script>
