@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-
 import fTypeExterior from "../assets/f-type-exterior.jpg";
 import gt3Front from "../assets/gt3-hero.jpg";
 import gt3Interior from "../assets/gt3-interior.jpg";
@@ -12,6 +11,7 @@ const services = [
     desc: "For already well-kept vehicles that need consistent upkeep with a clean, polished finish.",
     image: fTypeExterior,
     alt: "Factory Reset Detail maintenance exterior finish",
+    service: "maintenance",
   },
   {
     eyebrow: "Most Popular",
@@ -19,6 +19,7 @@ const services = [
     desc: "A deeper, more complete service designed to leave the vehicle feeling professionally finished.",
     image: gt3Front,
     alt: "Factory Reset Detail signature exterior detail",
+    service: "signature",
   },
   {
     eyebrow: "Complete Reset",
@@ -26,59 +27,49 @@ const services = [
     desc: "The most comprehensive reset short of correction work, inside and out.",
     image: gt3Interior,
     alt: "Factory Reset Detail deep-cleaned interior",
+    service: "reset",
   },
 ];
 ---
 
-<section id="services" class="bg-neutral-950 text-white -mt-4 lg:-mt-14">
-  <div class="mx-auto max-w-7xl px-6 pt-2 pb-20 lg:px-10 lg:pt-4">
-    <div class="flex items-end justify-between gap-6">
-      <div class="max-w-2xl">
-        <p class="hidden md:block text-[11px] tracking-[0.28em] uppercase text-white/50 md:text-xs">
-          Services
-        </p>
-
-        <h2 class="mt-3 text-2xl font-semibold tracking-tight text-white md:text-3xl">
+<section class="bg-neutral-950 text-white">
+  <div class="mx-auto max-w-7xl px-6 py-14 lg:px-10 lg:py-18">
+    <div class="flex items-end justify-between gap-4">
+      <div>
+        <p class="text-xs uppercase tracking-[0.3em] text-white/50">Services</p>
+        <h2 class="mt-3 text-3xl font-semibold leading-tight md:text-4xl">
           Signature services, executed with restraint.
         </h2>
-
-        <p class="mt-3 text-sm leading-relaxed text-white/68 md:text-base">
+        <p class="mt-4 max-w-2xl text-white/70">
           Focused packages designed for paint, wheels, glass, and interior—delivered at your home in Collin County.
         </p>
       </div>
 
       <a
         href="/services"
-        class="hidden sm:inline-flex items-center justify-center rounded-full border border-white/12 px-5 py-2.5 text-sm font-medium text-white/80 transition-all duration-300 hover:border-white/25 hover:bg-white/5 hover:text-white"
+        class="hidden rounded-full border border-white/12 px-5 py-3 text-sm text-white/78 transition hover:border-white/24 hover:text-white md:inline-flex"
       >
         View all
       </a>
     </div>
 
-    <div class="mt-6 grid gap-5 md:grid-cols-3">
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
       {services.map((service) => (
-        <article
-          class={`group overflow-hidden rounded-3xl border transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(0,0,0,0.24)] ${
-            service.title === "Signature Detail"
-              ? "border-white/18 bg-white/[0.08] hover:border-white/28"
-              : "border-white/10 bg-white/[0.04] hover:border-white/20 hover:bg-white/[0.06]"
-          }`}
-        >
-          <div class="overflow-hidden rounded-t-3xl">
+        <article class="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.03]">
+          <div class="aspect-[4/3] overflow-hidden">
             <Image
               src={service.image}
               alt={service.alt}
-              class="h-56 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-              loading="lazy"
+              class="h-full w-full object-cover"
             />
           </div>
 
-          <div class="p-5">
-            <p class="text-[11px] uppercase tracking-[0.28em] text-white/45">
+          <div class="p-6">
+            <p class="text-xs uppercase tracking-[0.24em] text-white/45">
               {service.eyebrow}
             </p>
 
-            <h3 class="mt-3 text-lg font-semibold text-white">
+            <h3 class="mt-3 text-2xl font-semibold">
               {service.title}
             </h3>
 
@@ -86,23 +77,30 @@ const services = [
               {service.desc}
             </p>
 
-            <div class="mt-5">
-              <span class="inline-flex items-center text-sm font-medium text-white/78 transition duration-300 group-hover:text-white">
-                Explore service
-                <span class="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">
-                  →
-                </span>
-              </span>
+            <div class="mt-6 flex gap-3">
+              <a
+                href={`/book?service=${service.service}`}
+                class="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90"
+              >
+                Book now
+              </a>
+
+              <a
+                href={`/services?focus=${service.service}`}
+                class="inline-flex items-center justify-center rounded-full border border-white/12 px-5 py-3 text-sm text-white/80 transition hover:border-white/24 hover:text-white"
+              >
+                Explore service →
+              </a>
             </div>
           </div>
         </article>
       ))}
     </div>
 
-    <div class="mt-6 sm:hidden">
+    <div class="mt-8 md:hidden">
       <a
         href="/services"
-        class="inline-flex items-center justify-center rounded-full border border-white/12 px-5 py-2.5 text-sm font-medium text-white/80 transition-all duration-300 hover:border-white/25 hover:bg-white/5 hover:text-white"
+        class="inline-flex rounded-full border border-white/12 px-5 py-3 text-sm text-white/78 transition hover:border-white/24 hover:text-white"
       >
         View all
       </a>

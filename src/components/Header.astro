@@ -4,310 +4,150 @@ const nav = [
   { label: "Process", href: "/services#process" },
   { label: "Results", href: "/services#results" },
   { label: "FAQ", href: "/services#faq" },
+  { label: "Contact", href: "/services#contact" },
 ];
 ---
 
-<header class="frd-header" data-header>
-  <div class="frd-header__inner">
-    <a class="frd-brand" href="/" aria-label="Factory Reset Detail home">
-      <span class="frd-brand__mark" aria-hidden="true"></span>
-      <span class="frd-brand__text">Factory Reset Detail</span>
+<header
+  class="site-header sticky top-0 z-50 border-b border-white/10 bg-neutral-950/80 text-white backdrop-blur-xl"
+  data-header
+>
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+    <a href="/" class="text-sm font-medium tracking-[0.18em] uppercase text-white/92">
+      Factory Reset Detail
     </a>
 
-    <nav class="frd-nav" aria-label="Primary">
-      <ul class="frd-nav__list">
-        {nav.map((item) => (
-          <li><a class="frd-nav__link" href={item.href}>{item.label}</a></li>
-        ))}
-      </ul>
+    <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class="text-sm text-white/68 transition hover:text-white"
+        >
+          {item.label}
+        </a>
+      ))}
     </nav>
 
-    <div class="frd-actions">
-      <a class="frd-book" href="/services#contact">Book</a>
-      <a class="frd-btn" href="/services#contact">Request a Booking</a>
-
-      <button
-        class="frd-menu"
-        type="button"
-        aria-label="Open menu"
-        aria-expanded="false"
-        data-menu-button
+    <div class="hidden items-center gap-3 lg:flex">
+      <a
+        href="/services#contact"
+        class="rounded-full border border-white/14 px-4 py-2 text-sm text-white/78 transition hover:border-white/28 hover:text-white"
       >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </button>
+        Contact
+      </a>
+      <a
+        href="/book"
+        class="rounded-full bg-white px-5 py-2 text-sm font-medium text-neutral-950 transition hover:opacity-90"
+      >
+        Book
+      </a>
     </div>
+
+    <button
+      type="button"
+      class="mobile-menu-button inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/12 text-white transition hover:border-white/24 lg:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Open menu"
+      data-menu-toggle
+    >
+      <span class="sr-only">Toggle menu</span>
+      <svg data-icon-open xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+      <svg data-icon-close xmlns="http://www.w3.org/2000/svg" class="hidden h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
   </div>
 
-  <div class="frd-drawer" data-drawer hidden>
-    <nav aria-label="Mobile">
-      <ul class="frd-drawer__list">
-        {nav.map((item) => (
-          <li><a class="frd-drawer__link" href={item.href} data-drawer-link>{item.label}</a></li>
-        ))}
-        <li class="frd-drawer__cta">
-          <a class="frd-btn frd-btn--full" href="/services#contact">Request a Booking</a>
-        </li>
-      </ul>
+  <div
+    id="mobile-menu"
+    class="mobile-menu fixed inset-x-0 top-[73px] z-[60] hidden border-b border-white/10 bg-neutral-950/96 px-6 pb-6 pt-4 backdrop-blur-xl lg:hidden"
+    data-mobile-menu
+  >
+    <nav class="mx-auto flex max-w-7xl flex-col gap-2" aria-label="Mobile">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class="rounded-2xl px-4 py-3 text-base text-white/80 transition hover:bg-white/6 hover:text-white"
+          data-mobile-link
+        >
+          {item.label}
+        </a>
+      ))}
+
+      <div class="mt-3 grid grid-cols-2 gap-3">
+        <a
+          href="/services#contact"
+          class="inline-flex items-center justify-center rounded-full border border-white/12 px-4 py-3 text-sm text-white/82 transition hover:border-white/24 hover:text-white"
+          data-mobile-link
+        >
+          Contact
+        </a>
+        <a
+          href="/book"
+          class="inline-flex items-center justify-center rounded-full bg-white px-4 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90"
+          data-mobile-link
+        >
+          Book
+        </a>
+      </div>
     </nav>
   </div>
-
-  <script is:inline>
-    const header = document.querySelector('[data-header]');
-    const drawer = document.querySelector('[data-drawer]');
-    const btn = document.querySelector('[data-menu-button]');
-    const links = document.querySelectorAll('[data-drawer-link]');
-
-    const setScrolled = () => {
-      const scrolled = window.scrollY > 12;
-      header?.classList.toggle('is-scrolled', scrolled);
-    };
-
-    const setOpen = (open) => {
-      if (!drawer || !btn) return;
-      btn.setAttribute('aria-expanded', String(open));
-      drawer.hidden = !open;
-      document.documentElement.classList.toggle('frd-lock', open);
-    };
-
-    btn?.addEventListener('click', () => {
-      const open = btn.getAttribute('aria-expanded') !== 'true';
-      setOpen(open);
-    });
-
-    links.forEach((a) => a.addEventListener('click', () => setOpen(false)));
-
-    // Optional: click outside drawer closes it
-    document.addEventListener('click', (e) => {
-      if (!drawer || !btn) return;
-      const open = btn.getAttribute('aria-expanded') === 'true';
-      if (!open) return;
-
-      const target = e.target;
-      const clickedMenuButton = btn.contains(target);
-      const clickedInsideDrawer = drawer.contains(target);
-      if (!clickedMenuButton && !clickedInsideDrawer) setOpen(false);
-    });
-
-    window.addEventListener('scroll', setScrolled, { passive: true });
-    setScrolled();
-  </script>
 </header>
 
-<style>
-  /* Lock scroll when mobile drawer is open */
-  :global(html.frd-lock),
-  :global(html.frd-lock body) {
-    overflow: hidden;
-  }
+<script is:inline>
+  (() => {
+    const header = document.querySelector("[data-header]");
+    const toggle = document.querySelector("[data-menu-toggle]");
+    const menu = document.querySelector("[data-mobile-menu]");
+    const links = document.querySelectorAll("[data-mobile-link]");
+    const openIcon = toggle?.querySelector("[data-icon-open]");
+    const closeIcon = toggle?.querySelector("[data-icon-close]");
 
-  .frd-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    transition: background-color 200ms ease, border-color 200ms ease,
-      backdrop-filter 200ms ease;
-    background: color-mix(in oklab, transparent 85%, #0b0b0c);
-    border-bottom: 1px solid color-mix(in oklab, transparent 88%, #ffffff);
-    backdrop-filter: blur(10px);
-  }
-  .frd-header.is-scrolled {
-    background: color-mix(in oklab, #0b0b0c 92%, transparent);
-    border-bottom: 1px solid color-mix(in oklab, #ffffff 12%, transparent);
-  }
+    if (!header || !toggle || !menu) return;
 
-  .frd-header__inner {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
+    const closeMenu = () => {
+      header.dataset.menuOpen = "false";
+      toggle.setAttribute("aria-expanded", "false");
+      menu.classList.add("hidden");
+      openIcon?.classList.remove("hidden");
+      closeIcon?.classList.add("hidden");
+      document.documentElement.classList.remove("menu-open");
+      document.body.classList.remove("menu-open");
+    };
 
-  .frd-brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: inherit;
-    min-width: 0; /* prevents overflow on tiny phones */
-  }
+    const openMenu = () => {
+      header.dataset.menuOpen = "true";
+      toggle.setAttribute("aria-expanded", "true");
+      menu.classList.remove("hidden");
+      openIcon?.classList.add("hidden");
+      closeIcon?.classList.remove("hidden");
+      document.documentElement.classList.add("menu-open");
+      document.body.classList.add("menu-open");
+    };
 
-  .frd-brand__mark {
-    width: 10px;
-    height: 10px;
-    border-radius: 999px;
-    background: color-mix(in oklab, #ffffff 70%, transparent);
-    box-shadow: 0 0 0 6px color-mix(in oklab, #ffffff 8%, transparent);
-    flex: 0 0 auto;
-  }
+    const toggleMenu = () => {
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+      isOpen ? closeMenu() : openMenu();
+    };
 
-  .frd-brand__text {
-    font-size: 14px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    opacity: 0.92;
-    white-space: nowrap;
-  }
+    toggle.addEventListener("click", toggleMenu);
+    links.forEach((link) => link.addEventListener("click", closeMenu));
 
-  /* Slightly tighter brand text on very small screens */
-  @media (max-width: 360px) {
-    .frd-brand__text {
-      font-size: 13px;
-      letter-spacing: 0.05em;
-    }
-  }
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenu();
+    });
 
-  .frd-nav {
-    display: none;
-  }
-  .frd-nav__list {
-    display: flex;
-    gap: 22px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .frd-nav__link {
-    font-size: 13px;
-    letter-spacing: 0.02em;
-    text-decoration: none;
-    opacity: 0.85;
-    transition: opacity 150ms ease;
-  }
-  .frd-nav__link:hover {
-    opacity: 1;
-  }
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 1024) closeMenu();
+    });
 
-  .frd-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex: 0 0 auto;
-  }
-
-  /* Book pill (mobile + desktop, looks good everywhere) */
-  .frd-book {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 42px;
-    padding: 0 14px;
-    border-radius: 999px;
-    font-size: 13px;
-    letter-spacing: 0.02em;
-    text-decoration: none;
-    color: color-mix(in oklab, #ffffff 92%, transparent);
-    border: 1px solid color-mix(in oklab, #ffffff 14%, transparent);
-    background: color-mix(in oklab, #ffffff 8%, transparent);
-    backdrop-filter: blur(10px);
-    transition: transform 150ms ease, background-color 150ms ease,
-      border-color 150ms ease;
-    white-space: nowrap;
-  }
-  .frd-book:hover {
-    transform: translateY(-1px);
-    background: color-mix(in oklab, #ffffff 12%, transparent);
-    border-color: color-mix(in oklab, #ffffff 20%, transparent);
-  }
-
-  /* Primary CTA button (desktop only via media query below) */
-  .frd-btn {
-    display: none;
-    font-size: 13px;
-    padding: 10px 12px;
-    border-radius: 999px;
-    text-decoration: none;
-    border: 1px solid color-mix(in oklab, #ffffff 14%, transparent);
-    background: color-mix(in oklab, #ffffff 10%, transparent);
-    backdrop-filter: blur(10px);
-    transition: transform 150ms ease, background-color 150ms ease,
-      border-color 150ms ease;
-    white-space: nowrap;
-  }
-  .frd-btn:hover {
-    transform: translateY(-1px);
-    background: color-mix(in oklab, #ffffff 14%, transparent);
-    border-color: color-mix(in oklab, #ffffff 20%, transparent);
-  }
-  .frd-btn--full {
-    display: inline-flex;
-    width: 100%;
-    justify-content: center;
-  }
-
-  /* Hamburger: premium + balanced next to Book */
-  .frd-menu {
-    width: 42px;
-    height: 42px;
-    border-radius: 999px;
-    border: 1px solid color-mix(in oklab, #ffffff 14%, transparent);
-    background: color-mix(in oklab, #ffffff 6%, transparent);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .frd-menu span {
-    display: block;
-    width: 18px;
-    height: 2px;
-    background: color-mix(in oklab, #ffffff 75%, transparent);
-    opacity: 0.9;
-    border-radius: 999px;
-    transition: transform 180ms ease;
-  }
-
-  /* Animate to X when open */
-  .frd-menu[aria-expanded="true"] span:nth-child(1) {
-    transform: translateY(3.5px) rotate(45deg);
-  }
-  .frd-menu[aria-expanded="true"] span:nth-child(2) {
-    transform: translateY(-3.5px) rotate(-45deg);
-  }
-
-  .frd-drawer {
-    border-top: 1px solid color-mix(in oklab, #ffffff 10%, transparent);
-    background: color-mix(in oklab, #0b0b0c 95%, transparent);
-    backdrop-filter: blur(14px);
-  }
-
-  .frd-drawer__list {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 12px 18px 18px;
-    list-style: none;
-  }
-
-  .frd-drawer__link {
-    display: block;
-    padding: 12px 0;
-    text-decoration: none;
-    opacity: 0.9;
-    border-bottom: 1px solid color-mix(in oklab, #ffffff 8%, transparent);
-  }
-
-  .frd-drawer__cta {
-    padding-top: 14px;
-  }
-
-  /* Desktop layout */
-  @media (min-width: 880px) {
-    .frd-nav {
-      display: block;
-    }
-    .frd-btn {
-      display: inline-flex;
-    }
-    .frd-menu {
-      display: none;
-    }
-    .frd-drawer {
-      display: none;
-    }
-  }
-</style>
+    window.addEventListener("scroll", () => {
+      if (window.innerWidth < 1024 && toggle.getAttribute("aria-expanded") === "true") {
+        closeMenu();
+      }
+    }, { passive: true });
+  })();
+</script>

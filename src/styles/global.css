@@ -1,16 +1,39 @@
 @import "tailwindcss";
 
-/* Anchor offset for sticky header */
 :root {
-  --header-offset: 88px; /* we will fine-tune this */
+  --header-offset: 92px;
 }
 
-/* Ensures anchor links land below the sticky header */
 html {
+  scroll-behavior: smooth;
   scroll-padding-top: var(--header-offset);
-  scroll-behavior: smooth; /* optional but feels premium */
+}
+
+body {
+  background: #0a0a0a;
+  color: white;
 }
 
 [id] {
   scroll-margin-top: var(--header-offset);
+}
+
+html.menu-open,
+body.menu-open {
+  overflow: hidden;
+}
+
+.site-header[data-menu-open="true"] {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.mobile-menu {
+  box-shadow: 0 16px 60px rgba(0, 0, 0, 0.35);
+}
+
+@media (min-width: 1024px) {
+  html.menu-open,
+  body.menu-open {
+    overflow: auto;
+  }
 }

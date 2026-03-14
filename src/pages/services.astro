@@ -1,11 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-
 const packages = [
   {
     eyebrow: "Maintenance",
     title: "Maintenance Detail",
+    service: "maintenance",
     bestFor: "Best for: clients on a recurring maintenance plan",
     desc:
       "Designed for vehicles that are already well cared for. Most clients choose this service on a recurring plan to keep the vehicle consistently clean while receiving preferred pricing and priority scheduling.",
@@ -15,14 +15,12 @@ const packages = [
       "Windows cleaned inside + out",
       "Vacuum of carpets and seats",
     ],
-    meta: [
-  "Preferred recurring pricing",
-  "Popular with bi-weekly clients",
-],
+    meta: ["Preferred recurring pricing", "Popular with bi-weekly clients"],
   },
   {
     eyebrow: "Full Detail",
     title: "Signature Detail",
+    service: "signature",
     bestFor: "Best for: clients wanting a deeper, more complete detail",
     desc:
       "A deeper, more complete clean with the details that make it feel professionally finished.",
@@ -33,14 +31,12 @@ const packages = [
       "More deliberate vacuuming and finishing",
       "Includes hydrophobic spray wax protection",
     ],
-    meta: [
-  "Most popular",
-  "Balanced depth and upkeep",
-],
+    meta: ["Most popular", "Balanced depth and upkeep"],
   },
   {
     eyebrow: "Complete Reset",
     title: "Factory Reset Detail",
+    service: "reset",
     bestFor: "Best for: the most complete reset without stepping into paint correction",
     desc:
       "Comprehensive, top-to-bottom detailing designed to make the vehicle feel new again—inside, outside, and in the details.",
@@ -50,13 +46,9 @@ const packages = [
       "Stain removal as needed",
       "Includes upgraded ceramic spray sealant protection",
     ],
-    meta: [
-  "Flagship service",
-  "Most comprehensive",
-],
+    meta: ["Flagship service", "Most comprehensive"],
   },
 ];
-const mobilePackages = [packages[1], packages[2], packages[0]];
 
 const addons = [
   {
@@ -81,7 +73,7 @@ const addons = [
   },
   {
     title: "Trim restoration",
-    desc: "Revives interior & exterior trim for a darker, more even finish without greasy residue.",
+    desc: "Revives interior and exterior trim for a darker, more even finish without greasy residue.",
   },
   {
     title: "Advanced Hydrophobic Protection",
@@ -96,11 +88,11 @@ const addons = [
 const faqs = [
   {
     q: "How long does a detail take?",
-    a: "Most services run 2–4 hours, with larger corrections and coatings taking longer depending on condition and prep needs.",
+    a: "Most services run 2–4 hours, with heavier-condition vehicles or add-ons taking longer depending on size and condition.",
   },
   {
     q: "Do you bring your own water and power?",
-    a: "I don’t bring water or power, but I arrive fully equipped with all tools needed (including a water hose and a 100-foot extension cable). I’ll just need access to a standard outdoor spigot and outlet to perform any service.",
+    a: "I arrive fully equipped with the tools needed, including a water hose and extension cable. I’ll just need access to a standard outdoor spigot and outlet to perform the service.",
   },
   {
     q: "Is this safe for new, luxury, or ceramic-coated vehicles?",
@@ -108,406 +100,363 @@ const faqs = [
   },
   {
     q: "Do you offer pricing over text?",
-    a: "We can provide a range, but final pricing is based on condition. Photos help us recommend the right level of service without guesswork.",
+    a: "I can usually provide a range, but final pricing depends on condition. Photos help me recommend the right level of service without guesswork.",
   },
 ];
 ---
 
-<Layout>
-  <main>
-    <!-- HERO + PACKAGES + ADD-ONS (Premium, dark) -->
-   <section class="bg-neutral-950 text-white">
-  <div class="mx-auto max-w-[1500px] px-6 pt-4 pb-6 lg:px-10 lg:py-6">
-
-    <div class="mt-1 grid gap-6 lg:grid-cols-12 lg:items-end">
-      <div class="lg:col-span-7">
-
-        <h1 class="text-4xl font-semibold leading-tight md:text-5xl lg:text-[3.25rem]">
+<Layout
+  title="Services | Factory Reset Detail"
+  description="Explore Factory Reset Detail service packages, add-ons, process, and booking."
+>
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
+      <div class="max-w-3xl">
+        <p class="text-xs uppercase tracking-[0.32em] text-white/50">Services</p>
+        <h1 class="mt-4 text-4xl font-semibold leading-tight md:text-5xl">
           Premium detailing, built around outcomes.
         </h1>
-
-        <p class="mt-3 max-w-2xl text-base md:text-lg text-white/65">
+        <p class="mt-5 text-base leading-relaxed text-white/70 md:text-lg">
           Mobile service based in McKinney—serving Collin County and surrounding areas.
-          Every package is designed to preserve materials, refine gloss, and deliver a
-          calm, finished look—never greasy, never overdone.
+          Every package is designed to preserve materials, refine gloss, and deliver a calm,
+          finished look—never greasy, never overdone.
         </p>
-
-        <div class="mt-4 flex flex-wrap gap-2 text-xs text-white/60">
-          <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-            Paint-safe methods
-          </span>
-
-          <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-            Material-correct finishes
-          </span>
-
-          <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-            Clear recommendations
-          </span>
-        </div>
-
       </div>
-    </div>
 
-    <!-- Packages -->
-    <div class="mt-6">
+      <div class="mt-8 flex flex-wrap gap-3 text-sm text-white/65">
+        <span class="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">Paint-safe methods</span>
+        <span class="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">Material-correct finishes</span>
+        <span class="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">Clear recommendations</span>
+      </div>
 
-                <!-- Packages -->
-        <div class="mt-6">
-          <!-- Mobile: swipe carousel -->
-          <div class="lg:hidden">
-            <div class="-mx-6 overflow-x-auto px-6 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-              <div class="flex snap-x snap-mandatory gap-4">
-                {mobilePackages.map((p) => (
-                  <article
-                    class={`flex min-h-full w-[84%] shrink-0 snap-center flex-col rounded-3xl border p-5 shadow-[0_10px_30px_rgba(0,0,0,0.18)] transition-all duration-300 ${
-  p.title === "Signature Detail"
-    ? "border-white/25 bg-white/10"
-    : "border-white/10 bg-white/5 opacity-80"
-}`}
-                  >
-                    <div class="flex-1">
-                      <p class="text-xs tracking-[0.35em] uppercase text-white/50">{p.eyebrow}</p>
+      <div class="mt-10 md:hidden">
+        <div
+          class="mobile-service-track no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4"
+          data-service-track
+        >
+          {packages.map((p, index) => (
+            <article
+              class={`service-slide min-w-[86%] snap-center rounded-[1.75rem] border p-6 transition ${
+                index === 0
+                  ? "border-white/22 bg-white/[0.06]"
+                  : "border-white/10 bg-white/[0.03]"
+              }`}
+              data-service-slide
+            >
+              <p class="text-xs uppercase tracking-[0.26em] text-white/45">{p.eyebrow}</p>
 
-                      <div class="mt-3 flex flex-wrap items-center gap-2">
-                        <h2 class="text-lg font-semibold sm:text-xl">{p.title}</h2>
+              <h2 class="mt-3 text-2xl font-semibold">{p.title}</h2>
 
-                        {p.title === "Signature Detail" && (
-                          <span class="rounded-full border border-white/20 bg-white/10 px-2.5 py-0.5 text-[10px] uppercase tracking-wide text-white/70">
-                            Most Popular
-                          </span>
-                        )}
-                      </div>
+              {p.title === "Signature Detail" && (
+                <div class="mt-3 inline-flex rounded-full border border-white/12 bg-white/8 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/75">
+                  Most Popular
+                </div>
+              )}
 
-                      <p class="mt-2 text-sm italic tracking-[0.01em] text-white/65 sm:text-[15px]">
-                        {p.bestFor}
-                      </p>
+              <p class="mt-4 text-sm text-white/58">{p.bestFor}</p>
+              <p class="mt-4 text-sm leading-relaxed text-white/72">{p.desc}</p>
 
-                      <p class="mt-3 text-[13px] leading-relaxed text-white/70 sm:text-sm">{p.desc}</p>
+              <ul class="mt-5 space-y-3 text-sm text-white/78">
+                {p.bullets.map((b) => <li>• {b}</li>)}
+              </ul>
 
-                      <ul class="mt-4 space-y-1.5 text-[13px] text-white/70 sm:mt-5 sm:space-y-2 sm:text-[15px]">
-                        {p.bullets.map((b) => (
-                          <li class="flex gap-3">
-                            <span class="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-white/40"></span>
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-
-                      <div class="mt-3 flex flex-wrap gap-1.5 text-[11px] text-white/60 sm:mt-4 sm:gap-2 sm:text-xs">
-                        {p.meta.map((m) => (
-                          <span
-                            class={`rounded-full px-2.5 py-1 sm:px-3 ${
-                              p.title === "Signature Detail"
-                                ? "border border-white/20 bg-white/10"
-                                : "border border-white/10 bg-white/5"
-                            }`}
-                          >
-                            {m}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div class="mt-4 grid grid-cols-1 gap-2.5">
-                      <a
-                        href="#contact"
-                        class="inline-flex min-h-[50px] w-full items-center justify-center rounded-full bg-white px-4 py-2 text-[14px] font-semibold text-neutral-950 transition-all duration-300 hover:bg-white/90"
-                      >
-                        Reserve
-                      </a>
-
-                      <a
-                        href="#contact"
-                        class="inline-flex min-h-[50px] w-full items-center justify-center rounded-full border border-white/15 px-4 py-2 text-[14px] font-medium text-white/80 transition-all duration-300 hover:border-white/30 hover:bg-white/5"
-                      >
-                        Get a recommendation
-                      </a>
-                    </div>
-                  </article>
+              <div class="mt-5 flex flex-wrap gap-2">
+                {p.meta.map((m) => (
+                  <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/58">
+                    {m}
+                  </span>
                 ))}
               </div>
-            </div>
 
-            <p class="mt-2 text-center text-[10px] uppercase tracking-[0.2em] text-white/35">
-              Swipe to compare packages
-            </p>
-          </div>
-
-          <!-- Desktop: existing 3-column grid -->
-          <div class="hidden gap-6 lg:grid lg:grid-cols-3 lg:gap-7">
-            {packages.map((p) => (
-              <article
-class={`group flex h-full flex-col rounded-3xl border p-6 shadow-[0_0_0_rgba(0,0,0,0)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(0,0,0,0.28)] ${
-  p.title === "Signature Detail"
-    ? "border-white/25 bg-white/10 hover:border-white/35"
-    : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/[0.07]"
-}`}
-              >
-                <div class="flex-1">
-                  <p class="text-xs tracking-[0.35em] uppercase text-white/50">{p.eyebrow}</p>
-
-                  <div class="mt-3 flex flex-wrap items-center gap-2">
-                    <h2 class="text-xl font-semibold">{p.title}</h2>
-
-                    {p.title === "Signature Detail" && (
-                      <span class="rounded-full border border-white/20 bg-white/10 px-2.5 py-0.5 text-[10px] uppercase tracking-wide text-white/70">
-                        Most Popular
-                      </span>
-                    )}
-                  </div>
-
-                  <p class="mt-2 text-[15px] italic tracking-[0.01em] text-white/65">
-                    {p.bestFor}
-                  </p>
-
-                  <p class="mt-4 text-sm leading-relaxed text-white/70">{p.desc}</p>
-
-                  <ul class="mt-5 space-y-2 text-[15px] text-white/70">
-                    {p.bullets.map((b) => (
-                      <li class="flex gap-3">
-                        <span class="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-white/40"></span>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div class="mt-3 flex flex-wrap gap-1.5 text-[11px] text-white/60 sm:gap-2 sm:text-xs">
-  {p.meta.map((m) => (
-    <span
-      class={`rounded-full px-2.5 py-1 sm:px-3 ${
-        p.title === "Signature Detail"
-          ? "border border-white/20 bg-white/10"
-          : "border border-white/10 bg-white/5"
-      }`}
-    >
-      {m}
-    </span>
-  ))}
-</div>
-                </div>
-
-                <div class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  <a
-                    href="#contact"
-                    class="inline-flex min-h-[58px] w-full items-center justify-center rounded-full bg-white px-5 py-2.5 text-[15px] font-semibold text-neutral-950 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/90"
-                  >
-                    Reserve
-                  </a>
-
-                  <a
-                    href="#contact"
-                    class="inline-flex min-h-[58px] w-full items-center justify-center whitespace-nowrap rounded-full border border-white/15 px-4 py-2.5 text-[15px] font-medium text-white/80 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/5"
-                  >
-                    Get a recommendation
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-        <!-- Custom + Ceramic -->
-        <div class="mt-12 grid gap-6 lg:grid-cols-12">
-          <div class="lg:col-span-7">
-            <p class="text-xs tracking-[0.35em] uppercase text-white/50">Custom</p>
-            <h3 class="mt-3 text-2xl font-semibold md:text-3xl">
-              Condition-based recommendations
-            </h3>
-            <p class="mt-3 text-sm text-white/70">
-              Not every vehicle fits a package. If you’re unsure, send a couple photos and
-              I’ll recommend the right level of service based on condition—no upsells, just
-              clarity.
-            </p>
-            <p class="mt-4 text-sm text-white/55">
-              Prefer guidance first? Send a couple photos and I’ll recommend the right tier
-              before booking.
-            </p>
-          </div>
-
-          <div class="lg:col-span-5">
-            <p class="text-xs tracking-[0.35em] uppercase text-white/50">Ceramic Coatings</p>
-            <h3 class="mt-3 text-2xl font-semibold md:text-3xl">Coming Spring 2026</h3>
-            <p class="mt-3 text-sm text-white/70">
-              Ceramic coatings will be available this year. Prep is required by default
-              (decontamination and some level of correction or refinement—even on newer
-              vehicles) to ensure the coating bonds properly and looks right.
-            </p>
-          </div>
-        </div>
-
-        <!-- Process teaser (scroll hook) -->
-        <a
-          href="#process"
-          class="mt-10 block text-center text-xs tracking-[0.35em] uppercase text-white/40 transition hover:text-white/70"
-        >
-          Assess &nbsp;→&nbsp; Protect &nbsp;→&nbsp; Refine &nbsp;→&nbsp; Inspect
-        </a>
-
-        <!-- Add-ons -->
-        <div class="mt-14 border-t border-white/5 pt-14">
-          <div>
-            <p class="text-xs tracking-[0.35em] uppercase text-white/50">Add-ons</p>
-            <h3 class="mt-3 text-2xl font-semibold md:text-3xl">
-              Finishing touches, added when they make sense.
-            </h3>
-            <p class="mt-2.5 max-w-2xl text-sm text-white/70">
-              Add-ons are quoted based on condition and time required—no blanket upcharges.
-            </p>
-            <p class="mt-2 max-w-2xl text-xs text-white/55">
-              Availability varies by package; some add-ons are included with Factory Reset service.
-            </p>
-          </div>
-
-          <div class="mt-8 grid gap-5 md:grid-cols-2">
-            {addons.map((a) => (
-             <div class="rounded-3xl border border-white/10 bg-white/5 p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.07] hover:shadow-[0_18px_50px_rgba(0,0,0,0.22)]">
-                <h4 class="text-base font-semibold">{a.title}</h4>
-                <p class="mt-2 text-sm leading-relaxed text-white/70">{a.desc}</p>
+              <div class="mt-6 flex gap-3">
+                <a
+                  href={`/book?service=${p.service}`}
+                  class="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950"
+                >
+                  Reserve
+                </a>
+                <a
+                  href="/services#contact"
+                  class="inline-flex items-center justify-center rounded-full border border-white/12 px-5 py-3 text-sm text-white/80"
+                >
+                  Get a recommendation
+                </a>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROCESS -->
-    <section id="process" class="bg-white">
-      <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
-        <p class="text-xs tracking-[0.35em] uppercase text-neutral-500">Process</p>
-        <h2 class="mt-3 text-2xl font-semibold text-neutral-950 md:text-3xl">
-          A calm, methodical approach
-        </h2>
-        <p class="mt-3 max-w-2xl text-sm text-neutral-700">
-          Every detail follows a consistent sequence designed to protect materials, refine
-          appearance, and deliver results you can maintain.
-        </p>
-
-        <ol class="mt-10 grid gap-6 md:grid-cols-3">
-          <li class="rounded-3xl border border-neutral-200 p-6">
-            <p class="text-xs tracking-[0.35em] uppercase text-neutral-500">01</p>
-            <h3 class="mt-2 text-base font-semibold text-neutral-950">Assessment</h3>
-            <p class="mt-2 text-sm leading-relaxed text-neutral-700">
-              We evaluate condition, surfaces, and priorities before choosing the right
-              methods.
-            </p>
-          </li>
-
-          <li class="rounded-3xl border border-neutral-200 p-6">
-            <p class="text-xs tracking-[0.35em] uppercase text-neutral-500">02</p>
-            <h3 class="mt-2 text-base font-semibold text-neutral-950">
-              Material-correct execution
-            </h3>
-            <p class="mt-2 text-sm leading-relaxed text-neutral-700">
-              Paint-safe technique, controlled product use, and deliberate finishing—no
-              rushed shortcuts.
-            </p>
-          </li>
-
-          <li class="rounded-3xl border border-neutral-200 p-6">
-            <p class="text-xs tracking-[0.35em] uppercase text-neutral-500">03</p>
-            <h3 class="mt-2 text-base font-semibold text-neutral-950">Final inspection</h3>
-            <p class="mt-2 text-sm leading-relaxed text-neutral-700">
-              We check details under proper lighting and leave clear guidance for care.
-            </p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- RESULTS -->
-    <section id="results" class="bg-white">
-      <div class="mx-auto max-w-7xl px-6 pb-16 lg:px-10 lg:pb-20">
-        <p class="text-xs tracking-[0.35em] uppercase text-neutral-500">Results</p>
-        <h2 class="mt-3 text-2xl font-semibold text-neutral-950 md:text-3xl">
-          Outcomes you can see—and maintain
-        </h2>
-        <p class="mt-3 max-w-2xl text-sm text-neutral-700">
-          Clients choose Factory Reset Detail for consistency: clean gloss, correct sheen,
-          and finishes that hold up beyond the first wash.
-        </p>
-
-        <ul class="mt-10 grid gap-6 md:grid-cols-3">
-          <li class="rounded-3xl border border-neutral-200 p-6">
-            <h3 class="text-base font-semibold text-neutral-950">
-              Clarity without harshness
-            </h3>
-            <p class="mt-2 text-sm leading-relaxed text-neutral-700">
-              Refinement that respects clear coat and avoids an overworked look.
-            </p>
-          </li>
-          <li class="rounded-3xl border border-neutral-200 p-6">
-            <h3 class="text-base font-semibold text-neutral-950">Factory-calm interiors</h3>
-            <p class="mt-2 text-sm leading-relaxed text-neutral-700">
-              A clean, dry finish—no greasy shine, no heavy fragrance, no residue.
-            </p>
-          </li>
-          <li class="rounded-3xl border border-neutral-200 p-6">
-            <h3 class="text-base font-semibold text-neutral-950">
-              Protection that makes life easier
-            </h3>
-            <p class="mt-2 text-sm leading-relaxed text-neutral-700">
-              Protectants selected for longevity and maintenance, not hype.
-            </p>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="scroll-mt-20 bg-neutral-950 text-white">
-      <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
-        <p class="text-xs tracking-[0.35em] uppercase text-white/50">FAQ</p>
-        <h2 class="mt-3 text-2xl font-semibold text-white md:text-3xl">
-          Quick answers
-        </h2>
-
-        <div class="mt-10 space-y-3">
-          {faqs.map((f) => (
-            <details class="group rounded-2xl border border-white/20 bg-white/0 p-5">
-              <summary class="cursor-pointer list-none text-sm font-medium text-white">
-                <span class="flex items-center justify-between gap-4">
-                  <span>{f.q}</span>
-                  <span class="text-white/60 transition group-open:rotate-45">+</span>
-                </span>
-              </summary>
-              <p class="mt-3 text-sm leading-relaxed text-white/70">{f.a}</p>
-            </details>
+            </article>
           ))}
         </div>
-      </div>
-    </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="bg-neutral-950 text-white">
-      <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
-        <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
-          <div class="grid gap-6 lg:grid-cols-12 lg:items-center">
-            <div class="lg:col-span-8">
-              <p class="text-xs tracking-[0.35em] uppercase text-white/50">Contact</p>
-              <h2 class="mt-3 text-2xl font-semibold md:text-3xl">
-                Ready for a reset?
-              </h2>
-              <p class="mt-3 text-white/70">
-                Send your vehicle, location, and a couple photos. I’ll reply with a clear
-                recommendation and a quote.
-              </p>
-            </div>
-
-            <div class="lg:col-span-4 lg:flex lg:justify-end">
-              <a
-                href="/contact"
-                class="inline-flex w-full items-center justify-center rounded-full bg-white px-6 py-3 text-[15px] font-medium text-neutral-950 transition hover:bg-white/90 sm:w-auto"
-              >
-                Contact
-              </a>
-            </div>
-          </div>
+        <div class="mt-4 flex justify-center gap-2" data-service-dots>
+          {packages.map((_, index) => (
+            <button
+              type="button"
+              class={`h-2.5 rounded-full transition ${
+                index === 0 ? "w-8 bg-white" : "w-2.5 bg-white/30"
+              }`}
+              aria-label={`Go to service ${index + 1}`}
+              data-service-dot
+            />
+          ))}
         </div>
 
-        <p class="mt-8 text-xs tracking-[0.35em] uppercase text-white/40">
-          Paint-safe &nbsp;•&nbsp; Material-correct &nbsp;•&nbsp; Calm, finished results
+        <p class="mt-4 text-center text-xs uppercase tracking-[0.24em] text-white/38">
+          Swipe to compare packages
         </p>
       </div>
-    </section>
-  </main>
+
+      <div class="mt-10 hidden gap-6 md:grid md:grid-cols-3">
+        {packages.map((p) => (
+          <article class="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6">
+            <p class="text-xs uppercase tracking-[0.26em] text-white/45">{p.eyebrow}</p>
+            <h2 class="mt-3 text-2xl font-semibold">{p.title}</h2>
+
+            {p.title === "Signature Detail" && (
+              <div class="mt-3 inline-flex rounded-full border border-white/12 bg-white/8 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/75">
+                Most Popular
+              </div>
+            )}
+
+            <p class="mt-4 text-sm text-white/58">{p.bestFor}</p>
+            <p class="mt-4 text-sm leading-relaxed text-white/72">{p.desc}</p>
+
+            <ul class="mt-5 space-y-3 text-sm text-white/78">
+              {p.bullets.map((b) => <li>• {b}</li>)}
+            </ul>
+
+            <div class="mt-5 flex flex-wrap gap-2">
+              {p.meta.map((m) => (
+                <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/58">
+                  {m}
+                </span>
+              ))}
+            </div>
+
+            <div class="mt-6 flex gap-3">
+              <a
+                href={`/book?service=${p.service}`}
+                class="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950"
+              >
+                Reserve
+              </a>
+              <a
+                href="/services#contact"
+                class="inline-flex items-center justify-center rounded-full border border-white/12 px-5 py-3 text-sm text-white/80"
+              >
+                Get a recommendation
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-6 lg:px-10 lg:py-8">
+      <div class="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-7">
+        <p class="text-xs uppercase tracking-[0.28em] text-white/45">Custom</p>
+        <h3 class="mt-3 text-2xl font-semibold">Condition-based recommendations</h3>
+        <p class="mt-4 max-w-3xl text-sm leading-relaxed text-white/70">
+          Not every vehicle fits neatly into a package. If you’re unsure, send a few photos and I’ll recommend
+          the right level of service based on condition—no upsells, just clarity.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-6 lg:px-10 lg:py-8">
+      <div class="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-7">
+        <p class="text-xs uppercase tracking-[0.28em] text-white/45">Ceramic Coatings</p>
+        <h3 class="mt-3 text-2xl font-semibold">Coming Spring 2026</h3>
+        <p class="mt-4 max-w-3xl text-sm leading-relaxed text-white/70">
+          Ceramic coatings are planned for this year. For the best visual result and proper bonding,
+          I strongly recommend decontamination and paint refinement beforehand—even on newer vehicles.
+          Final prep is always based on paint condition, finish expectations, and the protection package selected.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10">
+      <p class="text-xs uppercase tracking-[0.28em] text-white/45">Add-ons</p>
+      <h3 class="mt-3 text-3xl font-semibold">Finishing touches, added when they make sense.</h3>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-white/70">
+        Add-ons are quoted based on condition and time required—no blanket upcharges.
+      </p>
+
+      <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {addons.map((a) => (
+          <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
+            <h4 class="text-lg font-medium">{a.title}</h4>
+            <p class="mt-3 text-sm leading-relaxed text-white/68">{a.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10">
+      <p class="text-xs uppercase tracking-[0.28em] text-white/45">Process</p>
+      <h3 class="mt-3 text-3xl font-semibold">A calm, methodical approach</h3>
+
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <p class="text-sm text-white/45">01</p>
+          <h4 class="mt-3 text-xl font-medium">Assessment</h4>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            We evaluate condition, surfaces, and priorities before choosing the right methods.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <p class="text-sm text-white/45">02</p>
+          <h4 class="mt-3 text-xl font-medium">Material-correct execution</h4>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Paint-safe technique, controlled product use, and deliberate finishing—no rushed shortcuts.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <p class="text-sm text-white/45">03</p>
+          <h4 class="mt-3 text-xl font-medium">Final inspection</h4>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            We check details under proper lighting and leave clear guidance for care.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="results" class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10">
+      <p class="text-xs uppercase tracking-[0.28em] text-white/45">Results</p>
+      <h3 class="mt-3 text-3xl font-semibold">Outcomes you can see—and maintain</h3>
+
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h4 class="text-xl font-medium">Clarity without harshness</h4>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Refinement that respects clear coat and avoids an overworked look.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h4 class="text-xl font-medium">Factory-calm interiors</h4>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            A clean, dry finish—no greasy shine, no heavy fragrance, no residue.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h4 class="text-xl font-medium">Protection that makes life easier</h4>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Protectants selected for longevity and maintenance, not hype.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-5xl px-6 py-12 lg:px-10">
+      <p class="text-xs uppercase tracking-[0.28em] text-white/45">FAQ</p>
+      <h3 class="mt-3 text-3xl font-semibold">Quick answers</h3>
+
+      <div class="mt-8 space-y-4">
+        {faqs.map((f) => (
+          <details class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+            <summary class="cursor-pointer list-none text-base font-medium text-white">
+              {f.q}
+            </summary>
+            <p class="mt-3 text-sm leading-relaxed text-white/68">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-5xl px-6 py-14 lg:px-10">
+      <div class="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-7 md:p-9">
+        <p class="text-xs uppercase tracking-[0.28em] text-white/45">Contact</p>
+        <h3 class="mt-3 text-3xl font-semibold">Ready for a reset?</h3>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/70">
+          Send your vehicle, location, and a couple photos. I’ll reply with a clear recommendation and a quote.
+        </p>
+
+        <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+          <a
+            href="/book"
+            class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-neutral-950"
+          >
+            Book now
+          </a>
+          <a
+            href="mailto:ashton@factoryresetdetail.com"
+            class="inline-flex items-center justify-center rounded-full border border-white/12 px-6 py-3 text-sm text-white/82"
+          >
+            Email Ashton
+          </a>
+        </div>
+
+        <p class="mt-5 text-xs text-white/45">
+          Paint-safe • Material-correct • Calm, finished results
+        </p>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<script is:inline>
+  (() => {
+    const track = document.querySelector("[data-service-track]");
+    const slides = [...document.querySelectorAll("[data-service-slide]")];
+    const dots = [...document.querySelectorAll("[data-service-dot]")];
+
+    if (!track || !slides.length || !dots.length) return;
+
+    const setActive = (index) => {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("border-white/22", i === index);
+        slide.classList.toggle("bg-white/[0.06]", i === index);
+        slide.classList.toggle("border-white/10", i !== index);
+        slide.classList.toggle("bg-white/[0.03]", i !== index);
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("w-8", i === index);
+        dot.classList.toggle("bg-white", i === index);
+        dot.classList.toggle("w-2.5", i !== index);
+        dot.classList.toggle("bg-white/30", i !== index);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (!visible) return;
+
+        const index = slides.indexOf(visible.target);
+        if (index >= 0) setActive(index);
+      },
+      {
+        root: track,
+        threshold: 0.65,
+      }
+    );
+
+    slides.forEach((slide) => observer.observe(slide));
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        slides[index]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      });
+    });
+  })();
+</script>
