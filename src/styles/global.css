@@ -14,13 +14,12 @@ body {
   color: white;
 }
 
-[id] {
-  scroll-margin-top: var(--header-offset);
+main {
+  padding-top: var(--header-offset);
 }
 
-html.menu-open,
-body.menu-open {
-  overflow: hidden;
+[id] {
+  scroll-margin-top: var(--header-offset);
 }
 
 .site-header[data-menu-open="true"] {
@@ -29,11 +28,4 @@ body.menu-open {
 
 .mobile-menu {
   box-shadow: 0 16px 60px rgba(0, 0, 0, 0.35);
-}
-
-@media (min-width: 1024px) {
-  html.menu-open,
-  body.menu-open {
-    overflow: auto;
-  }
 }
