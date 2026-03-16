@@ -1,5 +1,5 @@
 FRD WEBSITE CODE EXPORT
-Generated: Mon Mar 16 02:19:46 CDT 2026
+Generated: Mon Mar 16 03:21:33 CDT 2026
 
 ==================================================
 REPO STRUCTURE
@@ -5798,87 +5798,91 @@ FILE: src/components/Header.astro
 ---
 const nav = [
   { label: "Services", href: "/services" },
-  { label: "Process", href: "/services#process" },
   { label: "Results", href: "/services#results" },
   { label: "FAQ", href: "/services#faq" },
 ];
 ---
 
 <header
-  class="site-header sticky top-0 z-50 border-b border-white/10 bg-neutral-950/80 text-white backdrop-blur-xl"
+  class="site-header fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-neutral-950/92 text-white"
   data-header
 >
   <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-    <a href="/" class="text-sm font-medium tracking-[0.18em] uppercase text-white/92">
+    <a
+      href="/"
+      class="min-w-0 text-sm font-medium uppercase tracking-[0.18em] text-white/92"
+    >
       Factory Reset Detail
     </a>
 
-    <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary">
-      {nav.map((item) => (
-        <a
-          href={item.href}
-          class="text-sm text-white/68 transition hover:text-white"
-        >
-          {item.label}
-        </a>
-      ))}
-    </nav>
-
-    <div class="hidden items-center gap-3 lg:flex">
-      <a
-        href="/book#photo-intake"
-        class="rounded-full border border-white/14 px-4 py-2 text-sm text-white/78 transition hover:border-white/28 hover:text-white"
-      >
-        Contact
-      </a>
-
-      <a
-        href="/book"
-        class="rounded-full bg-white px-5 py-2 text-sm font-medium text-neutral-950 transition hover:opacity-90"
-      >
-        Book
-      </a>
-    </div>
-
-    <button
-      type="button"
-      class="mobile-menu-button inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/12 text-white transition hover:border-white/24 lg:hidden"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-      aria-label="Open menu"
-      data-menu-toggle
-    >
-      <svg
-        data-icon-open
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-      >
-        <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
-      </svg>
-
-      <svg
-        data-icon-close
-        xmlns="http://www.w3.org/2000/svg"
-        class="hidden h-5 w-5"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-      >
-        <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" />
-      </svg>
-    </button>
-  </div>
-
-  <div
-    id="mobile-menu"
-    class="mobile-menu fixed inset-x-0 top-[73px] z-[60] hidden border-b border-white/10 bg-neutral-950/96 px-6 pb-6 pt-4 backdrop-blur-xl lg:hidden"
-    data-mobile-menu
+    <div class="ml-2 flex items-center gap-4">
+  <a
+    href="/book#photo-intake"
+    class="inline-flex h-11 items-center justify-center rounded-full border border-white/12 px-4 text-sm text-white/82 transition hover:border-white/24 hover:text-white"
   >
+    Contact
+  </a>
+
+      <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary">
+        {nav.map((item) => (
+          <a
+            href={item.href}
+            class="text-sm text-white/68 transition hover:text-white"
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <button
+        type="button"
+        class="mobile-menu-button inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/12 text-white transition hover:border-white/24 lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open menu"
+        data-menu-toggle
+      >
+        <svg
+          data-icon-open
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        >
+          <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+
+        <svg
+          data-icon-close
+          xmlns="http://www.w3.org/2000/svg"
+          class="hidden h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        >
+          <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div
+  id="mobile-menu"
+  class="mobile-menu fixed inset-0 z-40 hidden lg:hidden"
+  data-mobile-menu
+>
+  <button
+    type="button"
+    class="absolute inset-0 bg-black/45 backdrop-blur-[2px]"
+    aria-label="Close menu"
+    data-menu-backdrop
+  ></button>
+
+  <div class="absolute inset-x-0 top-[76px] border-b border-white/10 bg-neutral-950 px-6 pb-6 pt-4 shadow-2xl">
     <nav class="mx-auto flex max-w-7xl flex-col gap-2" aria-label="Mobile">
       {nav.map((item) => (
         <a
@@ -5889,27 +5893,9 @@ const nav = [
           {item.label}
         </a>
       ))}
-
-      <div class="mt-3 grid grid-cols-2 gap-3">
-        <a
-          href="/book#photo-intake"
-          class="inline-flex items-center justify-center rounded-full border border-white/12 px-4 py-3 text-sm text-white/82 transition hover:border-white/24 hover:text-white"
-          data-mobile-link
-        >
-          Contact
-        </a>
-
-        <a
-          href="/book"
-          class="inline-flex items-center justify-center rounded-full bg-white px-4 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90"
-          data-mobile-link
-        >
-          Book
-        </a>
-      </div>
     </nav>
   </div>
-</header>
+</div>
 
 <script is:inline>
   (() => {
@@ -5917,10 +5903,31 @@ const nav = [
     const toggle = document.querySelector("[data-menu-toggle]");
     const menu = document.querySelector("[data-mobile-menu]");
     const links = document.querySelectorAll("[data-mobile-link]");
+    const backdrop = document.querySelector("[data-menu-backdrop]");
     const openIcon = toggle?.querySelector("[data-icon-open]");
     const closeIcon = toggle?.querySelector("[data-icon-close]");
 
     if (!header || !toggle || !menu) return;
+
+    let scrollY = 0;
+
+    const lockScroll = () => {
+      scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+    };
+
+    const unlockScroll = () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      window.scrollTo(0, scrollY);
+    };
 
     const closeMenu = () => {
       header.dataset.menuOpen = "false";
@@ -5928,8 +5935,7 @@ const nav = [
       menu.classList.add("hidden");
       openIcon?.classList.remove("hidden");
       closeIcon?.classList.add("hidden");
-      document.documentElement.classList.remove("menu-open");
-      document.body.classList.remove("menu-open");
+      unlockScroll();
     };
 
     const openMenu = () => {
@@ -5938,8 +5944,7 @@ const nav = [
       menu.classList.remove("hidden");
       openIcon?.classList.add("hidden");
       closeIcon?.classList.remove("hidden");
-      document.documentElement.classList.add("menu-open");
-      document.body.classList.add("menu-open");
+      lockScroll();
     };
 
     const toggleMenu = () => {
@@ -5948,6 +5953,7 @@ const nav = [
     };
 
     toggle.addEventListener("click", toggleMenu);
+    backdrop?.addEventListener("click", closeMenu);
     links.forEach((link) => link.addEventListener("click", closeMenu));
 
     window.addEventListener("keydown", (event) => {
@@ -5959,7 +5965,6 @@ const nav = [
     });
   })();
 </script>
-
 
 ==================================================
 FILE: src/components/Hero.astro
@@ -5999,11 +6004,23 @@ FILE: src/components/Hero.astro
           </a>
         </div>
 
-        <div class="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm text-white/55">
-          <span>Fully mobile</span>
-          <span>Collin County</span>
-          <span>Paint-safe methods</span>
-        </div>
+        <div class="mt-6 flex flex-wrap gap-2 text-xs text-white/70">
+  <span class="rounded-full border border-white/10 px-3 py-1">
+    Mobile service
+  </span>
+
+  <span class="rounded-full border border-white/10 px-3 py-1">
+    Results-focused
+  </span>
+
+  <span class="rounded-full border border-white/10 px-3 py-1">
+    Material-correct finishes
+  </span>
+
+  <span class="rounded-full border border-white/10 px-3 py-1">
+    Clear recommendations
+  </span>
+</div>
       </div>
 
       <div class="lg:col-span-7">
@@ -7065,13 +7082,12 @@ body {
   color: white;
 }
 
-[id] {
-  scroll-margin-top: var(--header-offset);
+main {
+  padding-top: var(--header-offset);
 }
 
-html.menu-open,
-body.menu-open {
-  overflow: hidden;
+[id] {
+  scroll-margin-top: var(--header-offset);
 }
 
 .site-header[data-menu-open="true"] {
@@ -7081,14 +7097,6 @@ body.menu-open {
 .mobile-menu {
   box-shadow: 0 16px 60px rgba(0, 0, 0, 0.35);
 }
-
-@media (min-width: 1024px) {
-  html.menu-open,
-  body.menu-open {
-    overflow: auto;
-  }
-}
-
 
 ==================================================
 FILE: public/favicon.svg
