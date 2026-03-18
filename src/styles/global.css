@@ -83,3 +83,11 @@ main {
   font-size: 22px;
   margin-top: 10px;
 }
+
+.frd-image-break {
+  position: relative;
+}
+
+.frd-image-break img {
+  display: block;
+}
