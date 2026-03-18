@@ -1,5 +1,5 @@
 FRD WEBSITE CODE EXPORT
-Generated: Wed, Mar 18, 2026  2:15:31 PM
+Generated: Wed, Mar 18, 2026  2:19:25 PM
 
 ==================================================
 REPO STRUCTURE
@@ -6562,7 +6562,7 @@ const heroImages = [
     <div class="mx-auto max-w-3xl text-center">
       <p class="text-xs uppercase tracking-[0.3em] text-white/45">Craftsmanship</p>
       <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
-        Premium detailing, delivered with restraint.
+        Premium detailing, delivered with intention.
       </h2>
       <p class="mt-4 text-base leading-relaxed text-white/68 md:text-lg">
         A professional, mobile service designed to save you time, protect your materials,
