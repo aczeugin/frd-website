@@ -280,9 +280,9 @@ const faqs = [
   <section class="bg-neutral-950 text-white">
     <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10">
       <p class="text-xs uppercase tracking-[0.28em] text-white/45">Optional Upgrades</p>
-      <h3 class="mt-3 text-3xl font-semibold">Refine your service based on your vehicle’s condition and priorities.</h3>
+      <h3 class="mt-3 text-3xl font-semibold">Optional upgrades, added when they make sense.</h3>
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-white/70">
-        Add-ons are quoted based on condition and time required—no blanket upcharges.
+        Additional services are recommended based on condition, material, and time required—not pushed by default.
       </p>
 
       <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -292,6 +292,36 @@ const faqs = [
             <p class="mt-3 text-sm leading-relaxed text-white/68">{a.desc}</p>
           </article>
         ))}
+      </div>
+    </div>
+  </section>
+
+<section id="results" class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10">
+      <p class="text-xs uppercase tracking-[0.28em] text-white/45">Results</p>
+      <h3 class="mt-3 text-3xl font-semibold">Outcomes you can see—and maintain</h3>
+
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h4 class="text-xl font-medium">Clarity without harshness</h4>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Refinement that respects clear coat and avoids an overworked look.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h4 class="text-xl font-medium">Factory-calm interiors</h4>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            A clean, dry finish—no greasy shine, no heavy fragrance, no residue.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h4 class="text-xl font-medium">Protection that makes life easier</h4>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Protectants selected for longevity and maintenance, not hype.
+          </p>
+        </article>
       </div>
     </div>
   </section>
@@ -329,36 +359,6 @@ const faqs = [
     </div>
   </section>
 
-  <section id="results" class="bg-neutral-950 text-white">
-    <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10">
-      <p class="text-xs uppercase tracking-[0.28em] text-white/45">Results</p>
-      <h3 class="mt-3 text-3xl font-semibold">Outcomes you can see—and maintain</h3>
-
-      <div class="mt-8 grid gap-4 md:grid-cols-3">
-        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
-          <h4 class="text-xl font-medium">Clarity without harshness</h4>
-          <p class="mt-3 text-sm leading-relaxed text-white/68">
-            Refinement that respects clear coat and avoids an overworked look.
-          </p>
-        </article>
-
-        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
-          <h4 class="text-xl font-medium">Factory-calm interiors</h4>
-          <p class="mt-3 text-sm leading-relaxed text-white/68">
-            A clean, dry finish—no greasy shine, no heavy fragrance, no residue.
-          </p>
-        </article>
-
-        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
-          <h4 class="text-xl font-medium">Protection that makes life easier</h4>
-          <p class="mt-3 text-sm leading-relaxed text-white/68">
-            Protectants selected for longevity and maintenance, not hype.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
   <section id="faq" class="bg-neutral-950 text-white">
     <div class="mx-auto max-w-5xl px-6 py-12 lg:px-10">
       <p class="text-xs uppercase tracking-[0.28em] text-white/45">FAQ</p>
@@ -377,14 +377,54 @@ const faqs = [
     </div>
   </section>
 
+<section class="bg-neutral-950 text-white">
+  <div class="mx-auto max-w-7xl px-6 py-8 lg:px-10 lg:py-10">
+    <div class="mx-auto max-w-5xl">
+      <p class="text-xs uppercase tracking-[0.32em] text-white/45">Client feedback</p>
+      <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+        What clients notice most
+      </h2>
+
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <p class="text-sm leading-relaxed text-white/78">
+            “Interior looked brand new. No greasy shine, just clean.”
+          </p>
+          <p class="mt-4 text-xs uppercase tracking-[0.24em] text-white/40">
+            McKinney client
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <p class="text-sm leading-relaxed text-white/78">
+            “Best detail I’ve had. You can tell it was done properly.”
+          </p>
+          <p class="mt-4 text-xs uppercase tracking-[0.24em] text-white/40">
+            Repeat client
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <p class="text-sm leading-relaxed text-white/78">
+            “Super easy process, clear communication, and the finish spoke for itself.”
+          </p>
+          <p class="mt-4 text-xs uppercase tracking-[0.24em] text-white/40">
+            Collin County client
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
   <section id="contact" class="bg-neutral-950 text-white">
     <div class="mx-auto max-w-5xl px-6 py-14 lg:px-10">
       <div class="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-7 md:p-9">
         <p class="text-xs uppercase tracking-[0.28em] text-white/45">Contact</p>
-        <h3 class="mt-3 text-3xl font-semibold">Ready for a reset?</h3>
+        <h3 class="mt-3 text-3xl font-semibold">Get your vehicle back to how it should feel.</h3>
         <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/70">
-          Send your vehicle, location, and a couple photos. I’ll reply with a clear recommendation and a quote.
-        </p>
+  Send your vehicle, location, and a couple photos. I’ll reply with a clear recommendation, service fit, and quote.
+</p>
 
         <div class="mt-7 flex flex-col gap-3 sm:flex-row">
           <a
