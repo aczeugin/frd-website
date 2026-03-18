@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import SignatureServices from "../components/SignatureServices.astro";
-import MaintenancePlans from "../components/MaintenancePlans.astro";
 
 const heroImages = [
   {
@@ -31,7 +30,6 @@ const heroImages = [
       data-hero-slideshow
     >
       <div class="relative aspect-[16/11] w-full">
-
         {heroImages.map((image, index) => (
           <img
             src={image.src}
@@ -45,11 +43,9 @@ const heroImages = [
 
         <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/38 via-black/8 to-transparent"></div>
         <div class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/22 to-transparent"></div>
-
       </div>
 
       <div class="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
-
         {heroImages.map((_, index) => (
           <button
             type="button"
@@ -60,45 +56,51 @@ const heroImages = [
             data-hero-dot
           />
         ))}
-
       </div>
     </div>
   </Hero>
 
-<section class="frd-craftsmanship">
-  <div class="container">
-    <h2 class="section-title">Quality Craftsmanship</h2>
-    <p class="section-sub">
-      Every detail is performed with intention — from paint-safe wash methods to
-      material-correct interior finishes. The goal isn’t just clean, it’s refined.
-    </p>
-
-    <div class="craft-grid">
-      <div class="craft-card">
-        <h3>Refined Finish</h3>
-        <p>
-          Streak-free glass, dry-to-the-touch surfaces, and a deep, natural gloss —
-          never greasy, never rushed.
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-xs uppercase tracking-[0.3em] text-white/45">Craftsmanship</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          Quality craftsmanship, without the overworked look.
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-white/68 md:text-lg">
+          Every detail is performed with intention—from paint-safe wash methods to
+          material-correct interior finishing. The goal is a calm, refined result that
+          feels premium the moment you open the door.
         </p>
       </div>
 
-      <div class="craft-card">
-        <h3>Interior Reset</h3>
-        <p>
-          Crevices, touchpoints, and overlooked areas brought back to a calm,
-          like-new environment.
-        </p>
-      </div>
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-lg font-medium text-white">Refined Finish</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Streak-free glass, dry-to-the-touch surfaces, and a natural gloss that
+            looks finished—not greasy.
+          </p>
+        </article>
 
-      <div class="craft-card">
-        <h3>Convenient Service</h3>
-        <p>
-          Mobile, professional, and seamless. Book once — the rest is handled.
-        </p>
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-lg font-medium text-white">Interior Reset</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Crevices, touchpoints, and overlooked areas brought back to a calmer,
+            cleaner, like-new environment.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-lg font-medium text-white">Convenient Service</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Mobile, professional, and seamless. Clear recommendations, no pressure,
+            and no bloated package talk.
+          </p>
+        </article>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <SignatureServices />
 </Layout>

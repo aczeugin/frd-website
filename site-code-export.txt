@@ -1,5 +1,5 @@
 FRD WEBSITE CODE EXPORT
-Generated: Wed, Mar 18, 2026  4:54:54 AM
+Generated: Wed, Mar 18, 2026  2:05:53 PM
 
 ==================================================
 REPO STRUCTURE
@@ -46,6 +46,7 @@ src/components
 src/components/Footer.astro
 src/components/Header.astro
 src/components/Hero.astro
+src/components/MaintenancePlans.astro
 src/components/SignatureServices.astro
 src/layouts
 src/layouts/Layout.astro
@@ -5973,7 +5974,7 @@ FILE: src/components/Hero.astro
 ---
 
 <section class="frd-hero bg-neutral-950 text-white">
-  <div class="mx-auto max-w-7xl px-6 pt-6 pb-8 lg:px-10 lg:pt-10 lg:pb-12 xl:pt-12 xl:pb-14">
+  <div class="mx-auto max-w-7xl px-6 pt-6 pb-6 lg:px-10 lg:pt-10 lg:pb-10 xl:pt-12 xl:pb-12">
     <div class="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
       <div class="lg:col-span-5">
         <p class="text-[11px] uppercase tracking-[0.28em] text-white/60 md:text-xs">
@@ -6032,6 +6033,41 @@ FILE: src/components/Hero.astro
 
 
 ==================================================
+FILE: src/components/MaintenancePlans.astro
+==================================================
+<section class="frd-maintenance">
+  <div class="container">
+    <h2 class="section-title">Maintenance Plans</h2>
+    <p class="section-sub">
+      Designed for vehicles that are already well maintained — keeping them
+      consistently clean without starting from scratch every visit.
+    </p>
+
+    <div class="plans-grid">
+
+      <div class="plan-card">
+        <h3>Monthly Plan</h3>
+        <p class="plan-desc">1 maintenance detail per month</p>
+        <p class="price">$120 <span>/ visit</span></p>
+      </div>
+
+      <div class="plan-card featured">
+        <h3>Bi-Weekly Plan</h3>
+        <p class="plan-desc">2 maintenance details per month</p>
+        <p class="price">$110 <span>/ visit</span></p>
+      </div>
+
+      <div class="plan-card">
+        <h3>Exterior Plan</h3>
+        <p class="plan-desc">Exterior-only upkeep</p>
+        <p class="price">$50 <span>/ visit</span></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+==================================================
 FILE: src/components/SignatureServices.astro
 ==================================================
 ---
@@ -6073,12 +6109,12 @@ const services = [
     <div class="flex items-end justify-between gap-4">
       <div>
         <p class="text-xs uppercase tracking-[0.3em] text-white/50">Services</p>
-        <h2 class="mt-3 text-3xl font-semibold leading-tight md:text-4xl">
-          Signature services, built for lasting results.
-        </h2>
-        <p class="mt-4 max-w-2xl text-white/70">
-          Focused packages designed for paint, wheels, glass, and interior—delivered at your home in Collin County.
-        </p>
+<h2 class="mt-3 text-3xl font-semibold leading-tight md:text-4xl">
+  Signature services, built around outcome-driven results.
+</h2>
+<p class="mt-4 max-w-2xl text-white/70">
+  Focused packages designed for paint, wheels, glass, and interior—delivered with clear recommendations and a professionally finished result.
+</p>
       </div>
 
       <a
@@ -6491,7 +6527,6 @@ const heroImages = [
       data-hero-slideshow
     >
       <div class="relative aspect-[16/11] w-full">
-
         {heroImages.map((image, index) => (
           <img
             src={image.src}
@@ -6505,11 +6540,9 @@ const heroImages = [
 
         <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/38 via-black/8 to-transparent"></div>
         <div class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/22 to-transparent"></div>
-
       </div>
 
       <div class="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
-
         {heroImages.map((_, index) => (
           <button
             type="button"
@@ -6520,10 +6553,51 @@ const heroImages = [
             data-hero-dot
           />
         ))}
-
       </div>
     </div>
   </Hero>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-xs uppercase tracking-[0.3em] text-white/45">Craftsmanship</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          Quality craftsmanship, without the overworked look.
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-white/68 md:text-lg">
+          Every detail is performed with intention—from paint-safe wash methods to
+          material-correct interior finishing. The goal is a calm, refined result that
+          feels premium the moment you open the door.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-lg font-medium text-white">Refined Finish</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Streak-free glass, dry-to-the-touch surfaces, and a natural gloss that
+            looks finished—not greasy.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-lg font-medium text-white">Interior Reset</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Crevices, touchpoints, and overlooked areas brought back to a calmer,
+            cleaner, like-new environment.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-lg font-medium text-white">Convenient Service</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Mobile, professional, and seamless. Clear recommendations, no pressure,
+            and no bloated package talk.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
 
   <SignatureServices />
 </Layout>
@@ -6595,7 +6669,6 @@ const heroImages = [
 }
 </style>
 
-
 ==================================================
 FILE: src/pages/services.astro
 ==================================================
@@ -6611,11 +6684,11 @@ const packages = [
     desc:
       "Designed for vehicles that are already well cared for. Most clients choose this service on a recurring plan to keep the vehicle consistently clean while receiving preferred pricing and priority scheduling.",
     bullets: [
-      "Foam pre-rinse + safe hand wash",
-      "Exterior rinse + premium microfiber dry",
-      "Windows cleaned inside + out",
-      "Vacuum of carpets and seats",
-    ],
+  "Safe foam pre-rinse + contact wash (no swirl-inducing shortcuts)",
+  "Streak-free exterior dry using premium microfiber",
+  "Interior reset of primary surfaces (dash, console, touchpoints)",
+  "Vacuum of carpets, seats, and light debris areas",
+],
     meta: ["Preferred recurring pricing", "Popular with bi-weekly clients"],
   },
   {
@@ -6626,12 +6699,11 @@ const packages = [
     desc:
       "A deeper, more complete clean with the details that make it feel professionally finished.",
     bullets: [
-      "Thorough wheel cleaning (tools + brushes)",
-      "Door jamb cleaning",
-      "Deeper interior cleaning (crevices + touch points)",
-      "More deliberate vacuuming and finishing",
-      "Includes hydrophobic spray wax protection",
-    ],
+  "Deep wheel cleaning (faces, barrels, and tires)",
+  "Door jambs and hidden areas fully cleaned",
+  "Interior crevices, vents, and touchpoints detailed",
+  "Protective spray sealant applied for gloss and hydrophobic behavior",
+],
     meta: ["Most popular", "Balanced depth and upkeep"],
   },
   {
@@ -6642,11 +6714,11 @@ const packages = [
     desc:
       "Comprehensive, top-to-bottom detailing designed to make the vehicle feel new again—inside, outside, and in the details.",
     bullets: [
-      "Deep interior reset (including under-seat and rail access)",
-      "Pet hair removal as needed",
-      "Stain removal as needed",
-      "Includes upgraded ceramic spray sealant protection",
-    ],
+  "Comprehensive interior reset (including under seats and rails)",
+  "Advanced wheel + tire cleaning with full attention to detail",
+  "Air-assisted drying to eliminate drips and water marks",
+  "Upgraded ceramic spray protection for long-lasting finish",
+],
     meta: ["Flagship service", "Most comprehensive"],
   },
 ];
@@ -7096,6 +7168,60 @@ main {
 
 .mobile-menu {
   box-shadow: 0 16px 60px rgba(0, 0, 0, 0.35);
+}
+
+.frd-craftsmanship {
+  padding: 80px 20px;
+  background: #0a0a0a;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.section-sub {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  opacity: 0.7;
+}
+
+.craft-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+.craft-card h3 {
+  margin-bottom: 10px;
+}
+
+.frd-maintenance {
+  padding: 80px 20px;
+  background: #000;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.plan-card {
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 25px;
+  text-align: center;
+}
+
+.plan-card.featured {
+  border-color: rgba(255,255,255,0.3);
+}
+
+.price {
+  font-size: 22px;
+  margin-top: 10px;
 }
 
 ==================================================
