@@ -1,0 +1,697 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const bookingDate = Astro.url.searchParams.get("date") ?? "your appointment";
+const bookingName = Astro.url.searchParams.get("name") ?? "";
+const bookingId = Astro.url.searchParams.get("id") ?? "";
+---
+
+<Layout
+  title="Vehicle Photos | Factory Reset Detail"
+  description="Submit photos of your vehicle so we can confirm condition and prepare an accurate quote before arrival."
+>
+  <main class="min-h-screen bg-neutral-950 text-white">
+    <section class="mx-auto max-w-2xl px-6 py-12 lg:px-8">
+
+      <!-- Header -->
+      <div class="mb-10">
+        <p class="text-xs uppercase tracking-[0.35em] text-white/50">Vehicle photos</p>
+        <h1 class="mt-3 text-3xl font-semibold leading-tight md:text-4xl">
+          Let's get a look at your vehicle.
+        </h1>
+        <p class="mt-3 text-base text-white/65 leading-relaxed">
+          Six quick shots — takes about a minute. Walk around your car and follow the prompts.
+          This lets us confirm condition and get you an accurate quote before we arrive.
+        </p>
+
+        <!-- Bypass option -->
+        <button
+          id="skip-btn"
+          type="button"
+          class="mt-5 text-sm text-white/40 underline underline-offset-4 decoration-white/20 transition hover:text-white/70 hover:decoration-white/50"
+        >
+          Skip — I'll get a quote on arrival
+        </button>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="mb-8">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs uppercase tracking-[0.28em] text-white/50">Progress</span>
+          <span id="progress-label" class="text-xs text-white/50">0 of 6 complete</span>
+        </div>
+        <div class="h-px bg-white/10 rounded-full overflow-hidden">
+          <div
+            id="progress-bar"
+            class="h-full bg-white rounded-full transition-all duration-500 ease-out"
+            style="width: 0%"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Shot cards -->
+      <div id="shot-list" class="space-y-3">
+
+        <!-- Shot template — repeated 6x with different content -->
+        <div class="shot-card" data-shot="0">
+          <div class="rounded-[20px] border border-white/10 bg-white/[0.03] overflow-hidden transition-all duration-300">
+            <button type="button" class="shot-trigger w-full text-left p-5 flex items-center gap-4">
+              <div class="shot-status flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 transition-all duration-300">
+                <span class="shot-number text-xs font-medium text-white/60">1</span>
+                <svg class="shot-check hidden h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-white">Front</p>
+                <p class="text-xs text-white/45 mt-0.5 text-left">Stand 8–10 ft back, centered on the grille</p>
+              </div>
+              <div class="shot-badge hidden shrink-0">
+                <span class="text-xs text-emerald-400/80 font-medium">✓ Captured</span>
+              </div>
+              <svg class="shot-chevron h-4 w-4 text-white/30 transition-transform duration-300 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+
+            <div class="shot-panel hidden px-5 pb-5">
+              <div class="camera-container relative rounded-2xl overflow-hidden bg-black aspect-[4/3] mb-4">
+                <video class="shot-video w-full h-full object-cover" autoplay playsinline muted></video>
+                <canvas class="shot-canvas absolute inset-0 w-full h-full hidden"></canvas>
+
+                <!-- Guide overlay -->
+                <div class="shot-guide absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div class="border-2 border-white/30 rounded-xl w-[80%] h-[70%] flex items-center justify-center">
+                    <span class="text-white/40 text-xs tracking-wider uppercase">Frame vehicle here</span>
+                  </div>
+                </div>
+
+                <!-- Status overlay -->
+                <div class="shot-status-overlay absolute bottom-3 left-3 right-3">
+                  <div class="feedback-pill inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium backdrop-blur-sm bg-black/50 border border-white/10">
+                    <div class="feedback-dot h-2 w-2 rounded-full bg-white/40"></div>
+                    <span class="feedback-text">Point camera at front of vehicle</span>
+                  </div>
+                </div>
+
+                <!-- Captured overlay -->
+                <div class="captured-overlay absolute inset-0 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
+                  <div class="text-center">
+                    <div class="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 border border-white/20">
+                      <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <p class="text-sm font-medium text-white">Shot captured</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex gap-3">
+                <button type="button" class="capture-btn flex-1 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90 active:scale-[0.98]">
+                  Capture photo
+                </button>
+                <button type="button" class="retake-btn hidden flex-1 inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-white/80 transition hover:border-white/30 hover:bg-white/5">
+                  Retake
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="shot-card" data-shot="1">
+          <div class="rounded-[20px] border border-white/10 bg-white/[0.03] overflow-hidden transition-all duration-300">
+            <button type="button" class="shot-trigger w-full text-left p-5 flex items-center gap-4">
+              <div class="shot-status flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 transition-all duration-300">
+                <span class="shot-number text-xs font-medium text-white/60">2</span>
+                <svg class="shot-check hidden h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-white">Rear</p>
+                <p class="text-xs text-white/45 mt-0.5 text-left">Stand 8–10 ft back, centered on the trunk</p>
+              </div>
+              <div class="shot-badge hidden shrink-0">
+                <span class="text-xs text-emerald-400/80 font-medium">✓ Captured</span>
+              </div>
+              <svg class="shot-chevron h-4 w-4 text-white/30 transition-transform duration-300 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="shot-panel hidden px-5 pb-5">
+              <div class="camera-container relative rounded-2xl overflow-hidden bg-black aspect-[4/3] mb-4">
+                <video class="shot-video w-full h-full object-cover" autoplay playsinline muted></video>
+                <canvas class="shot-canvas absolute inset-0 w-full h-full hidden"></canvas>
+                <div class="shot-guide absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div class="border-2 border-white/30 rounded-xl w-[80%] h-[70%] flex items-center justify-center">
+                    <span class="text-white/40 text-xs tracking-wider uppercase">Frame vehicle here</span>
+                  </div>
+                </div>
+                <div class="shot-status-overlay absolute bottom-3 left-3 right-3">
+                  <div class="feedback-pill inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium backdrop-blur-sm bg-black/50 border border-white/10">
+                    <div class="feedback-dot h-2 w-2 rounded-full bg-white/40"></div>
+                    <span class="feedback-text">Point camera at rear of vehicle</span>
+                  </div>
+                </div>
+                <div class="captured-overlay absolute inset-0 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
+                  <div class="text-center">
+                    <div class="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 border border-white/20">
+                      <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <p class="text-sm font-medium text-white">Shot captured</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <button type="button" class="capture-btn flex-1 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90 active:scale-[0.98]">Capture photo</button>
+                <button type="button" class="retake-btn hidden flex-1 inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-white/80 transition hover:border-white/30 hover:bg-white/5">Retake</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="shot-card" data-shot="2">
+          <div class="rounded-[20px] border border-white/10 bg-white/[0.03] overflow-hidden transition-all duration-300">
+            <button type="button" class="shot-trigger w-full text-left p-5 flex items-center gap-4">
+              <div class="shot-status flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 transition-all duration-300">
+                <span class="shot-number text-xs font-medium text-white/60">3</span>
+                <svg class="shot-check hidden h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-white">Driver side</p>
+                <p class="text-xs text-white/45 mt-0.5 text-left">Full length of the vehicle, step back to fit it all in</p>
+              </div>
+              <div class="shot-badge hidden shrink-0">
+                <span class="text-xs text-emerald-400/80 font-medium">✓ Captured</span>
+              </div>
+              <svg class="shot-chevron h-4 w-4 text-white/30 transition-transform duration-300 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="shot-panel hidden px-5 pb-5">
+              <div class="camera-container relative rounded-2xl overflow-hidden bg-black aspect-[4/3] mb-4">
+                <video class="shot-video w-full h-full object-cover" autoplay playsinline muted></video>
+                <canvas class="shot-canvas absolute inset-0 w-full h-full hidden"></canvas>
+                <div class="shot-guide absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div class="border-2 border-white/30 rounded-xl w-[85%] h-[55%] flex items-center justify-center">
+                    <span class="text-white/40 text-xs tracking-wider uppercase">Full side profile here</span>
+                  </div>
+                </div>
+                <div class="shot-status-overlay absolute bottom-3 left-3 right-3">
+                  <div class="feedback-pill inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium backdrop-blur-sm bg-black/50 border border-white/10">
+                    <div class="feedback-dot h-2 w-2 rounded-full bg-white/40"></div>
+                    <span class="feedback-text">Capture full driver side</span>
+                  </div>
+                </div>
+                <div class="captured-overlay absolute inset-0 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
+                  <div class="text-center">
+                    <div class="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 border border-white/20">
+                      <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <p class="text-sm font-medium text-white">Shot captured</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <button type="button" class="capture-btn flex-1 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90 active:scale-[0.98]">Capture photo</button>
+                <button type="button" class="retake-btn hidden flex-1 inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-white/80 transition hover:border-white/30 hover:bg-white/5">Retake</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="shot-card" data-shot="3">
+          <div class="rounded-[20px] border border-white/10 bg-white/[0.03] overflow-hidden transition-all duration-300">
+            <button type="button" class="shot-trigger w-full text-left p-5 flex items-center gap-4">
+              <div class="shot-status flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 transition-all duration-300">
+                <span class="shot-number text-xs font-medium text-white/60">4</span>
+                <svg class="shot-check hidden h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-white">Passenger side</p>
+                <p class="text-xs text-white/45 mt-0.5 text-left">Full length of the vehicle, step back to fit it all in</p>
+              </div>
+              <div class="shot-badge hidden shrink-0">
+                <span class="text-xs text-emerald-400/80 font-medium">✓ Captured</span>
+              </div>
+              <svg class="shot-chevron h-4 w-4 text-white/30 transition-transform duration-300 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="shot-panel hidden px-5 pb-5">
+              <div class="camera-container relative rounded-2xl overflow-hidden bg-black aspect-[4/3] mb-4">
+                <video class="shot-video w-full h-full object-cover" autoplay playsinline muted></video>
+                <canvas class="shot-canvas absolute inset-0 w-full h-full hidden"></canvas>
+                <div class="shot-guide absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div class="border-2 border-white/30 rounded-xl w-[85%] h-[55%] flex items-center justify-center">
+                    <span class="text-white/40 text-xs tracking-wider uppercase">Full side profile here</span>
+                  </div>
+                </div>
+                <div class="shot-status-overlay absolute bottom-3 left-3 right-3">
+                  <div class="feedback-pill inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium backdrop-blur-sm bg-black/50 border border-white/10">
+                    <div class="feedback-dot h-2 w-2 rounded-full bg-white/40"></div>
+                    <span class="feedback-text">Capture full passenger side</span>
+                  </div>
+                </div>
+                <div class="captured-overlay absolute inset-0 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
+                  <div class="text-center">
+                    <div class="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 border border-white/20">
+                      <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <p class="text-sm font-medium text-white">Shot captured</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <button type="button" class="capture-btn flex-1 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90 active:scale-[0.98]">Capture photo</button>
+                <button type="button" class="retake-btn hidden flex-1 inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-white/80 transition hover:border-white/30 hover:bg-white/5">Retake</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="shot-card" data-shot="4">
+          <div class="rounded-[20px] border border-white/10 bg-white/[0.03] overflow-hidden transition-all duration-300">
+            <button type="button" class="shot-trigger w-full text-left p-5 flex items-center gap-4">
+              <div class="shot-status flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 transition-all duration-300">
+                <span class="shot-number text-xs font-medium text-white/60">5</span>
+                <svg class="shot-check hidden h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-white">Interior front</p>
+                <p class="text-xs text-white/45 mt-0.5 text-left">Open driver door, capture both front seats</p>
+              </div>
+              <div class="shot-badge hidden shrink-0">
+                <span class="text-xs text-emerald-400/80 font-medium">✓ Captured</span>
+              </div>
+              <svg class="shot-chevron h-4 w-4 text-white/30 transition-transform duration-300 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="shot-panel hidden px-5 pb-5">
+              <div class="camera-container relative rounded-2xl overflow-hidden bg-black aspect-[4/3] mb-4">
+                <video class="shot-video w-full h-full object-cover" autoplay playsinline muted></video>
+                <canvas class="shot-canvas absolute inset-0 w-full h-full hidden"></canvas>
+                <div class="shot-guide absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div class="border-2 border-white/30 rounded-xl w-[80%] h-[70%] flex items-center justify-center">
+                    <span class="text-white/40 text-xs tracking-wider uppercase">Frame both seats</span>
+                  </div>
+                </div>
+                <div class="shot-status-overlay absolute bottom-3 left-3 right-3">
+                  <div class="feedback-pill inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium backdrop-blur-sm bg-black/50 border border-white/10">
+                    <div class="feedback-dot h-2 w-2 rounded-full bg-white/40"></div>
+                    <span class="feedback-text">Open door and capture front interior</span>
+                  </div>
+                </div>
+                <div class="captured-overlay absolute inset-0 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
+                  <div class="text-center">
+                    <div class="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 border border-white/20">
+                      <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <p class="text-sm font-medium text-white">Shot captured</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <button type="button" class="capture-btn flex-1 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90 active:scale-[0.98]">Capture photo</button>
+                <button type="button" class="retake-btn hidden flex-1 inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-white/80 transition hover:border-white/30 hover:bg-white/5">Retake</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="shot-card" data-shot="5">
+          <div class="rounded-[20px] border border-white/10 bg-white/[0.03] overflow-hidden transition-all duration-300">
+            <button type="button" class="shot-trigger w-full text-left p-5 flex items-center gap-4">
+              <div class="shot-status flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 transition-all duration-300">
+                <span class="shot-number text-xs font-medium text-white/60">6</span>
+                <svg class="shot-check hidden h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-white">Rear seats + trunk</p>
+                <p class="text-xs text-white/45 mt-0.5 text-left">Step back from rear door to fit seats and cargo area</p>
+              </div>
+              <div class="shot-badge hidden shrink-0">
+                <span class="text-xs text-emerald-400/80 font-medium">✓ Captured</span>
+              </div>
+              <svg class="shot-chevron h-4 w-4 text-white/30 transition-transform duration-300 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="shot-panel hidden px-5 pb-5">
+              <div class="camera-container relative rounded-2xl overflow-hidden bg-black aspect-[4/3] mb-4">
+                <video class="shot-video w-full h-full object-cover" autoplay playsinline muted></video>
+                <canvas class="shot-canvas absolute inset-0 w-full h-full hidden"></canvas>
+                <div class="shot-guide absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div class="border-2 border-white/30 rounded-xl w-[80%] h-[70%] flex items-center justify-center">
+                    <span class="text-white/40 text-xs tracking-wider uppercase">Rear seats + cargo</span>
+                  </div>
+                </div>
+                <div class="shot-status-overlay absolute bottom-3 left-3 right-3">
+                  <div class="feedback-pill inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium backdrop-blur-sm bg-black/50 border border-white/10">
+                    <div class="feedback-dot h-2 w-2 rounded-full bg-white/40"></div>
+                    <span class="feedback-text">Capture rear seats and cargo area</span>
+                  </div>
+                </div>
+                <div class="captured-overlay absolute inset-0 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
+                  <div class="text-center">
+                    <div class="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 border border-white/20">
+                      <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <p class="text-sm font-medium text-white">Shot captured</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <button type="button" class="capture-btn flex-1 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90 active:scale-[0.98]">Capture photo</button>
+                <button type="button" class="retake-btn hidden flex-1 inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-white/80 transition hover:border-white/30 hover:bg-white/5">Retake</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Submit button — locked until all 6 done -->
+      <div class="mt-8">
+        <button
+          id="submit-btn"
+          type="button"
+          disabled
+          class="w-full inline-flex items-center justify-center rounded-full bg-white px-6 py-4 text-sm font-medium text-neutral-950 transition disabled:opacity-30 disabled:cursor-not-allowed hover:opacity-90 active:scale-[0.98]"
+        >
+          <span id="submit-label">Complete all 6 shots to submit</span>
+        </button>
+        <p class="mt-3 text-center text-xs text-white/35">
+          Photos are used only to assess condition and prepare your quote.
+        </p>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Skip modal -->
+  <div id="skip-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-6">
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" id="skip-backdrop"></div>
+    <div class="relative w-full max-w-sm rounded-[24px] border border-white/10 bg-neutral-900 p-7 shadow-2xl">
+      <p class="text-xs uppercase tracking-[0.3em] text-white/45">No problem</p>
+      <h2 class="mt-3 text-xl font-semibold leading-snug">
+        We'll sort the quote on arrival.
+      </h2>
+      <p class="mt-3 text-sm text-white/65 leading-relaxed">
+        Your appointment on <strong class="text-white/90" id="modal-date">{bookingDate}</strong> is confirmed.
+        Your detailer will assess the vehicle's condition on arrival and walk you through
+        pricing before any work begins — no surprises.
+      </p>
+      <div class="mt-6 flex flex-col gap-3">
+        <button
+          id="skip-confirm-btn"
+          type="button"
+          class="w-full inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90"
+        >
+          Got it, see you then
+        </button>
+        <button
+          id="skip-cancel-btn"
+          type="button"
+          class="w-full inline-flex items-center justify-center rounded-full border border-white/10 px-5 py-3 text-sm font-medium text-white/70 transition hover:border-white/20 hover:text-white"
+        >
+          I'll add photos after all
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- All done modal -->
+  <div id="success-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-6">
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+    <div class="relative w-full max-w-sm rounded-[24px] border border-white/10 bg-neutral-900 p-7 shadow-2xl text-center">
+      <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-white/8">
+        <svg class="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 class="text-xl font-semibold">Photos received.</h2>
+      <p class="mt-3 text-sm text-white/65 leading-relaxed">
+        We'll review your vehicle and follow up with a detailed quote shortly.
+        See you on <strong class="text-white/90">{bookingDate}</strong>.
+      </p>
+      <p class="mt-4 text-xs text-white/35">You can close this page.</p>
+    </div>
+  </div>
+
+</Layout>
+
+<script is:inline define:vars={{ bookingId }}>
+(() => {
+  const TOTAL_SHOTS = 6;
+  const captured = new Array(TOTAL_SHOTS).fill(null); // stores base64 data URLs
+  const streams = new Array(TOTAL_SHOTS).fill(null);
+  let activeShot = -1;
+
+  // ── DOM refs ──────────────────────────────────────────────────────────────
+  const progressBar = document.getElementById('progress-bar');
+  const progressLabel = document.getElementById('progress-label');
+  const submitBtn = document.getElementById('submit-btn');
+  const submitLabel = document.getElementById('submit-label');
+  const skipBtn = document.getElementById('skip-btn');
+  const skipModal = document.getElementById('skip-modal');
+  const skipBackdrop = document.getElementById('skip-backdrop');
+  const skipConfirmBtn = document.getElementById('skip-confirm-btn');
+  const skipCancelBtn = document.getElementById('skip-cancel-btn');
+  const successModal = document.getElementById('success-modal');
+
+  // ── Progress ──────────────────────────────────────────────────────────────
+  function updateProgress() {
+    const done = captured.filter(Boolean).length;
+    const pct = (done / TOTAL_SHOTS) * 100;
+    progressBar.style.width = pct + '%';
+    progressLabel.textContent = done + ' of ' + TOTAL_SHOTS + ' complete';
+
+    if (done === TOTAL_SHOTS) {
+      submitBtn.disabled = false;
+      submitLabel.textContent = 'Submit photos';
+    } else {
+      submitBtn.disabled = true;
+      submitLabel.textContent = 'Complete all 6 shots to submit';
+    }
+  }
+
+  // ── Card open/close ───────────────────────────────────────────────────────
+  function openShot(index) {
+    // Close previously active shot
+    if (activeShot !== -1 && activeShot !== index) {
+      closeShot(activeShot);
+    }
+    activeShot = index;
+
+    const card = document.querySelector('[data-shot="' + index + '"]');
+    const panel = card.querySelector('.shot-panel');
+    const chevron = card.querySelector('.shot-chevron');
+
+    panel.classList.remove('hidden');
+    chevron.style.transform = 'rotate(180deg)';
+
+    // Start camera if not already captured
+    if (!captured[index]) {
+      startCamera(index);
+    }
+  }
+
+  function closeShot(index) {
+    const card = document.querySelector('[data-shot="' + index + '"]');
+    const panel = card.querySelector('.shot-panel');
+    const chevron = card.querySelector('.shot-chevron');
+
+    panel.classList.add('hidden');
+    chevron.style.transform = '';
+
+    // Stop stream if not captured
+    if (!captured[index] && streams[index]) {
+      streams[index].getTracks().forEach(t => t.stop());
+      streams[index] = null;
+    }
+  }
+
+  // ── Camera ────────────────────────────────────────────────────────────────
+  async function startCamera(index) {
+    const card = document.querySelector('[data-shot="' + index + '"]');
+    const video = card.querySelector('.shot-video');
+
+    try {
+      // Prefer rear camera on mobile
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } },
+        audio: false
+      });
+      streams[index] = stream;
+      video.srcObject = stream;
+    } catch (err) {
+      console.warn('Camera error:', err);
+      setFeedback(index, 'Camera access denied — tap to retry', 'error');
+    }
+  }
+
+  function setFeedback(index, text, state) {
+    const card = document.querySelector('[data-shot="' + index + '"]');
+    const dot = card.querySelector('.feedback-dot');
+    const textEl = card.querySelector('.feedback-text');
+
+    textEl.textContent = text;
+
+    dot.className = 'feedback-dot h-2 w-2 rounded-full transition-colors duration-300 ';
+    if (state === 'good') dot.className += 'bg-emerald-400';
+    else if (state === 'error') dot.className += 'bg-red-400';
+    else dot.className += 'bg-white/40';
+  }
+
+  // ── Capture ───────────────────────────────────────────────────────────────
+  function captureShot(index) {
+    const card = document.querySelector('[data-shot="' + index + '"]');
+    const video = card.querySelector('.shot-video');
+    const canvas = card.querySelector('.shot-canvas');
+    const captureBtn = card.querySelector('.capture-btn');
+    const retakeBtn = card.querySelector('.retake-btn');
+    const capturedOverlay = card.querySelector('.captured-overlay');
+    const shotStatus = card.querySelector('.shot-status');
+    const shotNumber = card.querySelector('.shot-number');
+    const shotCheck = card.querySelector('.shot-check');
+    const shotBadge = card.querySelector('.shot-badge');
+    const guide = card.querySelector('.shot-guide');
+    const statusOverlay = card.querySelector('.shot-status-overlay');
+
+    // Draw frame to canvas
+    canvas.width = video.videoWidth || 1280;
+    canvas.height = video.videoHeight || 720;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+    captured[index] = dataUrl;
+
+    // Stop stream
+    if (streams[index]) {
+      streams[index].getTracks().forEach(t => t.stop());
+      streams[index] = null;
+    }
+
+    // Show captured state
+    video.classList.add('hidden');
+    capturedOverlay.classList.remove('hidden');
+    capturedOverlay.classList.add('flex');
+    guide.classList.add('hidden');
+    statusOverlay.classList.add('hidden');
+    captureBtn.classList.add('hidden');
+    retakeBtn.classList.remove('hidden');
+    retakeBtn.classList.add('flex');
+
+    // Update card header
+    shotStatus.classList.remove('border-white/15', 'bg-white/5');
+    shotStatus.classList.add('border-white/25', 'bg-white/10');
+    shotNumber.classList.add('hidden');
+    shotCheck.classList.remove('hidden');
+    shotBadge.classList.remove('hidden');
+
+    updateProgress();
+
+    // Auto-advance to next shot after short delay
+    setTimeout(() => {
+      if (index < TOTAL_SHOTS - 1) {
+        closeShot(index);
+        openShot(index + 1);
+      }
+    }, 800);
+  }
+
+  function retakeShot(index) {
+    const card = document.querySelector('[data-shot="' + index + '"]');
+    const video = card.querySelector('.shot-video');
+    const captureBtn = card.querySelector('.capture-btn');
+    const retakeBtn = card.querySelector('.retake-btn');
+    const capturedOverlay = card.querySelector('.captured-overlay');
+    const shotStatus = card.querySelector('.shot-status');
+    const shotNumber = card.querySelector('.shot-number');
+    const shotCheck = card.querySelector('.shot-check');
+    const shotBadge = card.querySelector('.shot-badge');
+    const guide = card.querySelector('.shot-guide');
+    const statusOverlay = card.querySelector('.shot-status-overlay');
+
+    captured[index] = null;
+
+    video.classList.remove('hidden');
+    capturedOverlay.classList.add('hidden');
+    capturedOverlay.classList.remove('flex');
+    guide.classList.remove('hidden');
+    statusOverlay.classList.remove('hidden');
+    captureBtn.classList.remove('hidden');
+    retakeBtn.classList.add('hidden');
+    retakeBtn.classList.remove('flex');
+
+    shotStatus.classList.add('border-white/15', 'bg-white/5');
+    shotStatus.classList.remove('border-white/25', 'bg-white/10');
+    shotNumber.classList.remove('hidden');
+    shotCheck.classList.add('hidden');
+    shotBadge.classList.add('hidden');
+
+    updateProgress();
+    startCamera(index);
+  }
+
+  // ── Event listeners ───────────────────────────────────────────────────────
+  document.querySelectorAll('.shot-card').forEach((card) => {
+    const index = parseInt(card.dataset.shot);
+
+    card.querySelector('.shot-trigger').addEventListener('click', () => {
+      const panel = card.querySelector('.shot-panel');
+      if (panel.classList.contains('hidden')) {
+        openShot(index);
+      } else {
+        closeShot(index);
+        activeShot = -1;
+      }
+    });
+
+    card.querySelector('.capture-btn').addEventListener('click', () => captureShot(index));
+    card.querySelector('.retake-btn').addEventListener('click', () => retakeShot(index));
+  });
+
+  // ── Skip modal ────────────────────────────────────────────────────────────
+  skipBtn.addEventListener('click', () => {
+    skipModal.classList.remove('hidden');
+    skipModal.classList.add('flex');
+  });
+
+  skipBackdrop.addEventListener('click', () => {
+    skipModal.classList.add('hidden');
+    skipModal.classList.remove('flex');
+  });
+
+  skipCancelBtn.addEventListener('click', () => {
+    skipModal.classList.add('hidden');
+    skipModal.classList.remove('flex');
+  });
+
+  skipConfirmBtn.addEventListener('click', async () => {
+    skipModal.classList.add('hidden');
+    skipModal.classList.remove('flex');
+
+    // Notify backend of skip
+    try {
+      await fetch('/api/submit-photos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bookingId, skipped: true })
+      });
+    } catch (e) {
+      // Silent fail — backend not wired yet
+    }
+
+    // Redirect home
+    window.location.href = '/';
+  });
+
+  // ── Submit ────────────────────────────────────────────────────────────────
+  submitBtn.addEventListener('click', async () => {
+    submitBtn.disabled = true;
+    submitLabel.textContent = 'Sending...';
+
+    try {
+      await fetch('/api/submit-photos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bookingId, skipped: false, photos: captured })
+      });
+    } catch (e) {
+      // Silent fail — backend not wired yet
+    }
+
+    successModal.classList.remove('hidden');
+    successModal.classList.add('flex');
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  updateProgress();
+  // Auto-open first shot
+  openShot(0);
+})();
+</script>

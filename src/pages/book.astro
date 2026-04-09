@@ -2,16 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 
 const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
-const uploadFormUrl =
-  import.meta.env.PUBLIC_UPLOAD_FORM_URL ?? "https://YOUR-UPLOAD-FORM-URL-HERE";
 ---
 
 <Layout
   title="Book | Factory Reset Detail"
   description="Book your mobile detailing appointment with Factory Reset Detail in McKinney and surrounding areas."
 >
-  <main class="bg-neutral-950 text-white">
-    <section class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
       <div class="max-w-3xl">
         <p class="text-xs uppercase tracking-[0.35em] text-white/50">Booking</p>
 
@@ -20,8 +18,8 @@ const uploadFormUrl =
         </h1>
 
         <p class="mt-4 max-w-2xl text-base text-white/70 md:text-lg">
-          Reserve a time below, then send a few current photos so condition,
-          service fit, and any add-ons can be confirmed before arrival.
+          Reserve a time below. After booking, you'll receive a text with a link
+          to photograph your vehicle so we can confirm condition before arrival.
         </p>
 
         <div class="mt-6 inline-flex flex-wrap items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80">
@@ -66,60 +64,63 @@ const uploadFormUrl =
         <div id="cal-booker" class="min-h-[780px]"></div>
       </div>
 
-      <section
-        id="upload-photos"
-        class="mt-10 rounded-[28px] border border-white/10 bg-white/5 p-6 lg:p-8"
+      <!-- Confirmation banner — hidden until Cal fires bookingSuccessfulV2 -->
+      <div
+        id="booking-confirmation"
+        class="confirmation-banner mt-10 overflow-hidden rounded-[28px] border border-white/10 bg-white/5"
+        aria-hidden="true"
       >
-        <p class="text-xs uppercase tracking-[0.35em] text-white/50">Step 2</p>
+        <div class="p-6 lg:p-8">
+          <div class="flex items-start gap-4">
+            <!-- Checkmark icon -->
+            <div class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/8">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white/80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
 
-        <h2 class="mt-3 text-2xl font-semibold">Upload photos</h2>
-
-        <p class="mt-3 max-w-2xl text-white/70">
-          After booking, upload a few current photos of the exterior, interior,
-          wheels, and any problem areas. That helps confirm condition and make
-          sure the selected service still fits before the appointment.
-        </p>
-
-        <div class="mt-6">
-          <a
-            href={uploadFormUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90"
-          >
-            Upload vehicle photos
-          </a>
+            <div class="min-w-0">
+              <p class="text-xs uppercase tracking-[0.35em] text-white/50">You're booked</p>
+              <h2 class="mt-2 text-xl font-semibold leading-snug md:text-2xl">
+                Check your phone in a moment.
+              </h2>
+              <p class="mt-3 max-w-xl text-base text-white/70 leading-relaxed">
+                You'll receive a text shortly with a link to photograph your vehicle.
+                Photos let us confirm condition and get you an accurate quote before
+                we arrive — but they're never required.
+              </p>
+              <p class="mt-3 text-sm text-white/45">
+                Skipping photos? No problem — your detailer will assess the vehicle
+                on arrival and confirm pricing before starting.
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <p class="mt-4 text-sm text-white/50">
-          Fallback: you can still text photos if needed, but upload is preferred for cleaner intake.
-        </p>
-
-        <div class="mt-8">
-          <h3 class="text-sm font-medium uppercase tracking-[0.24em] text-white/50">
-            What to include
-          </h3>
-
-          <ul class="mt-4 grid gap-3 text-sm text-white/75 md:grid-cols-2">
-            <li>Front 3/4 exterior</li>
-            <li>Rear 3/4 exterior</li>
-            <li>Driver seat / front cabin</li>
-            <li>Rear seats / cargo area</li>
-            <li>Wheels / brake dust condition</li>
-            <li>Any stains, pet hair, or problem spots</li>
-          </ul>
-        </div>
-      </section>
-    </section>
-  </main>
+    </div>
+  </section>
 </Layout>
 
-<script
-  is:inline
-  define:vars={{
-    calOrigin,
-  }}
->
+<style>
+  .confirmation-banner {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      max-height 600ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 500ms ease,
+      margin-top 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .confirmation-banner.visible {
+    max-height: 400px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>
+
+<script is:inline define:vars={{ calOrigin }}>
   (function () {
     const services = {
       maintenance: {
@@ -173,6 +174,19 @@ const uploadFormUrl =
       }
     });
 
+    window.showConfirmation = function () {
+      const banner = document.getElementById("booking-confirmation");
+      if (!banner) return;
+
+      banner.removeAttribute("aria-hidden");
+      banner.classList.add("visible");
+
+      // Scroll to banner after transition starts
+      setTimeout(() => {
+        banner.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+
     function bootCal() {
       if (!window.Cal) return;
 
@@ -191,21 +205,17 @@ const uploadFormUrl =
       });
 
       window.Cal("ui", {
-  styles: {
-    body: {
-      background: "#0a0a0a",
-    },
-  },
-});
-
+        styles: {
+          body: {
+            background: "#0a0a0a",
+          },
+        },
+      });
 
       window.Cal("on", {
         action: "bookingSuccessfulV2",
         callback: function () {
-          const upload = document.getElementById("upload-photos");
-          if (upload) {
-            upload.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
+          showConfirmation();
         },
       });
     }
