@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /submit-photos
+
+Sitemap: https://www.factoryresetdetail.com/sitemap.xml
