@@ -1,5 +1,5 @@
 FRD WEBSITE CODE EXPORT
-Generated: Thu, Apr  9, 2026  6:34:07 PM
+Generated: Fri, Apr 10, 2026 12:00:22 AM
 
 ==================================================
 REPO STRUCTURE
@@ -30,7 +30,9 @@ public/img/jaguar-ftype-rear.webp
 public/img/jaguar-interior.webp
 public/img/porsche-gt3-front.webp
 public/img/silverado-z71.webp
+public/robots.txt
 public/site.webmanifest
+public/sitemap.xml
 public/web-app-manifest-192x192.png
 public/web-app-manifest-512x512.png
 README.md
@@ -6080,7 +6082,7 @@ const services = [
     title: "Maintenance Detail",
     desc: "For already well-kept vehicles that need consistent upkeep with a clean, polished finish.",
     image: "/img/gt3-engine.webp",
-    alt: "Maintenance Detail service preview",
+    alt: "Porsche GT3 engine bay — Maintenance Detail mobile detailing, McKinney TX",
     primaryHref: "/book?service=maintenance",
     secondaryHref: "/services#packages",
   },
@@ -6089,7 +6091,7 @@ const services = [
     title: "Signature Detail",
     desc: "A deeper, more complete service designed to leave the vehicle feeling professionally finished.",
     image: "/img/porsche-gt3-front.webp",
-    alt: "Signature Detail service preview",
+    alt: "Porsche GT3 exterior paint finish — Signature Detail premium mobile detailing, McKinney TX",
     primaryHref: "/book?service=signature",
     secondaryHref: "/services#packages",
   },
@@ -6098,7 +6100,7 @@ const services = [
     title: "Factory Reset Detail",
     desc: "The most comprehensive reset short of correction work, inside and out.",
     image: "/img/gt3-interior.webp",
-    alt: "Factory Reset Detail service preview",
+    alt: "Porsche GT3 interior detail — Factory Reset Detail complete service, McKinney TX",
     primaryHref: "/book?service=reset",
     secondaryHref: "/services#packages",
   },
@@ -6193,9 +6195,26 @@ interface Props {
 }
 
 const {
-  title = "Factory Reset Detail",
-  description = "Premium mobile detailing in McKinney, Texas.",
+  title = "Mobile Car Detailing in McKinney, TX | Factory Reset Detail",
+  description = "Premium mobile car detailing in McKinney, TX. Interior, exterior, and full-service detailing brought directly to your driveway. Serving Collin County and surrounding areas.",
 } = Astro.props;
+
+const siteUrl = "https://www.factoryresetdetail.com";
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
+const ogImage = `${siteUrl}/img/porsche-gt3-front.webp`;
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Factory Reset Detail",
+  "url": siteUrl,
+  "description": "Premium mobile car detailing in McKinney, TX. Paint-safe methods, material-correct finishes, and clear recommendations—brought directly to your driveway.",
+  "areaServed": [
+    { "@type": "City", "name": "McKinney, Texas" },
+    { "@type": "AdministrativeArea", "name": "Collin County, Texas" },
+  ],
+  "serviceType": "Mobile Car Detailing",
+});
 ---
 
 <!doctype html>
@@ -6203,23 +6222,53 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0a0a0a" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
 
     <!-- Favicons -->
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
-
-    <!-- OpenGraph -->
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Factory Reset Detail" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/img/social-preview.jpg" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Factory Reset Detail — premium mobile car detailing in McKinney, TX" />
+    <meta property="og:locale" content="en_US" />
 
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Factory Reset Detail — premium mobile car detailing in McKinney, TX" />
+
+    <!-- Structured Data -->
+    <script is:inline type="application/ld+json" set:html={schema} />
+
+    <!-- Google Analytics (GA4) -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=G-W8RN9B4BBS`}></script>
+    <script is:inline>
+      console.log('GA4 init running', window.location.href); // DEBUG: remove after confirmed
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-W8RN9B4BBS', { debug_mode: true }); // DEBUG: remove debug_mode when confirmed working
+      // DEBUG: temporary test event — remove after GA4 confirmed receiving data
+      gtag('event', 'ga_test_ping', {
+        debug_mode: true,
+        page_path: window.location.pathname
+      });
+    </script>
   </head>
 
   <body class="min-h-screen bg-neutral-950 text-white antialiased">
@@ -6273,8 +6322,8 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
 ---
 
 <Layout
-  title="Book | Factory Reset Detail"
-  description="Book your mobile detailing appointment with Factory Reset Detail in McKinney and surrounding areas."
+  title="Book a Detail | Factory Reset Detail — McKinney, TX"
+  description="Reserve your mobile car detailing appointment in McKinney, TX. Choose your service, pick a time, and we come to you. Serving Collin County and surrounding areas."
 >
   <section class="bg-neutral-950 text-white">
     <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
@@ -6559,7 +6608,10 @@ const heroImages = [
 ];
 ---
 
-<Layout>
+<Layout
+  title="Factory Reset Detail | Mobile Car Detailing in McKinney, TX"
+  description="Premium mobile car detailing in McKinney, TX. Paint-safe interior and exterior detailing brought directly to your driveway. Serving Collin County and surrounding areas."
+>
   <Hero>
     <div
       class="hero-slideshow group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03]"
@@ -6643,7 +6695,7 @@ const heroImages = [
       <div class="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03]">
         <img
           src="/img/jaguar-interior.webp"
-          alt="Factory Reset Detail interior finish"
+          alt="Jaguar F-Type interior detail — Factory Reset Detail, McKinney TX"
           class="h-[320px] w-full object-cover md:h-[420px]"
           loading="lazy"
         />
@@ -6659,7 +6711,7 @@ const heroImages = [
       <div class="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03]">
         <img
           src="/img/porsche-gt3-front.webp"
-          alt="Factory Reset Detail paint reflection finish"
+          alt="Porsche GT3 exterior paint finish — Factory Reset Detail, McKinney TX"
           class="h-[320px] w-full object-cover md:h-[420px]"
           loading="lazy"
         />
@@ -6845,8 +6897,8 @@ const faqs = [
 ---
 
 <Layout
-  title="Services | Factory Reset Detail"
-  description="Explore Factory Reset Detail service packages, add-ons, process, and booking."
+  title="Detailing Services in McKinney, TX | Factory Reset Detail"
+  description="Mobile car detailing packages for McKinney and Collin County. Maintenance, Signature, and Factory Reset detail services—plus add-ons, process overview, and FAQ."
 >
   <section class="bg-neutral-950 text-white">
     <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
@@ -7993,6 +8045,16 @@ FILE: public/favicon.svg
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="317" height="302" viewBox="0 0 317 302"><image width="317" height="302" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QKIRXhpZgAATU0AKgAAAAgABAE7AAIAAAAHAAABSodpAAQAAAABAAABUpydAAEAAAAOAAACcuocAAcAAAEMAAAAPgAAAAAc6gAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQXNodG9uAAAAAeocAAcAAAEMAAABZAAAAAAc6gAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAHMAaAB0AG8AbgAAAP/hA19odHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvADw/eHBhY2tldCBiZWdpbj0n77u/JyBpZD0nVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkJz8+DQo8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIj48cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPjxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSJ1dWlkOmZhZjViZGQ1LWJhM2QtMTFkYS1hZDMxLWQzM2Q3NTE4MmYxYiIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIi8+PHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9InV1aWQ6ZmFmNWJkZDUtYmEzZC0xMWRhLWFkMzEtZDMzZDc1MTgyZjFiIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iPjxkYzpjcmVhdG9yPjxyZGY6U2VxIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+PHJkZjpsaT5Bc2h0b248L3JkZjpsaT48L3JkZjpTZXE+DQoJCQk8L2RjOmNyZWF0b3I+PC9yZGY6RGVzY3JpcHRpb24+PC9yZGY6UkRGPjwveDp4bXBtZXRhPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDw/eHBhY2tldCBlbmQ9J3cnPz7/2wBDAAcFBQYFBAcGBQYIBwcIChELCgkJChUPEAwRGBUaGRgVGBcbHichGx0lHRcYIi4iJSgpKywrGiAvMy8qMicqKyr/2wBDAQcICAoJChQLCxQqHBgcKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKir/wAARCAEuAT0DASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3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"></image></svg>
 
 ==================================================
+FILE: public/robots.txt
+==================================================
+User-agent: *
+Allow: /
+Disallow: /submit-photos
+
+Sitemap: https://www.factoryresetdetail.com/sitemap.xml
+
+
+==================================================
 FILE: public/site.webmanifest
 ==================================================
 {
@@ -8016,4 +8078,27 @@ FILE: public/site.webmanifest
   "background_color": "#000000",
   "display": "standalone"
 }
+
+==================================================
+FILE: public/sitemap.xml
+==================================================
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.factoryresetdetail.com/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.factoryresetdetail.com/services</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.factoryresetdetail.com/book</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>
+
 

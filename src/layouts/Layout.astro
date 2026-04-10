@@ -70,18 +70,12 @@ const schema = JSON.stringify({
     <script is:inline type="application/ld+json" set:html={schema} />
 
     <!-- Google Analytics (GA4) -->
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=G-W8RN9B4BBS`}></script>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=G-G3708NRPFL`}></script>
     <script is:inline>
-      console.log('GA4 init running', window.location.href); // DEBUG: remove after confirmed
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-W8RN9B4BBS', { debug_mode: true }); // DEBUG: remove debug_mode when confirmed working
-      // DEBUG: temporary test event — remove after GA4 confirmed receiving data
-      gtag('event', 'ga_test_ping', {
-        debug_mode: true,
-        page_path: window.location.pathname
-      });
+      gtag('config', 'G-G3708NRPFL');
     </script>
   </head>
 
