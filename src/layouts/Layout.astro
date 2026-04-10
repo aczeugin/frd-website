@@ -70,7 +70,7 @@ const schema = JSON.stringify({
     <script is:inline type="application/ld+json" set:html={schema} />
 
     <!-- Google Analytics (GA4) -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-W8RN9B4BBS"></script>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=G-W8RN9B4BBS`}></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
