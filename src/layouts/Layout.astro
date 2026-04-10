@@ -75,7 +75,12 @@ const schema = JSON.stringify({
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-W8RN9B4BBS');
+      gtag('config', 'G-W8RN9B4BBS', { debug_mode: true }); // DEBUG: remove debug_mode when confirmed working
+      // DEBUG: temporary test event — remove after GA4 confirmed receiving data
+      gtag('event', 'ga_test_ping', {
+        debug_mode: true,
+        page_path: window.location.pathname
+      });
     </script>
   </head>
 
