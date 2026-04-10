@@ -68,6 +68,15 @@ const schema = JSON.stringify({
 
     <!-- Structured Data -->
     <script is:inline type="application/ld+json" set:html={schema} />
+
+    <!-- Google Analytics (GA4) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-W8RN9B4BBS"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-W8RN9B4BBS');
+    </script>
   </head>
 
   <body class="min-h-screen bg-neutral-950 text-white antialiased">
