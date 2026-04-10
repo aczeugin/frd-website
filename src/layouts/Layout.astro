@@ -72,6 +72,7 @@ const schema = JSON.stringify({
     <!-- Google Analytics (GA4) -->
     <script async src={`https://www.googletagmanager.com/gtag/js?id=G-W8RN9B4BBS`}></script>
     <script is:inline>
+      console.log('GA4 init running', window.location.href); // DEBUG: remove after confirmed
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
