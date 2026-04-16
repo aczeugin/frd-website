@@ -77,6 +77,8 @@ const services = [
               <a
                 href={service.primaryHref}
                 class="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90"
+                data-track="book_click"
+                data-track-label={`Services — ${service.title}`}
               >
                 Book now
               </a>

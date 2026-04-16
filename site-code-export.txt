@@ -1,5 +1,5 @@
 FRD WEBSITE CODE EXPORT
-Generated: Fri, Apr 10, 2026 12:00:22 AM
+Generated: Fri, Apr 10, 2026  2:25:39 AM
 
 ==================================================
 REPO STRUCTURE
@@ -5778,7 +5778,8 @@ FILE: src/components/Footer.astro
           Mobile detailing · McKinney · Collin County
         </p>
         <p class="mt-2 text-sm text-white/60">
-          (469) 279-8048 · ashton@factoryresetdetail.com
+          <a href="tel:+14692798048" class="transition hover:text-white" data-track="phone_click" data-track-label="Footer — phone">(469) 279-8048</a>
+          · ashton@factoryresetdetail.com
         </p>
       </div>
 
@@ -5998,6 +5999,8 @@ FILE: src/components/Hero.astro
           <a
             href="/book"
             class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90"
+            data-track="book_click"
+            data-track-label="Hero — Book a Detail"
           >
             Book a Detail
           </a>
@@ -6154,6 +6157,8 @@ const services = [
               <a
                 href={service.primaryHref}
                 class="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90"
+                data-track="book_click"
+                data-track-label={`Services — ${service.title}`}
               >
                 Book now
               </a>
@@ -6256,18 +6261,12 @@ const schema = JSON.stringify({
     <script is:inline type="application/ld+json" set:html={schema} />
 
     <!-- Google Analytics (GA4) -->
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=G-W8RN9B4BBS`}></script>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=G-G3708NRPFL`}></script>
     <script is:inline>
-      console.log('GA4 init running', window.location.href); // DEBUG: remove after confirmed
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-W8RN9B4BBS', { debug_mode: true }); // DEBUG: remove debug_mode when confirmed working
-      // DEBUG: temporary test event — remove after GA4 confirmed receiving data
-      gtag('event', 'ga_test_ping', {
-        debug_mode: true,
-        page_path: window.location.pathname
-      });
+      gtag('config', 'G-G3708NRPFL');
     </script>
   </head>
 
@@ -6277,6 +6276,32 @@ const schema = JSON.stringify({
       <slot />
     </main>
     <Footer />
+
+    <script is:inline>
+      // --- Event tracking (book_click, phone_click, email_click) ---
+      document.addEventListener('click', function (e) {
+        var el = e.target.closest('[data-track]');
+        if (!el || typeof gtag !== 'function') return;
+        gtag('event', el.dataset.track, {
+          event_category: 'engagement',
+          event_label: el.dataset.trackLabel || el.textContent.trim().slice(0, 60),
+        });
+      });
+
+      // --- Scroll depth: 75% ---
+      var scroll75fired = false;
+      window.addEventListener('scroll', function () {
+        if (scroll75fired) return;
+        var scrolled = window.scrollY + window.innerHeight;
+        var total = document.documentElement.scrollHeight;
+        if (scrolled / total >= 0.75) {
+          scroll75fired = true;
+          if (typeof gtag === 'function') {
+            gtag('event', 'scroll_75', { event_category: 'engagement' });
+          }
+        }
+      }, { passive: true });
+    </script>
   </body>
 </html>
 
@@ -6533,6 +6558,12 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
         action: "bookingSuccessfulV2",
         callback: function () {
           showConfirmation();
+          if (typeof gtag === 'function') {
+            gtag('event', 'booking_complete', {
+              event_category: 'conversion',
+              event_label: selected.label,
+            });
+          }
         },
       });
     }
@@ -6963,6 +6994,8 @@ const faqs = [
                 <a
                   href={`/book?service=${p.service}`}
                   class="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950"
+                  data-track="book_click"
+                  data-track-label={`Services (mobile) — ${p.title}`}
                 >
                   Reserve
                 </a>
@@ -7026,6 +7059,8 @@ const faqs = [
               <a
                 href={`/book?service=${p.service}`}
                 class="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950"
+                data-track="book_click"
+                data-track-label={`Services (desktop) — ${p.title}`}
               >
                 Reserve
               </a>
@@ -7222,12 +7257,16 @@ const faqs = [
           <a
             href="/book"
             class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-neutral-950"
+            data-track="book_click"
+            data-track-label="Contact section — Book now"
           >
             Book now
           </a>
           <a
             href="mailto:ashton@factoryresetdetail.com"
             class="inline-flex items-center justify-center rounded-full border border-white/12 px-6 py-3 text-sm text-white/82"
+            data-track="email_click"
+            data-track-label="Contact section — Email Ashton"
           >
             Email Ashton
           </a>
