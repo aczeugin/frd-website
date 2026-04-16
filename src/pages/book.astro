@@ -58,6 +58,28 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
         <p id="selected-service-blurb" class="mt-4 max-w-2xl text-sm text-white/55">
           Best for clients wanting a deeper, more complete detail with stronger interior and wheel attention.
         </p>
+
+        <div class="mt-6 rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
+          <p class="mb-3 text-xs uppercase tracking-[0.35em] text-white/40">Starting Pricing</p>
+          <div class="flex flex-wrap gap-x-8 gap-y-2">
+            <div class="flex items-baseline gap-2">
+              <span class="text-sm text-white/55">Coupe</span>
+              <span id="price-coupe" class="text-sm font-semibold text-white"></span>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="text-sm text-white/55">Sedan</span>
+              <span id="price-sedan" class="text-sm font-semibold text-white"></span>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="text-sm text-white/55">SUV / Truck</span>
+              <span id="price-suv" class="text-sm font-semibold text-white"></span>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="text-sm text-white/55">Minivan / Suburban</span>
+              <span id="price-minivan" class="text-sm font-semibold text-white"></span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="mt-10 overflow-hidden rounded-[28px] border border-white/10 bg-neutral-900/40 backdrop-blur">
@@ -128,18 +150,21 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
         slug: "factoryresetdetail/maintenance-detail",
         blurb:
           "Best for already well-kept vehicles that need consistent upkeep and preferred recurring pricing.",
+        pricing: { coupe: "$75", sedan: "$100", suv: "$125", minivan: "$150" },
       },
       signature: {
         label: "Signature Detail",
         slug: "factoryresetdetail/signature-detail",
         blurb:
           "Best for clients wanting a deeper, more complete detail with stronger interior and wheel attention.",
+        pricing: { coupe: "$125", sedan: "$150", suv: "$175", minivan: "$200" },
       },
       reset: {
         label: "Factory Reset Detail",
         slug: "factoryresetdetail/factory-reset-detail",
         blurb:
           "Best for the most comprehensive reset short of correction work, inside and out.",
+        pricing: { coupe: "$175", sedan: "$200", suv: "$250", minivan: "$275" },
       },
     };
 
@@ -154,6 +179,16 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
 
     if (labelEl) labelEl.textContent = selected.label;
     if (blurbEl) blurbEl.textContent = selected.blurb;
+
+    const priceEls = {
+      coupe: document.getElementById("price-coupe"),
+      sedan: document.getElementById("price-sedan"),
+      suv: document.getElementById("price-suv"),
+      minivan: document.getElementById("price-minivan"),
+    };
+    Object.entries(priceEls).forEach(([key, el]) => {
+      if (el) el.textContent = selected.pricing[key];
+    });
 
     const pillIds = {
       maintenance: "service-pill-maintenance",
@@ -216,6 +251,12 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
         action: "bookingSuccessfulV2",
         callback: function () {
           showConfirmation();
+          if (typeof gtag === 'function') {
+            gtag('event', 'booking_complete', {
+              event_category: 'conversion',
+              event_label: selected.label,
+            });
+          }
         },
       });
     }

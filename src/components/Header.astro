@@ -10,12 +10,29 @@ const nav = [
   class="site-header fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-neutral-950/92 text-white"
   data-header
 >
-  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-    <a
-      href="/"
-      class="min-w-0 text-sm font-medium uppercase tracking-[0.18em] text-white/92"
-    >
-      Factory Reset Detail
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 pt-4 pb-3 lg:px-10">
+    <a href="/" class="relative flex h-11 items-center gap-3 min-w-0">
+      <!-- Mobile spacer + absolutely positioned badge -->
+      <span class="sm:hidden w-10 shrink-0" aria-hidden="true"></span>
+      <img
+        src="/img/frd-logo.png"
+        alt="Factory Reset Detail logo"
+        class="sm:hidden absolute -left-[42px] top-1/2 -translate-y-1/2 h-20 w-auto invert"
+      />
+
+      <!-- Desktop spacer + absolutely positioned badge -->
+      <span class="hidden sm:block w-20 shrink-0" aria-hidden="true"></span>
+      <img
+        src="/img/frd-logo.png"
+        alt=""
+        aria-hidden="true"
+        class="hidden sm:block absolute -left-8 top-1/2 -translate-y-1/2 h-28 xl:h-24 w-auto invert"
+      />
+
+      <!-- Text: compact on mobile, full size on desktop -->
+      <span class="whitespace-nowrap text-[14px] sm:text-[17px] font-medium uppercase ml-1.5 sm:ml-0 tracking-[0.04em] sm:tracking-[0.18em] text-white/92">
+        Factory Reset Detail
+      </span>
     </a>
 
     <div class="ml-2 flex items-center gap-4">

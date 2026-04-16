@@ -85,5 +85,31 @@ const schema = JSON.stringify({
       <slot />
     </main>
     <Footer />
+
+    <script is:inline>
+      // --- Event tracking (book_click, phone_click, email_click) ---
+      document.addEventListener('click', function (e) {
+        var el = e.target.closest('[data-track]');
+        if (!el || typeof gtag !== 'function') return;
+        gtag('event', el.dataset.track, {
+          event_category: 'engagement',
+          event_label: el.dataset.trackLabel || el.textContent.trim().slice(0, 60),
+        });
+      });
+
+      // --- Scroll depth: 75% ---
+      var scroll75fired = false;
+      window.addEventListener('scroll', function () {
+        if (scroll75fired) return;
+        var scrolled = window.scrollY + window.innerHeight;
+        var total = document.documentElement.scrollHeight;
+        if (scrolled / total >= 0.75) {
+          scroll75fired = true;
+          if (typeof gtag === 'function') {
+            gtag('event', 'scroll_75', { event_category: 'engagement' });
+          }
+        }
+      }, { passive: true });
+    </script>
   </body>
 </html>

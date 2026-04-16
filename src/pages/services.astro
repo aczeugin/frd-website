@@ -171,6 +171,8 @@ const faqs = [
                 <a
                   href={`/book?service=${p.service}`}
                   class="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950"
+                  data-track="book_click"
+                  data-track-label={`Services (mobile) — ${p.title}`}
                 >
                   Reserve
                 </a>
@@ -234,6 +236,8 @@ const faqs = [
               <a
                 href={`/book?service=${p.service}`}
                 class="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950"
+                data-track="book_click"
+                data-track-label={`Services (desktop) — ${p.title}`}
               >
                 Reserve
               </a>
@@ -391,7 +395,7 @@ const faqs = [
             “Interior looked brand new. No greasy shine, just clean.”
           </p>
           <p class="mt-4 text-xs uppercase tracking-[0.24em] text-white/40">
-            McKinney client
+            Mike R.
           </p>
         </article>
 
@@ -400,7 +404,7 @@ const faqs = [
             “Best detail I’ve had. You can tell it was done properly.”
           </p>
           <p class="mt-4 text-xs uppercase tracking-[0.24em] text-white/40">
-            Repeat client
+            Amy W.
           </p>
         </article>
 
@@ -409,7 +413,7 @@ const faqs = [
             “Super easy process, clear communication, and the finish spoke for itself.”
           </p>
           <p class="mt-4 text-xs uppercase tracking-[0.24em] text-white/40">
-            Collin County client
+            Will H.
           </p>
         </article>
       </div>
@@ -430,12 +434,16 @@ const faqs = [
           <a
             href="/book"
             class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-neutral-950"
+            data-track="book_click"
+            data-track-label="Contact section — Book now"
           >
             Book now
           </a>
           <a
             href="mailto:ashton@factoryresetdetail.com"
             class="inline-flex items-center justify-center rounded-full border border-white/12 px-6 py-3 text-sm text-white/82"
+            data-track="email_click"
+            data-track-label="Contact section — Email Ashton"
           >
             Email Ashton
           </a>
