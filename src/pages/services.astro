@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
+const siteUrl = "https://www.factoryresetdetail.com";
+
 const packages = [
   {
     eyebrow: "Maintenance",
@@ -101,24 +103,61 @@ const faqs = [
     q: "Do you offer pricing over text?",
     a: "I can usually provide a range, but final pricing depends on condition. Photos help me recommend the right level of service without guesswork.",
   },
+  {
+    q: "What’s the difference between the Maintenance Detail and a full detail?",
+    a: "The Maintenance Detail is for vehicles already in good condition—it keeps things consistent between visits at preferred pricing. The Signature and Factory Reset Details go deeper: more time on wheels, jambs, crevices, and interior surfaces. If it’s your first service or the vehicle hasn’t been detailed in a while, I’ll usually recommend starting with a full detail.",
+  },
+  {
+    q: "Do you offer interior-only detailing?",
+    a: "Interior-focused services are available depending on condition and scope. If the cabin is your main priority, let me know when you reach out and I’ll recommend the right approach based on what you describe.",
+  },
+  {
+    q: "Can you service my vehicle at an apartment complex or my workplace?",
+    a: "Yes. I work around your schedule and location—apartment parking lots, office complexes, or wherever the vehicle is parked. I just need access to a standard outdoor water spigot and outlet nearby. If access is uncertain, send me the address and I’ll confirm.",
+  },
+  {
+    q: "Do you detail SUVs and trucks?",
+    a: "Yes—SUVs, trucks, and larger vehicles are serviced regularly. Pricing reflects the additional time and surface area. Send me the make and approximate condition and I’ll give you an accurate quote upfront.",
+  },
+  {
+    q: "What should I expect to pay?",
+    a: "Most services range from $150–$400+ depending on vehicle size, condition, and the level of service. I don’t publish flat rates because condition matters—a clean daily driver and a neglected family SUV are very different jobs. Photos help me quote accurately without surprises.",
+  },
 ];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "url": `${siteUrl}/services`,
+  "name": "Mobile Car Detailing Services FAQ — Factory Reset Detail, McKinney TX",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a,
+    },
+  })),
+};
 ---
 
 <Layout
-  title="Detailing Services in McKinney, TX | Factory Reset Detail"
-  description="Mobile car detailing packages for McKinney and Collin County. Maintenance, Signature, and Factory Reset detail services—plus add-ons, process overview, and FAQ."
+  title="Mobile Detailing Services in McKinney, TX | Factory Reset Detail"
+  description="Explore mobile detailing services in McKinney, TX including interior, exterior, and full-service detailing for cars, SUVs, and trucks."
+  pageSchema={pageSchema}
 >
   <section class="bg-neutral-950 text-white">
     <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
       <div class="max-w-3xl">
-        <p class="text-xs uppercase tracking-[0.32em] text-white/50">Services</p>
+        <p class="text-xs uppercase tracking-[0.32em] text-white/50">Mobile Detailing · McKinney, TX</p>
         <h1 class="mt-4 text-4xl font-semibold leading-tight md:text-5xl">
-          Detailing built for results you actually notice.
+          Mobile detailing services in McKinney, Texas.
         </h1>
         <p class="mt-5 text-base leading-relaxed text-white/70 md:text-lg">
-          Mobile service based in McKinney—serving Collin County and surrounding areas.
-          Every package is designed to preserve materials, refine gloss, and deliver a calm,
-          finished look—never greasy, never overdone.
+          A fully mobile service based in McKinney, TX — bringing professional interior and exterior
+          detailing directly to your home, workplace, or wherever the vehicle is parked. Serving McKinney,
+          Allen, Frisco, Plano, Prosper, and the surrounding Collin County area. Every service is finished
+          to a high standard: clean without being greasy, refined without being overdone.
         </p>
       </div>
 
@@ -251,6 +290,141 @@ const faqs = [
           </article>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-xs uppercase tracking-[0.28em] text-white/45">What's included</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          Every service. Thoughtfully executed.
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-white/68">
+          Each detail covers interior and exterior work with methods selected to protect the vehicle—not just clean it.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Exterior wash</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Safe foam pre-rinse and contact wash using paint-safe technique — no swirl-inducing shortcuts, no drive-through pressure.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Interior detailing</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Vacuumed, wiped, and treated throughout — dash, console, vents, door panels, and touchpoints. Clean without fragrance, residue, or plastic gloss.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Wheels and tires</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Faces, barrels, and tires cleaned with appropriate product for each surface. Brake dust and road film removed properly — not masked.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Paint-safe drying</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Premium microfiber and air-assisted drying to eliminate water spots and drips — no drag, no abrasion on the clear coat.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Protection options</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Spray sealant or ceramic spray protection applied for hydrophobic behavior and lasting gloss — chosen for longevity, not showroom theater.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-xs uppercase tracking-[0.28em] text-white/45">Who this is for</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          Built for every vehicle, scaled to its needs.
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-white/68">
+          Whether it's a daily commuter or a garage-kept enthusiast car, the approach adapts to the vehicle and its condition.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Daily drivers</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Consistent upkeep without the hassle. A recurring maintenance plan keeps your daily looking sharp between deeper services.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Enthusiast cars</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Paint-safe methods, careful product selection, and attention to detail that matches how much the vehicle matters to you.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Luxury vehicles</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Material-correct technique on premium surfaces — leather, alcantara, carbon, and coated paint treated with the right products and the right amount of restraint.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">SUVs</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            More surface area, more interior volume — priced and paced accordingly. Full attention to third-row areas, cargo space, and larger wheel faces.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Trucks</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Bed areas, running boards, and heavily used interiors handled with the same care as the rest. Work trucks and weekend trucks both welcome.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Family vehicles</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Pet hair, car seats, crumbs, and lived-in grime — this is what the Factory Reset service is designed for. Start fresh and maintain from there.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-xs uppercase tracking-[0.28em] text-white/45">Service Area</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          Areas we commonly serve
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-white/68">
+          Based in McKinney — mobile service available throughout Collin County and nearby communities.
+        </p>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        {["McKinney", "Allen", "Frisco", "Plano", "Prosper", "Lucas", "Fairview", "Melissa", "Anna", "Celina"].map((city) => (
+          <span class="rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-sm text-white/78">
+            {city}
+          </span>
+        ))}
+      </div>
+
+      <p class="mt-6 text-center text-xs text-white/40">
+        Availability depends on schedule and travel distance. Reach out to confirm your location.
+      </p>
     </div>
   </section>
 
@@ -389,31 +563,49 @@ const faqs = [
         What clients notice most
       </h2>
 
-      <div class="mt-8 grid gap-5 md:grid-cols-3">
-        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
-          <p class="text-sm leading-relaxed text-white/78">
+      <div class=”mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3”>
+        <article class=”rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6”>
+          <p class=”text-sm leading-relaxed text-white/78”>
             “Interior looked brand new. No greasy shine, just clean.”
           </p>
-          <p class="mt-4 text-xs uppercase tracking-[0.24em] text-white/40">
+          <p class=”mt-4 text-xs uppercase tracking-[0.24em] text-white/40”>
             Mike R.
           </p>
         </article>
 
-        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
-          <p class="text-sm leading-relaxed text-white/78">
+        <article class=”rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6”>
+          <p class=”text-sm leading-relaxed text-white/78”>
             “Best detail I’ve had. You can tell it was done properly.”
           </p>
-          <p class="mt-4 text-xs uppercase tracking-[0.24em] text-white/40">
+          <p class=”mt-4 text-xs uppercase tracking-[0.24em] text-white/40”>
             Amy W.
           </p>
         </article>
 
-        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
-          <p class="text-sm leading-relaxed text-white/78">
+        <article class=”rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6”>
+          <p class=”text-sm leading-relaxed text-white/78”>
             “Super easy process, clear communication, and the finish spoke for itself.”
           </p>
-          <p class="mt-4 text-xs uppercase tracking-[0.24em] text-white/40">
+          <p class=”mt-4 text-xs uppercase tracking-[0.24em] text-white/40”>
             Will H.
+          </p>
+        </article>
+
+        <article class=”rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6”>
+          <p class=”text-sm leading-relaxed text-white/78”>
+            <!-- Anna’s quote — add text here -->
+          </p>
+          <p class=”mt-4 text-xs uppercase tracking-[0.24em] text-white/40”>
+            Anna
+          </p>
+        </article>
+
+        <article class=”rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6”>
+          <p class=”text-sm leading-relaxed text-white/78”>
+            <!-- Celina’s quote — add text here -->
+          </p>
+          <p class=”mt-4 text-xs uppercase tracking-[0.24em] text-white/40”>
+            Celina
           </p>
         </article>
       </div>

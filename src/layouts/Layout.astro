@@ -6,29 +6,52 @@ import Footer from "../components/Footer.astro";
 interface Props {
   title?: string;
   description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  pageSchema?: object;
 }
 
 const {
   title = "Mobile Car Detailing in McKinney, TX | Factory Reset Detail",
   description = "Premium mobile car detailing in McKinney, TX. Interior, exterior, and full-service detailing brought directly to your driveway. Serving Collin County and surrounding areas.",
+  ogTitle,
+  ogDescription,
+  ogImage: ogImageProp,
+  noindex = false,
+  pageSchema,
 } = Astro.props;
 
 const siteUrl = "https://www.factoryresetdetail.com";
 const canonical = new URL(Astro.url.pathname, siteUrl).href;
-const ogImage = `${siteUrl}/img/porsche-gt3-front.webp`;
+const defaultOgImage = `${siteUrl}/img/porsche-gt3-front.webp`;
 
-const schema = JSON.stringify({
+const resolvedOgTitle = ogTitle ?? title;
+const resolvedOgDescription = ogDescription ?? description;
+const resolvedOgImage = ogImageProp ?? defaultOgImage;
+
+const siteSchema = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "AutoDetailing",
   "name": "Factory Reset Detail",
   "url": siteUrl,
-  "description": "Premium mobile car detailing in McKinney, TX. Paint-safe methods, material-correct finishes, and clear recommendations—brought directly to your driveway.",
+  "image": `${siteUrl}/img/porsche-gt3-front.webp`,
+  "telephone": "+14692798048",
+  "priceRange": "$$",
   "areaServed": [
-    { "@type": "City", "name": "McKinney, Texas" },
-    { "@type": "AdministrativeArea", "name": "Collin County, Texas" },
+    "McKinney, Texas",
+    "Allen, Texas",
+    "Frisco, Texas",
+    "Plano, Texas",
+    "Prosper, Texas",
+    "Lucas, Texas",
+    "Collin County, Texas",
   ],
-  "serviceType": "Mobile Car Detailing",
+  "description": "Premium mobile car detailing in McKinney, Texas. Interior and exterior detailing performed at your home or workplace.",
 });
+
+const pageSchemaJson = pageSchema ? JSON.stringify(pageSchema) : null;
 ---
 
 <!doctype html>
@@ -36,7 +59,7 @@ const schema = JSON.stringify({
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
     <meta name="theme-color" content="#0a0a0a" />
 
     <title>{title}</title>
@@ -52,18 +75,18 @@ const schema = JSON.stringify({
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Factory Reset Detail" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={resolvedOgTitle} />
+    <meta property="og:description" content={resolvedOgDescription} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={resolvedOgImage} />
     <meta property="og:image:alt" content="Factory Reset Detail — premium mobile car detailing in McKinney, TX" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:title" content={resolvedOgTitle} />
+    <meta name="twitter:description" content={resolvedOgDescription} />
+    <meta name="twitter:image" content={resolvedOgImage} />
     <meta name="twitter:image:alt" content="Factory Reset Detail — premium mobile car detailing in McKinney, TX" />
 
     <!-- Cormorant Garamond — luxury serif for hero headline -->
@@ -72,7 +95,8 @@ const schema = JSON.stringify({
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet" />
 
     <!-- Structured Data -->
-    <script is:inline type="application/ld+json" set:html={schema} />
+    <script is:inline type="application/ld+json" set:html={siteSchema} />
+    {pageSchemaJson && <script is:inline type="application/ld+json" set:html={pageSchemaJson} />}
 
     <!-- Google Analytics (GA4) -->
     <script async src={`https://www.googletagmanager.com/gtag/js?id=G-G3708NRPFL`}></script>

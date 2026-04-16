@@ -1,5 +1,5 @@
 FRD WEBSITE CODE EXPORT
-Generated: Fri, Apr 10, 2026  2:25:39 AM
+Generated: Thu, Apr 16, 2026  5:15:18 PM
 
 ==================================================
 REPO STRUCTURE
@@ -24,6 +24,7 @@ public/img/FRD-Hero/GT3-Interior-4_3(squooshed).jpg
 public/img/FRD-Hero/GT3-Trunk-4_3(squooshed).jpg
 public/img/FRD-Hero/Jaguar-Interior-4_3(squooshed).jpg
 public/img/FRD-Hero/porsche-gt3-front.webp
+public/img/frd-logo.png
 public/img/gt3-engine.webp
 public/img/gt3-interior.webp
 public/img/jaguar-ftype-rear.webp
@@ -5814,12 +5815,29 @@ const nav = [
   class="site-header fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-neutral-950/92 text-white"
   data-header
 >
-  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-    <a
-      href="/"
-      class="min-w-0 text-sm font-medium uppercase tracking-[0.18em] text-white/92"
-    >
-      Factory Reset Detail
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 pt-4 pb-3 lg:px-10">
+    <a href="/" class="relative flex h-11 items-center gap-3 min-w-0">
+      <!-- Mobile spacer + absolutely positioned badge -->
+      <span class="sm:hidden w-10 shrink-0" aria-hidden="true"></span>
+      <img
+        src="/img/frd-logo.png"
+        alt="Factory Reset Detail logo"
+        class="sm:hidden absolute -left-[42px] top-1/2 -translate-y-1/2 h-20 w-auto invert"
+      />
+
+      <!-- Desktop spacer + absolutely positioned badge -->
+      <span class="hidden sm:block w-20 shrink-0" aria-hidden="true"></span>
+      <img
+        src="/img/frd-logo.png"
+        alt=""
+        aria-hidden="true"
+        class="hidden sm:block absolute -left-8 top-1/2 -translate-y-1/2 h-28 xl:h-24 w-auto invert"
+      />
+
+      <!-- Text: compact on mobile, full size on desktop -->
+      <span class="whitespace-nowrap text-[14px] sm:text-[17px] font-medium uppercase ml-1.5 sm:ml-0 tracking-[0.04em] sm:tracking-[0.18em] text-white/92">
+        Factory Reset Detail
+      </span>
     </a>
 
     <div class="ml-2 flex items-center gap-4">
@@ -5987,18 +6005,22 @@ FILE: src/components/Hero.astro
           Mobile Detailing • McKinney, TX
         </p>
 
-        <h1 class="mt-4 max-w-[11ch] text-4xl font-semibold leading-[1.02] md:text-5xl xl:text-[3.65rem]">
-          Precision detailing executed with restraint.
+        <h1 class="font-cormorant mt-4 text-[2.6rem] font-semibold leading-[1.0] tracking-[-0.01em] md:text-[3.4rem] lg:text-[2.6rem] xl:text-[3.2rem]">
+          <span class="lg:block">Premium mobile</span>
+          <span class="lg:block">detailing in</span>
+          <span class="lg:block">McKinney, Texas.</span>
         </h1>
 
         <p class="mt-5 max-w-prose text-base leading-relaxed text-white/70 md:text-lg">
-          A material-safe, paint-conscious approach designed to preserve finishes—not push them.
+          Premium mobile detailing for McKinney and the surrounding Collin County area, with interior
+          and exterior care performed at your home, workplace, or wherever the vehicle is parked.
+          Material-safe methods, clean finishes, and a service experience built around convenience.
         </p>
 
-        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <a
             href="/book"
-            class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-neutral-950 transition hover:opacity-90"
+            class="inline-flex items-center justify-center rounded-full border border-white/20 bg-[#f5f0e8] px-7 py-3.5 text-sm font-medium tracking-[0.06em] text-neutral-900 transition-all duration-300 hover:bg-[#ece6d9] hover:border-white/40"
             data-track="book_click"
             data-track-label="Hero — Book a Detail"
           >
@@ -6007,7 +6029,7 @@ FILE: src/components/Hero.astro
 
           <a
             href="/services"
-            class="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/5"
+            class="inline-flex items-center justify-center rounded-full border border-white/12 px-7 py-3.5 text-sm font-medium tracking-[0.06em] text-white/70 transition-all duration-300 hover:border-white/30 hover:text-white"
           >
             View Services
           </a>
@@ -6019,15 +6041,15 @@ FILE: src/components/Hero.astro
   </span>
 
   <span class="rounded-full border border-white/10 px-3 py-1">
-    Results-focused
+    Interior + exterior detailing
   </span>
 
   <span class="rounded-full border border-white/10 px-3 py-1">
-    Material-correct finishes
+    Paint-safe methods
   </span>
 
   <span class="rounded-full border border-white/10 px-3 py-1">
-    Clear recommendations
+    McKinney + Collin County
   </span>
 </div>
       </div>
@@ -6197,29 +6219,52 @@ import Footer from "../components/Footer.astro";
 interface Props {
   title?: string;
   description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  pageSchema?: object;
 }
 
 const {
   title = "Mobile Car Detailing in McKinney, TX | Factory Reset Detail",
   description = "Premium mobile car detailing in McKinney, TX. Interior, exterior, and full-service detailing brought directly to your driveway. Serving Collin County and surrounding areas.",
+  ogTitle,
+  ogDescription,
+  ogImage: ogImageProp,
+  noindex = false,
+  pageSchema,
 } = Astro.props;
 
 const siteUrl = "https://www.factoryresetdetail.com";
 const canonical = new URL(Astro.url.pathname, siteUrl).href;
-const ogImage = `${siteUrl}/img/porsche-gt3-front.webp`;
+const defaultOgImage = `${siteUrl}/img/porsche-gt3-front.webp`;
 
-const schema = JSON.stringify({
+const resolvedOgTitle = ogTitle ?? title;
+const resolvedOgDescription = ogDescription ?? description;
+const resolvedOgImage = ogImageProp ?? defaultOgImage;
+
+const siteSchema = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "AutoDetailing",
   "name": "Factory Reset Detail",
   "url": siteUrl,
-  "description": "Premium mobile car detailing in McKinney, TX. Paint-safe methods, material-correct finishes, and clear recommendations—brought directly to your driveway.",
+  "image": `${siteUrl}/img/porsche-gt3-front.webp`,
+  "telephone": "+14692798048",
+  "priceRange": "$$",
   "areaServed": [
-    { "@type": "City", "name": "McKinney, Texas" },
-    { "@type": "AdministrativeArea", "name": "Collin County, Texas" },
+    "McKinney, Texas",
+    "Allen, Texas",
+    "Frisco, Texas",
+    "Plano, Texas",
+    "Prosper, Texas",
+    "Lucas, Texas",
+    "Collin County, Texas",
   ],
-  "serviceType": "Mobile Car Detailing",
+  "description": "Premium mobile car detailing in McKinney, Texas. Interior and exterior detailing performed at your home or workplace.",
 });
+
+const pageSchemaJson = pageSchema ? JSON.stringify(pageSchema) : null;
 ---
 
 <!doctype html>
@@ -6227,7 +6272,7 @@ const schema = JSON.stringify({
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
     <meta name="theme-color" content="#0a0a0a" />
 
     <title>{title}</title>
@@ -6243,22 +6288,28 @@ const schema = JSON.stringify({
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Factory Reset Detail" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={resolvedOgTitle} />
+    <meta property="og:description" content={resolvedOgDescription} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={resolvedOgImage} />
     <meta property="og:image:alt" content="Factory Reset Detail — premium mobile car detailing in McKinney, TX" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:title" content={resolvedOgTitle} />
+    <meta name="twitter:description" content={resolvedOgDescription} />
+    <meta name="twitter:image" content={resolvedOgImage} />
     <meta name="twitter:image:alt" content="Factory Reset Detail — premium mobile car detailing in McKinney, TX" />
 
+    <!-- Cormorant Garamond — luxury serif for hero headline -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet" />
+
     <!-- Structured Data -->
-    <script is:inline type="application/ld+json" set:html={schema} />
+    <script is:inline type="application/ld+json" set:html={siteSchema} />
+    {pageSchemaJson && <script is:inline type="application/ld+json" set:html={pageSchemaJson} />}
 
     <!-- Google Analytics (GA4) -->
     <script async src={`https://www.googletagmanager.com/gtag/js?id=G-G3708NRPFL`}></script>
@@ -6347,8 +6398,8 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
 ---
 
 <Layout
-  title="Book a Detail | Factory Reset Detail — McKinney, TX"
-  description="Reserve your mobile car detailing appointment in McKinney, TX. Choose your service, pick a time, and we come to you. Serving Collin County and surrounding areas."
+  title="Book Mobile Detailing in McKinney, TX | Factory Reset Detail"
+  description="Book premium mobile detailing in McKinney, TX. Interior and exterior detailing at your home or workplace."
 >
   <section class="bg-neutral-950 text-white">
     <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
@@ -6368,7 +6419,7 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
           <span class="font-medium text-white">Currently viewing:</span>
           <span id="selected-service-label">Signature Detail</span>
           <span class="hidden text-white/30 sm:inline">•</span>
-          <span class="text-white/60">Mobile service in McKinney + surrounding areas</span>
+          <a href="/services" class="text-white/60 underline underline-offset-2 hover:text-white/90">Compare all services</a>
         </div>
 
         <div class="mt-6 flex flex-wrap gap-2">
@@ -6400,7 +6451,63 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
         <p id="selected-service-blurb" class="mt-4 max-w-2xl text-sm text-white/55">
           Best for clients wanting a deeper, more complete detail with stronger interior and wheel attention.
         </p>
+
+        <div class="mt-6 rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
+          <p class="mb-3 text-xs uppercase tracking-[0.35em] text-white/40">Starting Pricing</p>
+          <div class="flex flex-wrap gap-x-8 gap-y-2">
+            <div class="flex items-baseline gap-2">
+              <span class="text-sm text-white/55">Coupe</span>
+              <span id="price-coupe" class="text-sm font-semibold text-white"></span>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="text-sm text-white/55">Sedan</span>
+              <span id="price-sedan" class="text-sm font-semibold text-white"></span>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="text-sm text-white/55">SUV / Truck</span>
+              <span id="price-suv" class="text-sm font-semibold text-white"></span>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="text-sm text-white/55">Minivan / Suburban</span>
+              <span id="price-minivan" class="text-sm font-semibold text-white"></span>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <div class="mt-10 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+          <p class="text-xs uppercase tracking-[0.28em] text-white/40">01</p>
+          <h3 class="mt-2 text-sm font-medium text-white">Choose a package</h3>
+          <p class="mt-2 text-sm leading-relaxed text-white/58">
+            Pick the level that fits your vehicle's condition.
+            <a href="/services" class="text-white/75 underline underline-offset-2 hover:text-white">See what's included</a>
+            if you're not sure.
+          </p>
+        </div>
+
+        <div class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+          <p class="text-xs uppercase tracking-[0.28em] text-white/40">02</p>
+          <h3 class="mt-2 text-sm font-medium text-white">Pick a time</h3>
+          <p class="mt-2 text-sm leading-relaxed text-white/58">
+            Select a date and window below. You'll receive a confirmation and a
+            photo request to verify condition before arrival.
+          </p>
+        </div>
+
+        <div class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+          <p class="text-xs uppercase tracking-[0.28em] text-white/40">03</p>
+          <h3 class="mt-2 text-sm font-medium text-white">We come to you</h3>
+          <p class="mt-2 text-sm leading-relaxed text-white/58">
+            Service at your home, workplace, or apartment. Final pricing is
+            confirmed on-site before work begins—never a surprise.
+          </p>
+        </div>
+      </div>
+
+      <p class="mt-4 text-xs text-white/38">
+        Serving McKinney, Allen, Frisco, Plano, Prosper, Lucas, and surrounding Collin County areas.
+      </p>
 
       <div class="mt-10 overflow-hidden rounded-[28px] border border-white/10 bg-neutral-900/40 backdrop-blur">
         <div id="cal-booker" class="min-h-[780px]"></div>
@@ -6470,18 +6577,21 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
         slug: "factoryresetdetail/maintenance-detail",
         blurb:
           "Best for already well-kept vehicles that need consistent upkeep and preferred recurring pricing.",
+        pricing: { coupe: "$75", sedan: "$100", suv: "$125", minivan: "$150" },
       },
       signature: {
         label: "Signature Detail",
         slug: "factoryresetdetail/signature-detail",
         blurb:
           "Best for clients wanting a deeper, more complete detail with stronger interior and wheel attention.",
+        pricing: { coupe: "$125", sedan: "$150", suv: "$175", minivan: "$200" },
       },
       reset: {
         label: "Factory Reset Detail",
         slug: "factoryresetdetail/factory-reset-detail",
         blurb:
           "Best for the most comprehensive reset short of correction work, inside and out.",
+        pricing: { coupe: "$175", sedan: "$200", suv: "$250", minivan: "$275" },
       },
     };
 
@@ -6496,6 +6606,16 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
 
     if (labelEl) labelEl.textContent = selected.label;
     if (blurbEl) blurbEl.textContent = selected.blurb;
+
+    const priceEls = {
+      coupe: document.getElementById("price-coupe"),
+      sedan: document.getElementById("price-sedan"),
+      suv: document.getElementById("price-suv"),
+      minivan: document.getElementById("price-minivan"),
+    };
+    Object.entries(priceEls).forEach(([key, el]) => {
+      if (el) el.textContent = selected.pricing[key];
+    });
 
     const pillIds = {
       maintenance: "service-pill-maintenance",
@@ -6619,29 +6739,51 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import SignatureServices from "../components/SignatureServices.astro";
 
+const siteUrl = "https://www.factoryresetdetail.com";
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Mobile Detailing in McKinney, TX | Factory Reset Detail",
+  "description": "Premium mobile detailing in McKinney, TX. Interior, exterior, and full-service car detailing at your home or workplace. Serving McKinney, Allen, Frisco, Plano, Prosper, and nearby Collin County areas.",
+  "url": siteUrl,
+  "inLanguage": "en-US",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Factory Reset Detail",
+    "url": siteUrl,
+  },
+  "about": {
+    "@type": "AutoDetailing",
+    "name": "Factory Reset Detail",
+    "url": siteUrl,
+  },
+};
+
 const heroImages = [
   {
     src: "/img/FRD-Hero/F-Type-Rear-Quarter-4_3(squooshed).jpg",
-    alt: "Factory Reset Detail Jaguar exterior finish",
+    alt: "Mobile detailing result on Jaguar F-Type exterior — Factory Reset Detail, McKinney TX",
   },
   {
     src: "/img/FRD-Hero/Jaguar-Interior-4_3(squooshed).jpg",
-    alt: "Factory Reset Detail Jaguar interior detail",
+    alt: "Interior car detailing result in Jaguar — Factory Reset Detail, McKinney TX",
   },
   {
     src: "/img/FRD-Hero/porsche-gt3-front.webp",
-    alt: "Factory Reset Detail Porsche GT3 exterior finish",
+    alt: "Porsche GT3 exterior detail by Factory Reset Detail in McKinney, Texas",
   },
   {
     src: "/img/FRD-Hero/GT3-Trunk-4_3(squooshed).jpg",
-    alt: "Factory Reset Detail Porsche GT3 trunk detail",
+    alt: "Porsche GT3 trunk and paint finish — mobile auto detailing by Factory Reset Detail, McKinney TX",
   },
 ];
 ---
 
 <Layout
-  title="Factory Reset Detail | Mobile Car Detailing in McKinney, TX"
-  description="Premium mobile car detailing in McKinney, TX. Paint-safe interior and exterior detailing brought directly to your driveway. Serving Collin County and surrounding areas."
+  title="Mobile Detailing in McKinney, TX | Factory Reset Detail"
+  description="Premium mobile detailing in McKinney, TX. Interior, exterior, and full-service car detailing at your home or workplace. Serving McKinney, Allen, Frisco, Plano, Prosper, and nearby Collin County areas."
+  pageSchema={pageSchema}
 >
   <Hero>
     <div
@@ -6687,8 +6829,9 @@ const heroImages = [
           Premium detailing, delivered with intention.
         </h2>
         <p class="mt-4 text-base leading-relaxed text-white/68 md:text-lg">
-          A professional, mobile service designed to save you time, protect your investment,
-          and deliver a calm, finished result without unnecessary upsells or overdone dressing.
+          A professional, mobile detailing service based in McKinney, TX—designed to save you
+          time, protect your investment, and deliver a calm, finished result without unnecessary
+          upsells or overdone dressing.
         </p>
       </div>
 
@@ -6704,8 +6847,9 @@ const heroImages = [
         <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
           <h3 class="text-lg font-medium text-white">Convenience built in</h3>
           <p class="mt-3 text-sm leading-relaxed text-white/68">
-            Service performed at your home or workplace with a process that feels simple,
-            clear, and easy from first message to final walkthrough.
+            Service performed at your home or workplace across McKinney and surrounding
+            Collin County areas—with a process that feels simple, clear, and easy from
+            first message to final walkthrough.
           </p>
         </article>
 
@@ -6716,6 +6860,15 @@ const heroImages = [
             to the vehicle instead of one-size-fits-all package talk.
           </p>
         </article>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-4 text-sm">
+        <a href="/services" class="text-white/70 underline underline-offset-4 hover:text-white transition-colors">
+          Mobile detailing services
+        </a>
+        <a href="/book" class="text-white/70 underline underline-offset-4 hover:text-white transition-colors">
+          Book your detail
+        </a>
       </div>
     </div>
   </section>
@@ -6735,6 +6888,127 @@ const heroImages = [
   </section>
 
   <SignatureServices />
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-4 lg:px-10">
+      <div class="text-center">
+        <a href="/services" class="text-sm text-white/60 underline underline-offset-4 hover:text-white transition-colors">
+          Compare packages
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div class="mx-auto max-w-3xl">
+        <p class="text-xs uppercase tracking-[0.3em] text-white/45">About the service</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          Mobile detailing services in McKinney, built around real-world upkeep.
+        </h2>
+        <div class="mt-6 space-y-5 text-base leading-relaxed text-white/68">
+          <p>
+            Mobile car detailing in McKinney means the service comes to you — no drop-off, no waiting room,
+            no disruption to your day. Whether your vehicle is parked at home or sitting in an office lot,
+            professional interior and exterior detailing is performed on-site, at a standard that actually
+            shows in the finish.
+          </p>
+          <p>
+            Every vehicle is different. Daily drivers accumulate grime in ways that require real attention
+            to interior surfaces — seats, vents, door panels, and carpets. SUVs and trucks bring more
+            surface area, heavier use, and often more neglected detail areas. Each service is scoped to the
+            vehicle and its condition, not forced into a one-size template.
+          </p>
+          <p>
+            Based in McKinney and serving the surrounding Collin County area — including Allen, Frisco,
+            Plano, Prosper, and nearby communities — Factory Reset Detail is built around the idea that
+            quality upkeep should be convenient, honest, and worth doing on a regular basis.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-xs uppercase tracking-[0.3em] text-white/45">Service Area</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          Areas we commonly serve
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-white/68">
+          Based in McKinney — mobile service available throughout Collin County and nearby communities.
+        </p>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        {["McKinney", "Allen", "Frisco", "Plano", "Prosper", "Lucas", "Fairview", "Melissa", "Anna"].map((city) => (
+          <span class="rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-sm text-white/78">
+            {city}
+          </span>
+        ))}
+      </div>
+
+      <p class="mt-6 text-center text-xs text-white/40">
+        Booking availability varies by schedule and distance. Reach out to confirm your location.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-5xl px-6 py-16 lg:px-10 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-xs uppercase tracking-[0.3em] text-white/45">Common Questions</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          Quick answers
+        </h2>
+      </div>
+
+      <div class="mt-8 space-y-3">
+        <details class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+          <summary class="cursor-pointer list-none text-base font-medium text-white">
+            Do you offer mobile detailing in McKinney?
+          </summary>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Yes — McKinney is home base. Service is performed at your location across McKinney and surrounding Collin County communities including Allen, Frisco, Plano, Prosper, and more.
+          </p>
+        </details>
+
+        <details class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+          <summary class="cursor-pointer list-none text-base font-medium text-white">
+            Do you detail SUVs and trucks?
+          </summary>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Yes—SUVs, trucks, and larger vehicles are serviced regularly. Pricing reflects the additional time and surface area. Send the make and approximate condition for an accurate quote.
+          </p>
+        </details>
+
+        <details class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+          <summary class="cursor-pointer list-none text-base font-medium text-white">
+            Do you need water and power on-site?
+          </summary>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            I arrive fully equipped with tools, products, and a hose. I'll just need access to a standard outdoor spigot and outlet to perform the service.
+          </p>
+        </details>
+
+        <details class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+          <summary class="cursor-pointer list-none text-base font-medium text-white">
+            How long does a detail take?
+          </summary>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Most services run 2–4 hours depending on the package, vehicle size, and condition. Heavier-condition vehicles or add-ons may take longer.
+          </p>
+        </details>
+      </div>
+
+      <div class="mt-7 text-center">
+        <a href="/services#faq" class="text-sm text-white/60 underline underline-offset-4 hover:text-white transition-colors">
+          See all frequently asked questions
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- IMAGE BREAK #2 -->
   <section class="frd-image-break bg-neutral-950 text-white">
@@ -6823,6 +7097,8 @@ FILE: src/pages/services.astro
 ==================================================
 ---
 import Layout from "../layouts/Layout.astro";
+
+const siteUrl = "https://www.factoryresetdetail.com";
 
 const packages = [
   {
@@ -6924,24 +7200,61 @@ const faqs = [
     q: "Do you offer pricing over text?",
     a: "I can usually provide a range, but final pricing depends on condition. Photos help me recommend the right level of service without guesswork.",
   },
+  {
+    q: "What’s the difference between the Maintenance Detail and a full detail?",
+    a: "The Maintenance Detail is for vehicles already in good condition—it keeps things consistent between visits at preferred pricing. The Signature and Factory Reset Details go deeper: more time on wheels, jambs, crevices, and interior surfaces. If it’s your first service or the vehicle hasn’t been detailed in a while, I’ll usually recommend starting with a full detail.",
+  },
+  {
+    q: "Do you offer interior-only detailing?",
+    a: "Interior-focused services are available depending on condition and scope. If the cabin is your main priority, let me know when you reach out and I’ll recommend the right approach based on what you describe.",
+  },
+  {
+    q: "Can you service my vehicle at an apartment complex or my workplace?",
+    a: "Yes. I work around your schedule and location—apartment parking lots, office complexes, or wherever the vehicle is parked. I just need access to a standard outdoor water spigot and outlet nearby. If access is uncertain, send me the address and I’ll confirm.",
+  },
+  {
+    q: "Do you detail SUVs and trucks?",
+    a: "Yes—SUVs, trucks, and larger vehicles are serviced regularly. Pricing reflects the additional time and surface area. Send me the make and approximate condition and I’ll give you an accurate quote upfront.",
+  },
+  {
+    q: "What should I expect to pay?",
+    a: "Most services range from $150–$400+ depending on vehicle size, condition, and the level of service. I don’t publish flat rates because condition matters—a clean daily driver and a neglected family SUV are very different jobs. Photos help me quote accurately without surprises.",
+  },
 ];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "url": `${siteUrl}/services`,
+  "name": "Mobile Car Detailing Services FAQ — Factory Reset Detail, McKinney TX",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a,
+    },
+  })),
+};
 ---
 
 <Layout
-  title="Detailing Services in McKinney, TX | Factory Reset Detail"
-  description="Mobile car detailing packages for McKinney and Collin County. Maintenance, Signature, and Factory Reset detail services—plus add-ons, process overview, and FAQ."
+  title="Mobile Detailing Services in McKinney, TX | Factory Reset Detail"
+  description="Explore mobile detailing services in McKinney, TX including interior, exterior, and full-service detailing for cars, SUVs, and trucks."
+  pageSchema={pageSchema}
 >
   <section class="bg-neutral-950 text-white">
     <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
       <div class="max-w-3xl">
-        <p class="text-xs uppercase tracking-[0.32em] text-white/50">Services</p>
+        <p class="text-xs uppercase tracking-[0.32em] text-white/50">Mobile Detailing · McKinney, TX</p>
         <h1 class="mt-4 text-4xl font-semibold leading-tight md:text-5xl">
-          Detailing built for results you actually notice.
+          Mobile detailing services in McKinney, Texas.
         </h1>
         <p class="mt-5 text-base leading-relaxed text-white/70 md:text-lg">
-          Mobile service based in McKinney—serving Collin County and surrounding areas.
-          Every package is designed to preserve materials, refine gloss, and deliver a calm,
-          finished look—never greasy, never overdone.
+          A fully mobile service based in McKinney, TX — bringing professional interior and exterior
+          detailing directly to your home, workplace, or wherever the vehicle is parked. Serving McKinney,
+          Allen, Frisco, Plano, Prosper, and the surrounding Collin County area. Every service is finished
+          to a high standard: clean without being greasy, refined without being overdone.
         </p>
       </div>
 
@@ -7074,6 +7387,141 @@ const faqs = [
           </article>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-xs uppercase tracking-[0.28em] text-white/45">What's included</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          Every service. Thoughtfully executed.
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-white/68">
+          Each detail covers interior and exterior work with methods selected to protect the vehicle—not just clean it.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Exterior wash</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Safe foam pre-rinse and contact wash using paint-safe technique — no swirl-inducing shortcuts, no drive-through pressure.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Interior detailing</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Vacuumed, wiped, and treated throughout — dash, console, vents, door panels, and touchpoints. Clean without fragrance, residue, or plastic gloss.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Wheels and tires</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Faces, barrels, and tires cleaned with appropriate product for each surface. Brake dust and road film removed properly — not masked.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Paint-safe drying</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Premium microfiber and air-assisted drying to eliminate water spots and drips — no drag, no abrasion on the clear coat.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Protection options</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Spray sealant or ceramic spray protection applied for hydrophobic behavior and lasting gloss — chosen for longevity, not showroom theater.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-xs uppercase tracking-[0.28em] text-white/45">Who this is for</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          Built for every vehicle, scaled to its needs.
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-white/68">
+          Whether it's a daily commuter or a garage-kept enthusiast car, the approach adapts to the vehicle and its condition.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Daily drivers</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Consistent upkeep without the hassle. A recurring maintenance plan keeps your daily looking sharp between deeper services.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Enthusiast cars</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Paint-safe methods, careful product selection, and attention to detail that matches how much the vehicle matters to you.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Luxury vehicles</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Material-correct technique on premium surfaces — leather, alcantara, carbon, and coated paint treated with the right products and the right amount of restraint.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">SUVs</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            More surface area, more interior volume — priced and paced accordingly. Full attention to third-row areas, cargo space, and larger wheel faces.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Trucks</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Bed areas, running boards, and heavily used interiors handled with the same care as the rest. Work trucks and weekend trucks both welcome.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
+          <h3 class="text-base font-medium text-white">Family vehicles</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/65">
+            Pet hair, car seats, crumbs, and lived-in grime — this is what the Factory Reset service is designed for. Start fresh and maintain from there.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-xs uppercase tracking-[0.28em] text-white/45">Service Area</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          Areas we commonly serve
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-white/68">
+          Based in McKinney — mobile service available throughout Collin County and nearby communities.
+        </p>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        {["McKinney", "Allen", "Frisco", "Plano", "Prosper", "Lucas", "Fairview", "Melissa", "Anna", "Celina"].map((city) => (
+          <span class="rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-sm text-white/78">
+            {city}
+          </span>
+        ))}
+      </div>
+
+      <p class="mt-6 text-center text-xs text-white/40">
+        Availability depends on schedule and travel distance. Reach out to confirm your location.
+      </p>
     </div>
   </section>
 
@@ -7212,31 +7660,49 @@ const faqs = [
         What clients notice most
       </h2>
 
-      <div class="mt-8 grid gap-5 md:grid-cols-3">
-        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
-          <p class="text-sm leading-relaxed text-white/78">
+      <div class=”mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3”>
+        <article class=”rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6”>
+          <p class=”text-sm leading-relaxed text-white/78”>
             “Interior looked brand new. No greasy shine, just clean.”
           </p>
-          <p class="mt-4 text-xs uppercase tracking-[0.24em] text-white/40">
-            McKinney client
+          <p class=”mt-4 text-xs uppercase tracking-[0.24em] text-white/40”>
+            Mike R.
           </p>
         </article>
 
-        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
-          <p class="text-sm leading-relaxed text-white/78">
+        <article class=”rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6”>
+          <p class=”text-sm leading-relaxed text-white/78”>
             “Best detail I’ve had. You can tell it was done properly.”
           </p>
-          <p class="mt-4 text-xs uppercase tracking-[0.24em] text-white/40">
-            Repeat client
+          <p class=”mt-4 text-xs uppercase tracking-[0.24em] text-white/40”>
+            Amy W.
           </p>
         </article>
 
-        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
-          <p class="text-sm leading-relaxed text-white/78">
+        <article class=”rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6”>
+          <p class=”text-sm leading-relaxed text-white/78”>
             “Super easy process, clear communication, and the finish spoke for itself.”
           </p>
-          <p class="mt-4 text-xs uppercase tracking-[0.24em] text-white/40">
-            Collin County client
+          <p class=”mt-4 text-xs uppercase tracking-[0.24em] text-white/40”>
+            Will H.
+          </p>
+        </article>
+
+        <article class=”rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6”>
+          <p class=”text-sm leading-relaxed text-white/78”>
+            <!-- Anna’s quote — add text here -->
+          </p>
+          <p class=”mt-4 text-xs uppercase tracking-[0.24em] text-white/40”>
+            Anna
+          </p>
+        </article>
+
+        <article class=”rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6”>
+          <p class=”text-sm leading-relaxed text-white/78”>
+            <!-- Celina’s quote — add text here -->
+          </p>
+          <p class=”mt-4 text-xs uppercase tracking-[0.24em] text-white/40”>
+            Celina
           </p>
         </article>
       </div>
@@ -8070,6 +8536,10 @@ main {
 }
 
 
+.font-cormorant {
+  font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+}
+
 .frd-image-break {
   position: relative;
 }
@@ -8097,8 +8567,8 @@ Sitemap: https://www.factoryresetdetail.com/sitemap.xml
 FILE: public/site.webmanifest
 ==================================================
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "Factory Reset Detail",
+  "short_name": "FRD",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -8117,6 +8587,7 @@ FILE: public/site.webmanifest
   "background_color": "#000000",
   "display": "standalone"
 }
+
 
 ==================================================
 FILE: public/sitemap.xml

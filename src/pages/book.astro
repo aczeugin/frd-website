@@ -5,8 +5,8 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
 ---
 
 <Layout
-  title="Book a Detail | Factory Reset Detail — McKinney, TX"
-  description="Reserve your mobile car detailing appointment in McKinney, TX. Choose your service, pick a time, and we come to you. Serving Collin County and surrounding areas."
+  title="Book Mobile Detailing in McKinney, TX | Factory Reset Detail"
+  description="Book premium mobile detailing in McKinney, TX. Interior and exterior detailing at your home or workplace."
 >
   <section class="bg-neutral-950 text-white">
     <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
@@ -26,7 +26,7 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
           <span class="font-medium text-white">Currently viewing:</span>
           <span id="selected-service-label">Signature Detail</span>
           <span class="hidden text-white/30 sm:inline">•</span>
-          <span class="text-white/60">Mobile service in McKinney + surrounding areas</span>
+          <a href="/services" class="text-white/60 underline underline-offset-2 hover:text-white/90">Compare all services</a>
         </div>
 
         <div class="mt-6 flex flex-wrap gap-2">
@@ -81,6 +81,40 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
           </div>
         </div>
       </div>
+
+      <div class="mt-10 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+          <p class="text-xs uppercase tracking-[0.28em] text-white/40">01</p>
+          <h3 class="mt-2 text-sm font-medium text-white">Choose a package</h3>
+          <p class="mt-2 text-sm leading-relaxed text-white/58">
+            Pick the level that fits your vehicle's condition.
+            <a href="/services" class="text-white/75 underline underline-offset-2 hover:text-white">See what's included</a>
+            if you're not sure.
+          </p>
+        </div>
+
+        <div class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+          <p class="text-xs uppercase tracking-[0.28em] text-white/40">02</p>
+          <h3 class="mt-2 text-sm font-medium text-white">Pick a time</h3>
+          <p class="mt-2 text-sm leading-relaxed text-white/58">
+            Select a date and window below. You'll receive a confirmation and a
+            photo request to verify condition before arrival.
+          </p>
+        </div>
+
+        <div class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+          <p class="text-xs uppercase tracking-[0.28em] text-white/40">03</p>
+          <h3 class="mt-2 text-sm font-medium text-white">We come to you</h3>
+          <p class="mt-2 text-sm leading-relaxed text-white/58">
+            Service at your home, workplace, or apartment. Final pricing is
+            confirmed on-site before work begins—never a surprise.
+          </p>
+        </div>
+      </div>
+
+      <p class="mt-4 text-xs text-white/38">
+        Serving McKinney, Allen, Frisco, Plano, Prosper, Lucas, and surrounding Collin County areas.
+      </p>
 
       <div class="mt-10 overflow-hidden rounded-[28px] border border-white/10 bg-neutral-900/40 backdrop-blur">
         <div id="cal-booker" class="min-h-[780px]"></div>

@@ -3,29 +3,51 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import SignatureServices from "../components/SignatureServices.astro";
 
+const siteUrl = "https://www.factoryresetdetail.com";
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Mobile Detailing in McKinney, TX | Factory Reset Detail",
+  "description": "Premium mobile detailing in McKinney, TX. Interior, exterior, and full-service car detailing at your home or workplace. Serving McKinney, Allen, Frisco, Plano, Prosper, and nearby Collin County areas.",
+  "url": siteUrl,
+  "inLanguage": "en-US",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Factory Reset Detail",
+    "url": siteUrl,
+  },
+  "about": {
+    "@type": "AutoDetailing",
+    "name": "Factory Reset Detail",
+    "url": siteUrl,
+  },
+};
+
 const heroImages = [
   {
     src: "/img/FRD-Hero/F-Type-Rear-Quarter-4_3(squooshed).jpg",
-    alt: "Factory Reset Detail Jaguar exterior finish",
+    alt: "Mobile detailing result on Jaguar F-Type exterior — Factory Reset Detail, McKinney TX",
   },
   {
     src: "/img/FRD-Hero/Jaguar-Interior-4_3(squooshed).jpg",
-    alt: "Factory Reset Detail Jaguar interior detail",
+    alt: "Interior car detailing result in Jaguar — Factory Reset Detail, McKinney TX",
   },
   {
     src: "/img/FRD-Hero/porsche-gt3-front.webp",
-    alt: "Factory Reset Detail Porsche GT3 exterior finish",
+    alt: "Porsche GT3 exterior detail by Factory Reset Detail in McKinney, Texas",
   },
   {
     src: "/img/FRD-Hero/GT3-Trunk-4_3(squooshed).jpg",
-    alt: "Factory Reset Detail Porsche GT3 trunk detail",
+    alt: "Porsche GT3 trunk and paint finish — mobile auto detailing by Factory Reset Detail, McKinney TX",
   },
 ];
 ---
 
 <Layout
-  title="Factory Reset Detail | Mobile Car Detailing in McKinney, TX"
-  description="Premium mobile car detailing in McKinney, TX. Paint-safe interior and exterior detailing brought directly to your driveway. Serving Collin County and surrounding areas."
+  title="Mobile Detailing in McKinney, TX | Factory Reset Detail"
+  description="Premium mobile detailing in McKinney, TX. Interior, exterior, and full-service car detailing at your home or workplace. Serving McKinney, Allen, Frisco, Plano, Prosper, and nearby Collin County areas."
+  pageSchema={pageSchema}
 >
   <Hero>
     <div
@@ -71,8 +93,9 @@ const heroImages = [
           Premium detailing, delivered with intention.
         </h2>
         <p class="mt-4 text-base leading-relaxed text-white/68 md:text-lg">
-          A professional, mobile service designed to save you time, protect your investment,
-          and deliver a calm, finished result without unnecessary upsells or overdone dressing.
+          A professional, mobile detailing service based in McKinney, TX—designed to save you
+          time, protect your investment, and deliver a calm, finished result without unnecessary
+          upsells or overdone dressing.
         </p>
       </div>
 
@@ -88,8 +111,9 @@ const heroImages = [
         <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6">
           <h3 class="text-lg font-medium text-white">Convenience built in</h3>
           <p class="mt-3 text-sm leading-relaxed text-white/68">
-            Service performed at your home or workplace with a process that feels simple,
-            clear, and easy from first message to final walkthrough.
+            Service performed at your home or workplace across McKinney and surrounding
+            Collin County areas—with a process that feels simple, clear, and easy from
+            first message to final walkthrough.
           </p>
         </article>
 
@@ -100,6 +124,15 @@ const heroImages = [
             to the vehicle instead of one-size-fits-all package talk.
           </p>
         </article>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-4 text-sm">
+        <a href="/services" class="text-white/70 underline underline-offset-4 hover:text-white transition-colors">
+          Mobile detailing services
+        </a>
+        <a href="/book" class="text-white/70 underline underline-offset-4 hover:text-white transition-colors">
+          Book your detail
+        </a>
       </div>
     </div>
   </section>
@@ -119,6 +152,127 @@ const heroImages = [
   </section>
 
   <SignatureServices />
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-4 lg:px-10">
+      <div class="text-center">
+        <a href="/services" class="text-sm text-white/60 underline underline-offset-4 hover:text-white transition-colors">
+          Compare packages
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div class="mx-auto max-w-3xl">
+        <p class="text-xs uppercase tracking-[0.3em] text-white/45">About the service</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          Mobile detailing services in McKinney, built around real-world upkeep.
+        </h2>
+        <div class="mt-6 space-y-5 text-base leading-relaxed text-white/68">
+          <p>
+            Mobile car detailing in McKinney means the service comes to you — no drop-off, no waiting room,
+            no disruption to your day. Whether your vehicle is parked at home or sitting in an office lot,
+            professional interior and exterior detailing is performed on-site, at a standard that actually
+            shows in the finish.
+          </p>
+          <p>
+            Every vehicle is different. Daily drivers accumulate grime in ways that require real attention
+            to interior surfaces — seats, vents, door panels, and carpets. SUVs and trucks bring more
+            surface area, heavier use, and often more neglected detail areas. Each service is scoped to the
+            vehicle and its condition, not forced into a one-size template.
+          </p>
+          <p>
+            Based in McKinney and serving the surrounding Collin County area — including Allen, Frisco,
+            Plano, Prosper, and nearby communities — Factory Reset Detail is built around the idea that
+            quality upkeep should be convenient, honest, and worth doing on a regular basis.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-xs uppercase tracking-[0.3em] text-white/45">Service Area</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          Areas we commonly serve
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-white/68">
+          Based in McKinney — mobile service available throughout Collin County and nearby communities.
+        </p>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        {["McKinney", "Allen", "Frisco", "Plano", "Prosper", "Lucas", "Fairview", "Melissa", "Anna"].map((city) => (
+          <span class="rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-sm text-white/78">
+            {city}
+          </span>
+        ))}
+      </div>
+
+      <p class="mt-6 text-center text-xs text-white/40">
+        Booking availability varies by schedule and distance. Reach out to confirm your location.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-neutral-950 text-white">
+    <div class="mx-auto max-w-5xl px-6 py-16 lg:px-10 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-xs uppercase tracking-[0.3em] text-white/45">Common Questions</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          Quick answers
+        </h2>
+      </div>
+
+      <div class="mt-8 space-y-3">
+        <details class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+          <summary class="cursor-pointer list-none text-base font-medium text-white">
+            Do you offer mobile detailing in McKinney?
+          </summary>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Yes — McKinney is home base. Service is performed at your location across McKinney and surrounding Collin County communities including Allen, Frisco, Plano, Prosper, and more.
+          </p>
+        </details>
+
+        <details class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+          <summary class="cursor-pointer list-none text-base font-medium text-white">
+            Do you detail SUVs and trucks?
+          </summary>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Yes—SUVs, trucks, and larger vehicles are serviced regularly. Pricing reflects the additional time and surface area. Send the make and approximate condition for an accurate quote.
+          </p>
+        </details>
+
+        <details class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+          <summary class="cursor-pointer list-none text-base font-medium text-white">
+            Do you need water and power on-site?
+          </summary>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            I arrive fully equipped with tools, products, and a hose. I'll just need access to a standard outdoor spigot and outlet to perform the service.
+          </p>
+        </details>
+
+        <details class="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-5">
+          <summary class="cursor-pointer list-none text-base font-medium text-white">
+            How long does a detail take?
+          </summary>
+          <p class="mt-3 text-sm leading-relaxed text-white/68">
+            Most services run 2–4 hours depending on the package, vehicle size, and condition. Heavier-condition vehicles or add-ons may take longer.
+          </p>
+        </details>
+      </div>
+
+      <div class="mt-7 text-center">
+        <a href="/services#faq" class="text-sm text-white/60 underline underline-offset-4 hover:text-white transition-colors">
+          See all frequently asked questions
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- IMAGE BREAK #2 -->
   <section class="frd-image-break bg-neutral-950 text-white">
