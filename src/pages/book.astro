@@ -284,13 +284,13 @@ const calOrigin = import.meta.env.PUBLIC_CAL_ORIGIN ?? "https://cal.com";
       window.Cal("on", {
         action: "bookingSuccessfulV2",
         callback: function () {
-          showConfirmation();
           if (typeof gtag === 'function') {
             gtag('event', 'booking_complete', {
-              event_category: 'conversion',
+              event_category: 'engagement',
               event_label: selected.label,
             });
           }
+          window.location.href = '/thank-you';
         },
       });
     }

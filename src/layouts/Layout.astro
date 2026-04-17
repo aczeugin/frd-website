@@ -98,6 +98,9 @@ const pageSchemaJson = pageSchema ? JSON.stringify(pageSchema) : null;
     <script is:inline type="application/ld+json" set:html={siteSchema} />
     {pageSchemaJson && <script is:inline type="application/ld+json" set:html={pageSchemaJson} />}
 
+    <!-- Per-page head injection (e.g. conversion scripts) -->
+    <slot name="head" />
+
     <!-- Google Analytics (GA4) -->
     <script async src={`https://www.googletagmanager.com/gtag/js?id=G-G3708NRPFL`}></script>
     <script is:inline>
