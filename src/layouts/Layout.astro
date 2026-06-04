@@ -11,6 +11,7 @@ interface Props {
   ogImage?: string;
   noindex?: boolean;
   pageSchema?: object;
+  canonicalOverride?: string;
 }
 
 const {
@@ -21,10 +22,11 @@ const {
   ogImage: ogImageProp,
   noindex = false,
   pageSchema,
+  canonicalOverride,
 } = Astro.props;
 
 const siteUrl = "https://www.factoryresetdetail.com";
-const canonical = new URL(Astro.url.pathname, siteUrl).href;
+const canonical = canonicalOverride ?? new URL(Astro.url.pathname, siteUrl).href;
 const defaultOgImage = `${siteUrl}/img/porsche-gt3-front.webp`;
 
 const resolvedOgTitle = ogTitle ?? title;
